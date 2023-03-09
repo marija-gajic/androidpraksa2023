@@ -28,9 +28,7 @@ class SplashActivity : AppCompatActivity() {
             }
         }.start()
 
-        //prva izmena u develop
-
-        //druga izmena u develop
+        val testProgress = 2f
 
 
     }
