@@ -30,6 +30,8 @@ class SplashActivity : AppCompatActivity() {
 
         //prva izmena u develop
 
+        //druga izmena u develop
+
 
     }
 
