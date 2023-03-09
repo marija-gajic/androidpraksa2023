@@ -28,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
             }
         }.start()
 
+        //prva izmena u develop
 
 
     }
