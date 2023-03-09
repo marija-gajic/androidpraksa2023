@@ -13,13 +13,6 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-//        val btnSplash = findViewById<Button>(R.id.btnSplash)
-//        btnSplash.setOnClickListener(View.OnClickListener {
-//                val intent = Intent(this, MainActivity::class.java)
-//                startActivity(intent)
-//
-//        })
-
         val prog = findViewById<ProgressBar>(R.id.loading_splash)
         val loading_time = resources.getInteger(R.integer.loading_timer).toLong()
         prog.max = loading_time.toInt()
