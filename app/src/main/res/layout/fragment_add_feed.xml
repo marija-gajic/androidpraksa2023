@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_holder"
+    tools:context=".AddFeedFragment">
+
+    <TextView
+        android:id="@+id/add_feed_title"
+        android:textSize="13sp"
+        android:textColor="@color/icon_text_light"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txt_add_a_picture_from"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_gallery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_full"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="320:120"
+        app:layout_constraintEnd_toStartOf="@id/btn_camera"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_feed_title"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <TextView
+        android:id="@+id/btn_camera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_full"
+        android:padding="3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="320:120"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_gallery"
+        app:layout_constraintTop_toBottomOf="@id/add_feed_title"
+        app:layout_constraintWidth_percent="0.4" />
+
+     <ImageView
+          android:id="@+id/ic_gallery"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginStart="3dp"
+          android:background="@drawable/ico_gallery"
+          app:layout_constraintBottom_toBottomOf="@id/btn_gallery"
+          app:layout_constraintDimensionRatio="1"
+          app:layout_constraintWidth_percent="0.1"
+          app:layout_constraintEnd_toStartOf="@id/txt_gallery"
+          app:layout_constraintHorizontal_chainStyle="spread"
+          app:layout_constraintStart_toStartOf="@id/btn_gallery"
+          app:layout_constraintTop_toTopOf="@id/btn_gallery" />
+
+      <TextView
+          android:id="@+id/txt_gallery"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:gravity="center"
+          android:textSize="13sp"
+          android:layout_marginEnd="3dp"
+          android:text="@string/dialog_gallery"
+          android:textColor="@color/white_color"
+          app:layout_constraintBottom_toBottomOf="@id/btn_gallery"
+          app:layout_constraintEnd_toEndOf="@id/btn_gallery"
+          app:layout_constraintStart_toEndOf="@id/ic_gallery"
+          app:layout_constraintTop_toTopOf="@id/btn_gallery" />
+
+     <ImageView
+         android:id="@+id/ic_camera"
+         android:layout_width="0dp"
+         android:layout_height="0dp"
+         android:layout_marginStart="3dp"
+         android:background="@drawable/ico_camera"
+         app:layout_constraintBottom_toBottomOf="@id/btn_camera"
+         app:layout_constraintDimensionRatio="1"
+         app:layout_constraintWidth_percent="0.1"
+         app:layout_constraintEnd_toStartOf="@id/txt_camera"
+         app:layout_constraintHorizontal_chainStyle="packed"
+         app:layout_constraintStart_toStartOf="@id/btn_camera"
+         app:layout_constraintTop_toTopOf="@id/btn_camera" />
+
+       <TextView
+           android:id="@+id/txt_camera"
+           android:layout_width="wrap_content"
+           android:layout_height="0dp"
+           android:gravity="center"
+           android:text="@string/dialog_camera"
+           android:textSize="13sp"
+           android:layout_marginStart="5dp"
+           android:layout_marginEnd="3dp"
+           android:textColor="@color/white_color"
+           app:layout_constraintBottom_toBottomOf="@id/btn_camera"
+           app:layout_constraintEnd_toEndOf="@id/btn_camera"
+           app:layout_constraintStart_toEndOf="@id/ic_camera"
+           app:layout_constraintTop_toTopOf="@id/btn_camera" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

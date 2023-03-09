@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SettingsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineDarkModeBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRateBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRecommendBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineFeedbackBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineMoreAppsBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelinePrivacyBottom_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4"/>
+
+
+    <ImageView
+        android:id="@+id/header_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"/>
+
+    <!--    Dark mode-->
+
+    <ImageView
+        android:id="@+id/img_dark_mode_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_dark_mode"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineDarkModeBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_dark_mode_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_dark_mode_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_dark_mode_settings"
+        app:layout_constraintTop_toBottomOf="@id/header_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineDarkModeBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/dark_mode_off"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_toggle_off"
+        app:layout_constraintDimensionRatio="2:1"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/header_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:id="@+id/dark_mode_on"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_toggle_on"
+        app:layout_constraintDimensionRatio="2:1"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/header_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--    Rate-->
+
+    <ImageView
+        android:id="@+id/img_rate_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_rate"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRateBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_rate_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_rate_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_rate_settings"
+        app:layout_constraintTop_toBottomOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRateBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/img_rate_arrow"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_arrow_go"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRateBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--    Recommend-->
+
+    <ImageView
+        android:id="@+id/img_recommend_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_recommend"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRateBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRecommendBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_recommend_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_recommend_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_recommend_settings"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRateBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRecommendBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/img_recommend_arrow"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_arrow_go"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRateBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRecommendBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--    Feedback-->
+
+    <ImageView
+        android:id="@+id/img_feedback_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_feedback"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRecommendBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineFeedbackBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_feedback_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_feedback_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_feedback_settings"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRecommendBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineFeedbackBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/img_feedback_arrow"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_arrow_go"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRecommendBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineFeedbackBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--    More apps-->
+
+    <ImageView
+        android:id="@+id/img_more_apps_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_more_apps"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFeedbackBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMoreAppsBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_more_apps_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_more_apps_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_more_apps_settings"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFeedbackBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMoreAppsBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/img_more_apps_arrow"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_arrow_go"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFeedbackBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMoreAppsBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+<!--    Privacy-->
+
+    <ImageView
+        android:id="@+id/img_privacy_settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_privacy"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMoreAppsBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelinePrivacyBottom_settings"/>
+
+    <TextView
+        android:id="@+id/txt_privacy_settings"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_privacy_settings"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toEndOf="@id/img_privacy_settings"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMoreAppsBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelinePrivacyBottom_settings"/>
+
+    <ImageView
+        android:id="@+id/img_privacy_arrow"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_arrow_go"
+        app:layout_constraintDimensionRatio="1"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMoreAppsBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelinePrivacyBottom_settings"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

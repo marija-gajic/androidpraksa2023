@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/popup_holder"
+    tools:context=".DeleteFeedFragment">
+
+    <TextView
+        android:id="@+id/txt_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/delete_question"
+        android:textColor="@color/icon_text_light"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_delete_ok"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="@string/delete_ok"
+        android:textSize="13sp"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_delete_cancel"
+        app:layout_constraintDimensionRatio="330:120"
+        app:layout_constraintEnd_toStartOf="@+id/btn_delete_cancel"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintTop_toTopOf="@+id/btn_delete_cancel" />
+
+    <TextView
+        android:id="@+id/btn_delete_cancel"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:background="@drawable/button_full"
+        android:gravity="center"
+        android:text="@string/delete_cancel"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/white_color"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="330:120"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_delete" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

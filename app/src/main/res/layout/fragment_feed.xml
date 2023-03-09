@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FeedFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineImgTop_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineImgLeft_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineImgRight_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineBottom_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <ImageView
+        android:id="@+id/header_feed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"/>
+
+    <ImageView
+        android:id="@+id/img_empty_feed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/illustration_empty"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintTop_toBottomOf="@id/guidelineImgTop_feed"
+        app:layout_constraintStart_toStartOf="@id/guidelineImgLeft_feed"
+        app:layout_constraintEnd_toEndOf="@id/guidelineImgRight_feed"/>
+
+    <TextView
+        android:id="@+id/txt_empty_feed"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:text="@string/txt_feed_empty"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toStartOf="@id/img_empty_feed"
+        app:layout_constraintEnd_toEndOf="@id/img_empty_feed"
+        app:layout_constraintTop_toBottomOf="@id/img_empty_feed"/>
+
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fab_feed"-->
+<!--        android:layout_width="50dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:background="@drawable/btn_plus"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+    <ImageView
+        android:id="@+id/fab_feed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="1"
+        android:background="@drawable/btn_plus"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom_feed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_edit_feed"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_edit_feed"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:textColor="@color/icon_text_light"
+        android:gravity="center"
+        android:background="@drawable/button"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom_feed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_color_code_feed"/>
+
+    <TextView
+        android:id="@+id/btn_color_code_feed"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_color_code_feed"
+        android:textSize="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:textColor="@color/icon_text_light"
+        android:gravity="center"
+        android:background="@drawable/button"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom_feed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_edit_feed"
+        app:layout_constraintEnd_toStartOf="@id/btn_delete_feed"/>
+
+    <TextView
+        android:id="@+id/btn_delete_feed"
+        android:visibility="invisible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="@string/btn_delete_feed"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/icon_text_light"
+        android:gravity="center"
+        android:background="@drawable/button"
+        app:layout_constraintTop_toBottomOf="@id/guidelineBottom_feed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btn_color_code_feed"
+        app:layout_constraintEnd_toEndOf="parent"/>
+    
+    <ImageView
+        android:id="@+id/btn_back_feed"
+        android:visibility="visible"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ico_arrow_back"
+        app:layout_constraintDimensionRatio="1"
+        android:padding="20dp"
+        app:layout_constraintStart_toStartOf="@id/header_feed"
+        app:layout_constraintTop_toTopOf="@id/header_feed"
+        app:layout_constraintBottom_toBottomOf="@id/header_feed"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

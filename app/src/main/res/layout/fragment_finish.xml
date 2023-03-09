@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".FinishFragment">
+
+    <ImageView
+        android:id="@+id/header_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/footer_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/footer_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/btn_discard_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:text="Discard"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/icon_text_light"
+        android:background="@drawable/button"
+        app:layout_constraintBottom_toBottomOf="@id/header_finish"
+        app:layout_constraintStart_toStartOf="@id/header_finish"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintTop_toTopOf="@id/header_finish"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <TextView
+        android:id="@+id/btn_share_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        android:text="Share"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        app:layout_constraintTop_toTopOf="@id/footer_finish"
+        app:layout_constraintBottom_toBottomOf="@id/footer_finish"
+        app:layout_constraintStart_toStartOf="@id/footer_finish"
+        app:layout_constraintEnd_toStartOf="@id/btn_schedule_finish"/>
+
+    <TextView
+        android:id="@+id/btn_schedule_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        android:text="Schedule"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        app:layout_constraintTop_toTopOf="@id/footer_finish"
+        app:layout_constraintBottom_toBottomOf="@id/footer_finish"
+        app:layout_constraintStart_toEndOf="@id/btn_share_finish"
+        app:layout_constraintEnd_toStartOf="@id/btn_save_finish"/>
+
+    <TextView
+        android:id="@+id/btn_save_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        android:text="Save"
+        android:textSize="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        app:layout_constraintTop_toTopOf="@id/footer_finish"
+        app:layout_constraintBottom_toBottomOf="@id/footer_finish"
+        app:layout_constraintStart_toEndOf="@id/btn_schedule_finish"
+        app:layout_constraintEnd_toEndOf="@id/footer_finish"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

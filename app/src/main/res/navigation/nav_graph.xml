@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/HomeFragment">
+
+
+    <fragment
+        android:id="@+id/HomeFragment"
+        android:name="com.example.feedcraft.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        android:label="Home">
+    </fragment>
+
+    <fragment
+        android:id="@+id/FeedFragment"
+        android:name="com.example.feedcraft.FeedFragment"
+        tools:layout="@layout/fragment_feed"
+        android:label="Feed">
+        <action
+            android:id="@+id/action_FeedFragment_to_addFeedFragment"
+            app:destination="@id/addFeedFragment" />
+        <action
+            android:id="@+id/action_FeedFragment_to_deleteFeedFragment"
+            app:destination="@id/deleteFeedFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/SettingsFragment"
+        android:name="com.example.feedcraft.SettingsFragment"
+        tools:layout="@layout/fragment_settings"
+        android:label="Settings">
+    </fragment>
+
+    <dialog
+        android:id="@+id/addFeedFragment"
+        android:name="com.example.feedcraft.AddFeedFragment"
+        android:label="fragment_add_feed"
+        tools:layout="@layout/fragment_add_feed" />
+    <dialog
+        android:id="@+id/deleteFeedFragment"
+        tools:layout="@layout/fragment_delete_feed"
+        android:name="com.example.feedcraft.DeleteFeedFragment"
+        android:label="DeleteFeedFragment" />
+    <dialog
+        android:id="@+id/addCaptionFragment"
+        tools:layout="@layout/fragment_add_caption"
+        android:name="com.example.feedcraft.AddCaptionFragment"
+        android:label="AddCaptionFragment" />
+
+</navigation>

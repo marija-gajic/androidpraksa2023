@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <item
+            android:id="@+id/HomeFragment"
+            android:enabled="true"
+            android:icon="@drawable/ico_home"
+            android:title="@string/home_main_btn" />
+        <item
+            android:id="@+id/FeedFragment"
+            android:enabled="true"
+            android:icon="@drawable/ico_feed"
+            android:title="@string/feed_main_btn"/>
+        <item
+            android:id="@+id/SettingsFragment"
+            android:enabled="true"
+            android:icon="@drawable/ico_settings"
+            android:title="@string/settings_main_btn"/>
+    </menu>
+

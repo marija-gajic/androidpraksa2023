@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">FeedCraft</string>
+    <string name="btn_start_text">START</string>
+    <string name="btn_sign_in_text">Sign in</string>
+    <string name="home_main_btn">Home</string>
+    <string name="feed_main_btn">Feed</string>
+    <string name="settings_main_btn">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="txt_feed_empty">Feed is empty</string>
+    <string name="btn_edit_feed">Edit</string>
+    <string name="btn_color_code_feed">Color Code</string>
+    <string name="btn_delete_feed">Delete</string>
+    <string name="txt_dark_mode_settings">Allow Dark Mode</string>
+    <string name="txt_rate_settings">Rate</string>
+    <string name="txt_recommend_settings">Recommend</string>
+    <string name="txt_feedback_settings">Feedback</string>
+    <string name="txt_more_apps_settings">More Apps</string>
+    <string name="txt_privacy_settings">Privacy</string>
+    <string name="txt_add_a_picture_from">Add a picture from:</string>
+    <string name="dialog_gallery">Gallery</string>
+    <string name="dialog_camera">Camera</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="delete_ok">OK</string>
+    <string name="delete_cancel">Cancel</string>
+    <string name="delete_question">Are you sure you want to delete the image?</string>
+    <string name="hint_add_caption">Add Caption...</string>
+    <string name="txt_finish_editor">Finish</string>
+    <string name="caption_editor">Caption</string>
+    <string name="filter_editor">Filter</string>
+    <string name="brightness_editor">Brightness</string>
+    <string name="saturation_editor">Saturation</string>
+    <string name="contrast_editor">Contrast</string>
+    <string name="add_caption_editor">Add caption...</string>
+</resources>
