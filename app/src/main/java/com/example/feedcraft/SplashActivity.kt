@@ -29,6 +29,7 @@ class SplashActivity : AppCompatActivity() {
         }.start()
 
         val testProgress = 2f
+        val newProgress = 0.5
 
 
     }
