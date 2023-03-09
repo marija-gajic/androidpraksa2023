@@ -13,6 +13,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+
         val prog = findViewById<ProgressBar>(R.id.loading_splash)
         val loading_time = resources.getInteger(R.integer.loading_timer).toLong()
         prog.max = loading_time.toInt()
