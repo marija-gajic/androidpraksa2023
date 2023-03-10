@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@color/white_color"
+    android:src="@drawable/popup_holder"
     tools:context=".AddCaptionFragment">
 
     <TextView
         android:id="@+id/txt_add_caption"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/caption_holder"
@@ -19,29 +19,31 @@
         android:hint="@string/hint_add_caption"
         android:textColor="@color/icon_text_light"
         android:textSize="13sp"
-        app:layout_constraintHeight_percent="0.4"
+        app:layout_constraintHeight_percent="0.3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.9" />
+        app:layout_constraintWidth_percent="0.93" />
 
     <TextView
         android:id="@+id/btn_caption_cancel"
-        android:layout_width="131dp"
-        android:layout_height="44dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:background="@drawable/button_full"
         android:gravity="center"
         android:text="@string/delete_cancel"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:textColor="@color/white_color"
         app:layout_constraintEnd_toEndOf="@id/txt_add_caption"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintTop_toBottomOf="@+id/txt_add_caption" />
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintTop_toBottomOf="@+id/txt_add_caption"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/btn_caption_ok"
-        android:layout_width="131dp"
-        android:layout_height="44dp"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
         android:background="@drawable/button"
         android:gravity="center"
         android:layout_marginEnd="10dp"
@@ -49,7 +51,7 @@
         android:textColor="@color/icon_text_light"
         app:layout_constraintBottom_toBottomOf="@+id/btn_caption_cancel"
         app:layout_constraintEnd_toStartOf="@+id/btn_caption_cancel"
-        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintTop_toTopOf="@+id/btn_caption_cancel" />
 
 

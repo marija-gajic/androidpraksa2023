@@ -11,6 +11,9 @@
         android:name="com.example.feedcraft.HomeFragment"
         tools:layout="@layout/fragment_home"
         android:label="Home">
+        <action
+            android:id="@+id/action_HomeFragment_to_FeedFragment"
+            app:destination="@id/FeedFragment" />
     </fragment>
 
     <fragment
@@ -27,6 +30,9 @@
         <action
             android:id="@+id/action_FeedFragment_to_editFragment"
             app:destination="@id/editFragment" />
+        <action
+            android:id="@+id/action_FeedFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
 
 
     </fragment>

@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
 //        NavigationBarView.OnItemSelectedListener { item ->
 //            when(item.itemId) {
 //                R.id.btn_home -> {

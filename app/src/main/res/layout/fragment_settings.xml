@@ -113,6 +113,15 @@
 <!--    Rate-->
 
     <ImageView
+        android:id="@+id/cont_rate"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineDarkModeBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRateBottom_settings"/>
+
+    <ImageView
         android:id="@+id/img_rate_settings"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -152,6 +161,15 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 <!--    Recommend-->
+
+    <ImageView
+        android:id="@+id/cont_recommend"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRateBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineRecommendBottom_settings"/>
 
     <ImageView
         android:id="@+id/img_recommend_settings"
@@ -195,6 +213,15 @@
 <!--    Feedback-->
 
     <ImageView
+        android:id="@+id/cont_feedback"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRecommendBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineFeedbackBottom_settings"/>
+
+    <ImageView
         android:id="@+id/img_feedback_settings"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -236,6 +263,15 @@
 <!--    More apps-->
 
     <ImageView
+        android:id="@+id/cont_more_apps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineFeedbackBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelineMoreAppsBottom_settings"/>
+
+    <ImageView
         android:id="@+id/img_more_apps_settings"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -275,6 +311,15 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
 <!--    Privacy-->
+
+    <ImageView
+        android:id="@+id/cont_privacy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineMoreAppsBottom_settings"
+        app:layout_constraintBottom_toTopOf="@id/guidelinePrivacyBottom_settings"/>
 
     <ImageView
         android:id="@+id/img_privacy_settings"

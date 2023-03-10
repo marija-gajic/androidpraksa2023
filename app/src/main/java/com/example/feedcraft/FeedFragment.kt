@@ -34,6 +34,7 @@ class FeedFragment : Fragment() {
         val deleteFeed = binding.btnDeleteFeed
         val colorCode = binding.btnColorCodeFeed
         val editPhoto = binding.btnEditFeed
+        val btnBack = binding.btnBackFeed
 
         fabAdd.setOnClickListener{
             val actionAdd = FeedFragmentDirections.actionFeedFragmentToAddFeedFragment()
@@ -46,6 +47,13 @@ class FeedFragment : Fragment() {
         editPhoto.setOnClickListener {
             val actionEdit = FeedFragmentDirections.actionFeedFragmentToEditFragment()
             findNavController().navigate(actionEdit)
+        }
+        colorCode.setOnClickListener {
+            //TODO
+        }
+        btnBack.setOnClickListener {
+            val actionBack = FeedFragmentDirections.actionFeedFragmentToHomeFragment()
+            findNavController().navigate(actionBack)
         }
 
     }

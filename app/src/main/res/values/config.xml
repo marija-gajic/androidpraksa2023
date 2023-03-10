@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="loading_timer">3000</integer>
+    <string name="play_store_game_package_id">com.Creative.Dollify.Cute.Doll.Avatar.Maker</string>
+    <string name="play_store_dev">8115615668998310791</string>
+    <string name="privacy_site">https://webelinx.com/privacy-policy-doo/</string>
+    <string name="dev_email">gajicmmarija@gmail.com</string>
 </resources>

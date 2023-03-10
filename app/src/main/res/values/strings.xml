@@ -37,4 +37,11 @@
     <string name="schedule_finish">Schedule</string>
     <string name="save_finish">Save</string>
     <string name="done_schedule">Done</string>
+    <string name="share_check_out_this_app">Check out this amazing app!</string>
+    <string name="rate_unavailable">Rate currently unavailable</string>
+    <string name="share_unavailable">Share currently unavailable</string>
+    <string name="write_feedback_below">Please write your feedback below: </string>
+    <string name="feedback_unavailable">Feedback currently unavailable</string>
+    <string name="more_apps_unavailable">More apps currently unavailable</string>
+    <string name="privacy_policy_unavailable">Privacy policy currently unavailable</string>
 </resources>
