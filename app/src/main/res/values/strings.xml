@@ -32,4 +32,9 @@
     <string name="saturation_editor">Saturation</string>
     <string name="contrast_editor">Contrast</string>
     <string name="add_caption_editor">Add caption...</string>
+    <string name="discard_finish">Discard</string>
+    <string name="share_finish">Share</string>
+    <string name="schedule_finish">Schedule</string>
+    <string name="save_finish">Save</string>
+    <string name="done_schedule">Done</string>
 </resources>

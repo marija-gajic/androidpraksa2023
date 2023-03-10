@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ScheduleFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineLeft_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineRight_schedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95"/>
+
+    <ImageView
+        android:id="@+id/header_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/header_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btn_back_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:src="@drawable/ico_arrow_back"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@id/header_schedule"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintStart_toStartOf="@id/header_schedule"
+        app:layout_constraintTop_toTopOf="@id/header_schedule" />
+
+    <ImageView
+        android:id="@+id/btn_done_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_full"
+        app:layout_constraintBottom_toBottomOf="@id/header_schedule"
+        app:layout_constraintEnd_toEndOf="@id/header_schedule"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintTop_toTopOf="@id/header_schedule"
+        app:layout_constraintWidth_percent="0.35" />
+
+    <ImageView
+        android:id="@+id/ic_done"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ico_check"
+        app:layout_constraintBottom_toBottomOf="@id/btn_done_schedule"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@id/txt_finish"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@id/btn_done_schedule"
+        app:layout_constraintTop_toTopOf="@id/btn_done_schedule"
+        app:layout_constraintWidth_percent="0.1" />
+
+    <TextView
+        android:id="@+id/txt_finish"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="@string/done_schedule"
+        android:textColor="@color/white_color"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ic_done"
+        app:layout_constraintEnd_toEndOf="@id/btn_done_schedule"
+        app:layout_constraintStart_toEndOf="@id/ic_done"
+        app:layout_constraintTop_toTopOf="@id/ic_done" />
+
+    <TextView
+        android:id="@+id/txt_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:text="Write the notification text:"
+        android:textColor="@color/icon_text_light"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintTop_toBottomOf="@id/header_schedule"/>
+
+    <TextView
+        android:id="@+id/text_field_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/schedule_message_icon"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintTop_toBottomOf="@id/txt_write"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight_schedule"/>
+
+    <TextView
+        android:id="@+id/txt_add_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add a picture"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/icon_text_light"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/text_field_schedule"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"/>
+
+    <CheckBox
+        android:id="@+id/add_photo_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/guidelineRight_schedule"
+        app:layout_constraintTop_toTopOf="@id/txt_add_picture"
+        app:layout_constraintBottom_toBottomOf="@id/txt_add_picture"/>
+
+    <TextView
+        android:id="@+id/txt_pick_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick a date:"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/icon_text_light"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintTop_toBottomOf="@id/txt_add_picture"/>
+
+    <TextView
+        android:id="@+id/date_picker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        app:layout_constraintWidth_percent="0.4"
+        app:layout_constraintHeight_percent="0.05"
+        android:layout_marginTop="15dp"
+        android:textSize="17sp"
+        android:hint="XX/XX/XXXX"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        android:textColorHint="@color/white_color"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintTop_toBottomOf="@id/txt_pick_date"/>
+
+    <TextView
+        android:id="@+id/txt_pick_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pick a time:"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/icon_text_light"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintTop_toBottomOf="@id/date_picker"/>
+
+    <TextView
+        android:id="@+id/time_picker"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.05"
+        android:layout_marginTop="15dp"
+        android:textSize="17sp"
+        android:hint="XX:XX"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        android:textColorHint="@color/white_color"
+        app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
+        app:layout_constraintTop_toBottomOf="@id/txt_pick_time"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

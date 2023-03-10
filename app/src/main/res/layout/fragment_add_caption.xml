@@ -9,21 +9,21 @@
 
     <TextView
         android:id="@+id/txt_add_caption"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        android:background="@drawable/button"
+        android:background="@drawable/caption_holder"
         android:gravity="center"
         android:hint="@string/hint_add_caption"
         android:textColor="@color/icon_text_light"
         android:textSize="13sp"
-        app:layout_constraintHeight_percent="0.5"
+        app:layout_constraintHeight_percent="0.4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.8" />
+        app:layout_constraintWidth_percent="0.9" />
 
     <TextView
         android:id="@+id/btn_caption_cancel"

@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="10dp"
-        android:text="Discard"
+        android:text="@string/discard_finish"
         android:gravity="center"
         android:textSize="20sp"
         android:textColor="@color/icon_text_light"
@@ -47,7 +47,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_full"
-        android:text="Share"
+        android:text="@string/share_finish"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -65,7 +65,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_full"
-        android:text="Schedule"
+        android:text="@string/schedule_finish"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -83,7 +83,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/button_full"
-        android:text="Save"
+        android:text="@string/save_finish"
         android:textSize="20dp"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="15dp"
@@ -95,5 +95,34 @@
         app:layout_constraintBottom_toBottomOf="@id/footer_finish"
         app:layout_constraintStart_toEndOf="@id/btn_schedule_finish"
         app:layout_constraintEnd_toEndOf="@id/footer_finish"/>
+
+    <ImageView
+        android:id="@+id/img_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_finish"/>
+
+    <TextView
+        android:id="@+id/caption_field_finish"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/caption_holder"
+        android:hint="Caption"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:textColor="@color/icon_text_light"
+        android:textSize="20sp"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_preview"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
