@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_editor"
+    app:startDestination="@id/EditFragment">
+
+    <fragment
+        android:id="@+id/EditFragment"
+        android:name="com.example.feedcraft.EditFragment"
+        android:label="fragment_edit"
+        tools:layout="@layout/fragment_edit" >
+        <action
+            android:id="@+id/action_editFragment_to_finishFragment"
+            app:destination="@id/FinishFragment" />
+        <action
+            android:id="@+id/action_editFragment_to_addCaptionFragment"
+            app:destination="@id/AddCaptionFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/AddCaptionFragment"
+        android:name="com.example.feedcraft.AddCaptionFragment"
+        android:label="fragment_add_caption"
+        tools:layout="@layout/fragment_add_caption" />
+    <fragment
+        android:id="@+id/FinishFragment"
+        android:name="com.example.feedcraft.FinishFragment"
+        android:label="fragment_finish"
+        tools:layout="@layout/fragment_finish" >
+        <action
+            android:id="@+id/action_finishFragment_to_scheduleFragment"
+            app:destination="@id/ScheduleFragment" />
+        <action
+            android:id="@+id/action_finishFragment_to_editFragment"
+            app:destination="@id/EditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ScheduleFragment"
+        android:name="com.example.feedcraft.ScheduleFragment"
+        android:label="fragment_schedule"
+        tools:layout="@layout/fragment_schedule" >
+        <action
+            android:id="@+id/action_scheduleFragment_to_finishFragment"
+            app:destination="@id/FinishFragment" />
+    </fragment>
+</navigation>

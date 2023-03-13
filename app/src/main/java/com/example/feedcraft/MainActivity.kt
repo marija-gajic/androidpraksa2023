@@ -3,6 +3,7 @@ package com.example.feedcraft
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.os.IResultReceiver._Parcel
 import android.view.View
 import android.widget.Button
 import androidx.navigation.NavController
@@ -28,7 +29,11 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navigation)
 
 
-
+//        navController.addOnDestinationChangedListener {  _, destination, _ ->
+//        when(destination.id) {
+//            R.id.editFragment -> binding.bottomNavigation.visibility = View.GONE
+//
+//        }}
 
 
 //        NavigationBarView.OnItemSelectedListener { item ->

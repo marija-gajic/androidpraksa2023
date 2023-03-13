@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SeekBar
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentEditBinding
 import com.example.feedcraft.databinding.FragmentFeedBinding
@@ -35,6 +36,10 @@ class EditFragment : Fragment() {
         val btnBrightness = binding.contBrightnessEditor
         val btnSaturation = binding.contSaturationEditor
         val btnContrast = binding.contContrastEditor
+        val seek = binding.seekBar
+        val percent = binding.percent
+
+
 
         addCaption.setOnClickListener {
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
@@ -49,8 +54,7 @@ class EditFragment : Fragment() {
             findNavController().navigate(actionCaption)
         }
         btnBack.setOnClickListener {
-            val actionBack = EditFragmentDirections.actionEditFragmentToFeedFragment()
-            findNavController().navigate(actionBack)
+            requireActivity().finish()
         }
         btnFilter.setOnClickListener {
             //TODO
@@ -65,5 +69,7 @@ class EditFragment : Fragment() {
             //TODO
         }
     }
+
+
 
 }

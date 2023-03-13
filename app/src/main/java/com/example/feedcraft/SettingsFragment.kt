@@ -1,5 +1,6 @@
 package com.example.feedcraft
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
 import android.content.Context
@@ -12,6 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.feedcraft.databinding.FragmentSettingsBinding
@@ -35,6 +39,7 @@ class SettingsFragment : Fragment() {
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnRate = binding.contRate
         val btnRecommend = binding.contRecommend
@@ -159,14 +164,24 @@ class SettingsFragment : Fragment() {
             }
         }
         darkModeOn.setOnClickListener {
-            darkModeOn.isVisible = false
-            darkModeOff.isVisible = true
-            //TODO
+            darkModeOn.isVisible = true
+            darkModeOff.isVisible = false
+
+//            val thm = AppCompatDelegate.getDefaultNightMode()
+//
+//            if (thm == 1) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+//            }
+
         }
         darkModeOff.setOnClickListener {
             darkModeOff.isVisible = false
             darkModeOn.isVisible = true
-            //TODO
+//            val thm = AppCompatDelegate.getDefaultNightMode()
+//
+//            if (thm == 2) {
+            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+//            }
         }
     }
 

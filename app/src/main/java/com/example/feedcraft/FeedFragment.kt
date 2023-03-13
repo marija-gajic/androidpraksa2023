@@ -1,5 +1,6 @@
 package com.example.feedcraft
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -45,8 +46,13 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionDelete)
         }
         editPhoto.setOnClickListener {
-            val actionEdit = FeedFragmentDirections.actionFeedFragmentToEditFragment()
-            findNavController().navigate(actionEdit)
+            //val actionEdit = FeedFragmentDirections.actionFeedFragmentToEditFragment()
+            //findNavController().navigate(actionEdit)
+
+            //startActivity(Intent(requireContext(), EditorActivity::class.java))
+
+            findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToEditorActivity())
+
         }
         colorCode.setOnClickListener {
             //TODO

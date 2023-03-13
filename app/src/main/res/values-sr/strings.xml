@@ -23,7 +23,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="delete_ok">OK</string>
     <string name="delete_cancel">Cancel</string>
-    <string name="delete_question">Are you sure you want to delete the image?</string>
+    <string name="delete_question">Da li zelite da obrisite sliku ?</string>
     <string name="hint_add_caption">Add Caption...</string>
     <string name="txt_finish_editor">Finish</string>
     <string name="caption_editor">Caption</string>
@@ -44,7 +44,6 @@
     <string name="feedback_unavailable">Feedback currently unavailable</string>
     <string name="more_apps_unavailable">More apps currently unavailable</string>
     <string name="privacy_policy_unavailable">Privacy policy currently unavailable</string>
-    <string name="type_something_schedule">Type something...</string>
     <string name="write_notification_text_schedule">Write the notification text:</string>
     <string name="add_picture_schedule">Add a picture</string>
     <string name="pick_date_schedule">Pick a date:</string>

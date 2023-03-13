@@ -2,11 +2,13 @@ package com.example.feedcraft
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentAddCaptionBinding
@@ -32,6 +34,9 @@ class DeleteFeedFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnOk = binding.btnDeleteOk
         val btnCancel = binding.btnDeleteCancel
+
+//        binding.txtDelete.typeface =
+//            ResourcesCompat.getFont(requireContext(), R.font.poppins_regular)
 
         btnOk.setOnClickListener {
             //TODO

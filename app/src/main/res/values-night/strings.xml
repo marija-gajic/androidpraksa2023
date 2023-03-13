@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="write_notification_text_schedule">Write the notification text:</string>
+    <string name="add_picture_schedule">Add a picture</string>
+    <string name="pick_date_schedule">Pick a date:</string>
+    <string name="pick_time_schedule">Pick a time:</string>
+</resources>

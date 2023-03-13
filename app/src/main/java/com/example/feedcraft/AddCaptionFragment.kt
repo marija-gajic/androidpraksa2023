@@ -1,16 +1,12 @@
 package com.example.feedcraft
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentAddCaptionBinding
-import com.example.feedcraft.databinding.FragmentEditBinding
 
 class AddCaptionFragment : DialogFragment() {
     private var _binding: FragmentAddCaptionBinding? = null
@@ -38,8 +34,9 @@ class AddCaptionFragment : DialogFragment() {
             //TODO
         }
         btnCancel.setOnClickListener {
-            val actionCancel = AddCaptionFragmentDirections.actionAddCaptionFragmentToEditFragment()
-            findNavController().navigate(actionCancel)
+
+            findNavController().popBackStack()
+
         }
     }
 

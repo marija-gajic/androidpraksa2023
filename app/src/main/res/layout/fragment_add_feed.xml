@@ -10,6 +10,12 @@
     <TextView
         android:id="@+id/add_feed_title"
         android:textSize="13sp"
+        app:autoSizeTextType="uniform"
+        app:autoSizeMinTextSize="6sp"
+        app:autoSizeMaxTextSize="13sp"
+        app:autoSizeStepGranularity="1sp"
+        android:maxLines="1"
+        android:fontFamily="@font/poppins_regular"
         android:textColor="@color/icon_text_light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,12 +67,18 @@
           app:layout_constraintStart_toStartOf="@id/btn_gallery"
           app:layout_constraintTop_toTopOf="@id/btn_gallery" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
           android:id="@+id/txt_gallery"
           android:layout_width="wrap_content"
           android:layout_height="0dp"
           android:gravity="center"
           android:textSize="12sp"
+          app:autoSizeTextType="uniform"
+          app:autoSizeMinTextSize="6sp"
+          app:autoSizeMaxTextSize="13sp"
+          app:autoSizeStepGranularity="1sp"
+          android:maxLines="1"
+          android:fontFamily="@font/poppins_regular"
           android:layout_marginEnd="5dp"
           android:text="@string/dialog_gallery"
           android:textColor="@color/white_color"
@@ -89,13 +101,19 @@
          app:layout_constraintStart_toStartOf="@id/btn_camera"
          app:layout_constraintTop_toTopOf="@id/btn_camera" />
 
-       <TextView
+       <androidx.appcompat.widget.AppCompatTextView
            android:id="@+id/txt_camera"
            android:layout_width="wrap_content"
            android:layout_height="0dp"
            android:gravity="center"
            android:text="@string/dialog_camera"
            android:textSize="12sp"
+           app:autoSizeTextType="uniform"
+           app:autoSizeMinTextSize="6sp"
+           app:autoSizeMaxTextSize="13sp"
+           app:autoSizeStepGranularity="1sp"
+           android:maxLines="1"
+           android:fontFamily="@font/poppins_regular"
            android:layout_marginStart="5dp"
            android:layout_marginEnd="5dp"
            android:textColor="@color/white_color"

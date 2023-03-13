@@ -2,12 +2,12 @@
     <!-- Base application theme. -->
     <style name="Theme.FeedCraft" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/main_color_light</item>
-        <item name="colorPrimaryVariant">@color/bg_color_light</item>
-        <item name="colorOnPrimary">@color/icon_text_light</item>
+        <item name="colorPrimary">@color/main_color_dark</item>
+        <item name="colorPrimaryVariant">@color/bg_color_dark</item>
+        <item name="colorOnPrimary">@color/icon_text_dark</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/main_color_dark</item>
-        <item name="colorSecondaryVariant">@color/bg_color_dark</item>
+        <item name="colorSecondary">@color/buttons_dark</item>
+        <item name="colorSecondaryVariant">@color/header_footer_dark</item>
         <item name="colorOnSecondary">@color/icon_text_dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
