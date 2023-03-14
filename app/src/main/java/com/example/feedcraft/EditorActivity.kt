@@ -11,10 +11,12 @@ class EditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = ActivityEditorBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_editor)
 
-        //val navigation = findNavController(R.id.nav_editor)
+        /*val binding = ActivityEditorBinding.inflate(layoutInflater)
+        setContentView(binding.root)*/
+
+
 
 
     }

@@ -1,14 +1,15 @@
 package com.example.feedcraft
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentEditBinding
-import com.example.feedcraft.databinding.FragmentFeedBinding
 
 class EditFragment : Fragment() {
     private var _binding: FragmentEditBinding? = null
@@ -19,11 +20,25 @@ class EditFragment : Fragment() {
 
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditBinding.inflate(inflater, container, false)
+
+        val imgEditor = binding.imgEditor
+
+        if(UIApplication.imageUri != null)
+        {//gallery
+            val selectedImageFromGalleryUri = UIApplication.imageUri
+            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)
+        }
+        else
+        {//camera
+            imgEditor.setImageBitmap(UIApplication.tempBitmap)
+        }
+
         return binding.root
     }
 
@@ -39,9 +54,30 @@ class EditFragment : Fragment() {
         val seek = binding.seekBar
         val percent = binding.percent
 
+        val currentProgress = seek.progress.toString() + "%"
+        percent.text = currentProgress
+        seek.isVisible = false
+        percent.isVisible = false
 
+        seek?.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar,
+                                           progress: Int, fromUser: Boolean) {
+                percent.text = progress.toString() + "%"
+            }
+
+            override fun onStartTrackingTouch(seek: SeekBar) {
+
+            }
+
+            override fun onStopTrackingTouch(seek: SeekBar) {
+
+            }
+        })
 
         addCaption.setOnClickListener {
+            seek.isVisible = false
+            percent.isVisible = false
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
             findNavController().navigate(actionCaption)
         }
@@ -50,6 +86,8 @@ class EditFragment : Fragment() {
             findNavController().navigate(actionFinish)
         }
         btnCaption.setOnClickListener {
+            seek.isVisible = false
+            percent.isVisible = false
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
             findNavController().navigate(actionCaption)
         }
@@ -57,16 +95,20 @@ class EditFragment : Fragment() {
             requireActivity().finish()
         }
         btnFilter.setOnClickListener {
-            //TODO
+            seek.isVisible = false
+            percent.isVisible = false
         }
         btnBrightness.setOnClickListener {
-            //TODO
+            seek.isVisible = true
+            percent.isVisible = true
         }
         btnSaturation.setOnClickListener {
-            //TODO
+            seek.isVisible = true
+            percent.isVisible = true
         }
         btnContrast.setOnClickListener {
-            //TODO
+            seek.isVisible = true
+            percent.isVisible = true
         }
     }
 

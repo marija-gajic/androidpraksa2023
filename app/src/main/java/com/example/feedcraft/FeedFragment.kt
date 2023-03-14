@@ -49,9 +49,9 @@ class FeedFragment : Fragment() {
             //val actionEdit = FeedFragmentDirections.actionFeedFragmentToEditFragment()
             //findNavController().navigate(actionEdit)
 
-            //startActivity(Intent(requireContext(), EditorActivity::class.java))
+            startActivity(Intent(requireContext(), EditorActivity::class.java))
 
-            findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToEditorActivity())
+            //findNavController().navigate(FeedFragmentDirections.actionFeedFragmentToEditorActivity())
 
         }
         colorCode.setOnClickListener {

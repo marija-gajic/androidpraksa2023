@@ -9,8 +9,8 @@
     <fragment
         android:id="@+id/HomeFragment"
         android:name="com.example.feedcraft.HomeFragment"
-        tools:layout="@layout/fragment_home"
-        android:label="Home">
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_HomeFragment_to_FeedFragment"
             app:destination="@id/FeedFragment" />
@@ -19,8 +19,8 @@
     <fragment
         android:id="@+id/FeedFragment"
         android:name="com.example.feedcraft.FeedFragment"
-        tools:layout="@layout/fragment_feed"
-        android:label="Feed">
+        android:label="Feed"
+        tools:layout="@layout/fragment_feed">
         <action
             android:id="@+id/action_FeedFragment_to_addFeedFragment"
             app:destination="@id/addFeedFragment" />
@@ -30,9 +30,9 @@
         <action
             android:id="@+id/action_FeedFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
-        <action
+       <!-- <action
             android:id="@+id/action_FeedFragment_to_EditorActivity"
-            app:destination="@id/EditorActivity" />
+            app:destination="@id/EditorActivity" />-->
 
 
     </fragment>
@@ -40,28 +40,31 @@
     <fragment
         android:id="@+id/SettingsFragment"
         android:name="com.example.feedcraft.SettingsFragment"
-        tools:layout="@layout/fragment_settings"
-        android:label="Settings">
-    </fragment>
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings"></fragment>
 
     <dialog
         android:id="@+id/addFeedFragment"
         android:name="com.example.feedcraft.AddFeedFragment"
         android:label="fragment_add_feed"
-        tools:layout="@layout/fragment_add_feed" />
+        tools:layout="@layout/fragment_add_feed" >
+        <action
+            android:id="@+id/action_addFeedFragment_to_FeedFragment"
+            app:destination="@id/FeedFragment" />
+    </dialog>
     <dialog
         android:id="@+id/deleteFeedFragment"
-        tools:layout="@layout/fragment_delete_feed"
         android:name="com.example.feedcraft.DeleteFeedFragment"
-        android:label="DeleteFeedFragment" >
+        android:label="DeleteFeedFragment"
+        tools:layout="@layout/fragment_delete_feed">
         <action
             android:id="@+id/action_deleteFeedFragment_to_FeedFragment"
             app:destination="@id/FeedFragment" />
     </dialog>
 
-    <activity
+<!--    <activity
         android:id="@+id/EditorActivity"
         android:name="com.example.feedcraft.EditorActivity"
-        android:label="EditorActivity" />
+        android:label="EditorActivity" />-->
 
 </navigation>
