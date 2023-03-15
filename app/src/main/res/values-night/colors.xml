@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="main_color">#B03873</color>
+    <color name="bg_color">#332F3E</color>
+    <color name="header_footer">#262330</color>
+    <color name="icon_text">#C0B7CC</color>
+    <color name="buttons">#B197F5</color>
+</resources>

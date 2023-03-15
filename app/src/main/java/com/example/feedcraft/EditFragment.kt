@@ -8,6 +8,7 @@ import android.widget.SeekBar
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -17,7 +18,10 @@ import com.example.feedcraft.databinding.FragmentEditBinding
 class EditFragment : Fragment() {
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: EditorViewModel by viewModels()
+    private val viewModel: EditorViewModel by activityViewModels()
+    private var brightnessClicked: Boolean = false
+    private var saturationClicked: Boolean = false
+    private var contrastClicked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,27 +62,42 @@ class EditFragment : Fragment() {
         val percent = binding.percent
 
         //viewModel = ViewModelProvider(requireActivity())[EditorViewModel::class.java]
-        viewModel!!.message.observe(viewLifecycleOwner) { newMessage ->
-            Toast.makeText(requireContext(), "Stigla je poruka:" + newMessage, Toast.LENGTH_SHORT).show()
+//        viewModel!!.message.observe(viewLifecycleOwner) { newMessage ->
+//            Toast.makeText(requireContext(), "Stigla je poruka:" + newMessage, Toast.LENGTH_SHORT).show()
+//        }
+
+        viewModel.edits.observe(viewLifecycleOwner) { newEdit ->
+            addCaption.setText(newEdit.caption)
         }
 
-        val txtCaption = viewModel.getCaption()
-        addCaption.text = txtCaption
 
+        //addCaption.text = viewModel.getCaption()
+        addCaption.setText(viewModel.edits.value?.caption)
 
         val currentProgress = seek.progress.toString() + "%"
         percent.text = currentProgress
         setSeekPercentVisible(false)
 
-        seek?.setOnSeekBarChangeListener(object :
-            SeekBar.OnSeekBarChangeListener {
+        seek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 percent.text = progress.toString() + "%"
             }
+
             override fun onStartTrackingTouch(seek: SeekBar) {}
+
             override fun onStopTrackingTouch(seek: SeekBar) {
-                val prog = seek.progress
-                viewModel.setBrightness(prog)
+                //val prog = seek.progress
+                //viewModel.setBrightness(prog)
+
+                if (brightnessClicked){
+                    viewModel.setBrightness(seek.progress)
+                }
+                if (saturationClicked){
+                    viewModel.setSaturation(seek.progress)
+                }
+                if (contrastClicked){
+                    viewModel.setContrast(seek.progress)
+                }
 
             }
         })
@@ -108,19 +127,31 @@ class EditFragment : Fragment() {
         }
         btnBrightness.setOnClickListener {
             setSeekPercentVisible(true)
-
-
-
+            brightnessClicked = true
+            saturationClicked = false
+            contrastClicked = false
+            val brightnessAmount = viewModel.getBrightness()
+            seek.progress = brightnessAmount
+            percent.text = brightnessAmount.toString() + "%"
         }
         btnSaturation.setOnClickListener {
             setSeekPercentVisible(true)
-
-
+            brightnessClicked = false
+            saturationClicked = true
+            contrastClicked = false
+            val saturationAmount = viewModel.getSaturation()
+            seek.progress = saturationAmount
+            percent.text = saturationAmount.toString() + "%"
         }
         btnContrast.setOnClickListener {
             setSeekPercentVisible(true)
             //viewModel?.setAnotherValueToLiveData("Nova poruka")
-
+            brightnessClicked = false
+            saturationClicked = false
+            contrastClicked = true
+            val contrastAmount = viewModel.getContrast()
+            seek.progress = contrastAmount
+            percent.text = contrastAmount.toString() + "%"
         }
 
 
@@ -132,6 +163,7 @@ class EditFragment : Fragment() {
         seek.isVisible = isVisible
         percent.isVisible = isVisible
     }
+
 
 
 

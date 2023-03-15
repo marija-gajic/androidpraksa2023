@@ -1,13 +1,20 @@
 package com.example.feedcraft
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentFinishBinding
 import com.example.feedcraft.databinding.FragmentScheduleBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ScheduleFragment : Fragment() {
     private var _binding: FragmentScheduleBinding? = null
@@ -44,11 +51,14 @@ class ScheduleFragment : Fragment() {
             //TODO
         }
         datePicker.setOnClickListener {
-            //TODO
+
         }
         timePicker.setOnClickListener {
             //TODO
         }
+
     }
+
+
 
 }

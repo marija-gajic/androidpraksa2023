@@ -24,7 +24,7 @@
         android:id="@+id/header_schedule"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/header_bg"
+        android:background="@color/header_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintStart_toStartOf="parent"
@@ -87,19 +87,21 @@
         android:textSize="20sp"
         android:layout_marginTop="30dp"
         android:text="@string/write_notification_text_schedule"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/header_schedule"/>
 
-    <TextView
+    <EditText
         android:id="@+id/text_field_schedule"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:textSize="17sp"
-        android:textColorHint="@color/icon_text_light"
+        android:textColorHint="@color/icon_text"
         android:hint="@string/type_something_schedule"
+        android:gravity="start"
+        android:maxLines="4"
         android:background="@drawable/schedule_message_icon"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintTop_toBottomOf="@id/txt_write"
@@ -112,7 +114,7 @@
         android:layout_height="wrap_content"
         android:text="@string/add_picture_schedule"
         android:layout_marginTop="30dp"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@id/text_field_schedule"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"/>
@@ -131,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="@string/pick_date_schedule"
         android:layout_marginTop="30dp"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/txt_add_picture"/>
@@ -158,7 +160,7 @@
         android:layout_height="wrap_content"
         android:text="@string/pick_time_schedule"
         android:layout_marginTop="30dp"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/date_picker"/>

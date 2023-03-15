@@ -3,19 +3,20 @@ package com.example.feedcraft
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+//import kotlinx.coroutines.NonCancellable.message
 
 class EditorViewModel : ViewModel() {
 
-    val message: MutableLiveData<String> = MutableLiveData()
+   // val message: MutableLiveData<String> = MutableLiveData()
 
     val _edits: MutableLiveData<Edits> = MutableLiveData(Edits("", 1,1,1))
     val edits: LiveData<Edits>
         get() = _edits
 
-    fun setAnotherValueToLiveData(messageToReplaceWith: String)
-    {
-        message.value = messageToReplaceWith
-    }
+//    fun setAnotherValueToLiveData(messageToReplaceWith: String)
+//    {
+//        message.value = messageToReplaceWith
+//    }
 
     fun setCaption(caption: String) {
         val newEdits: Edits = edits.value!!
@@ -42,10 +43,20 @@ class EditorViewModel : ViewModel() {
     }
 
     fun getCaption(): String {
-        return edits.value?.caption.toString()
+        return edits.value!!.caption
     }
 
+    fun getBrightness(): Int {
+        return edits.value!!.brightness
+    }
 
+    fun getSaturation(): Int {
+        return edits.value!!.saturation
+    }
+
+    fun getContrast(): Int {
+        return edits.value!!.contrast
+    }
 
 
 }
