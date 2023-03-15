@@ -48,11 +48,10 @@ class AddFeedFragment : DialogFragment() {
         val addGallery = binding.btnGallery
         val addCamera = binding.btnCamera
 
-
         addGallery.setOnClickListener {
             val pickPhoto = Intent(
                 Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI
             )
             startActivityForResult(pickPhoto, Constants.REQUEST_GALLERY)
         }
@@ -60,14 +59,11 @@ class AddFeedFragment : DialogFragment() {
             val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(takePicture, Constants.REQUEST_CAMERA)
         }
-
-
     }
 
     @SuppressLint("RestrictedApi")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
 
         when (requestCode) {
             REQUEST_CAMERA -> if (resultCode == RESULT_OK) {

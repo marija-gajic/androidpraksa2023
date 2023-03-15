@@ -50,6 +50,15 @@ class SettingsFragment : Fragment() {
         val darkModeOn = binding.darkModeOn
         val darkModeOff = binding.darkModeOff
 
+        if (AppCompatDelegate.getDefaultNightMode() == MODE_NIGHT_NO) {
+            darkModeOn.isVisible = true
+            darkModeOff.isVisible = false
+        }
+        else {
+            darkModeOn.isVisible = false
+            darkModeOff.isVisible = true
+        }
+
         btnRate.setOnClickListener {
             val gameId = resources.getString(R.string.play_store_game_package_id)
             val intent = Intent(Intent.ACTION_VIEW).apply {
@@ -165,24 +174,27 @@ class SettingsFragment : Fragment() {
             }
         }
         darkModeOn.setOnClickListener {
-            darkModeOn.isVisible = true
-            darkModeOff.isVisible = false
+            darkModeOn.isVisible = false
+            darkModeOff.isVisible = true
 
-//            val thm = AppCompatDelegate.getDefaultNightMode()
-//
-//            if (thm == 1) {
+            if (AppCompatDelegate.getDefaultNightMode() == MODE_NIGHT_NO) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            }
+            else {
                 AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
-//            }
+            }
 
         }
         darkModeOff.setOnClickListener {
-            darkModeOff.isVisible = false
             darkModeOn.isVisible = true
-//            val thm = AppCompatDelegate.getDefaultNightMode()
-//
-//            if (thm == 2) {
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
-//            }
+            darkModeOff.isVisible = false
+
+            if (AppCompatDelegate.getDefaultNightMode() == MODE_NIGHT_YES) {
+            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_NO)
+            }
+            else {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            }
         }
     }
 

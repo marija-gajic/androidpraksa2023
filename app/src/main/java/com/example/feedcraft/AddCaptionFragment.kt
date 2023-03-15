@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentAddCaptionBinding
 
 class AddCaptionFragment : DialogFragment() {
     private var _binding: FragmentAddCaptionBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: EditorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -29,14 +30,15 @@ class AddCaptionFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val btnOk = binding.btnCaptionOk
         val btnCancel = binding.btnCaptionCancel
+        val caption = binding.txtAddCaption
 
         btnOk.setOnClickListener {
-            //TODO
+            val txt = caption.text.toString()
+            viewModel.setCaption(txt)
+            dismiss()
         }
         btnCancel.setOnClickListener {
-
             findNavController().popBackStack()
-
         }
     }
 

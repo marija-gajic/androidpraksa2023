@@ -88,7 +88,7 @@
 
     <ImageView
         android:id="@+id/dark_mode_off"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/btn_toggle_on"
@@ -100,7 +100,7 @@
 
     <ImageView
         android:id="@+id/dark_mode_on"
-        android:visibility="invisible"
+        android:visibility="visible"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/btn_toggle_off"

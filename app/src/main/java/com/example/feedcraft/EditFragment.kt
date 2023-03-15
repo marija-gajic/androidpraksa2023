@@ -5,21 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentEditBinding
 
+
 class EditFragment : Fragment() {
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: EditorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,40 +57,46 @@ class EditFragment : Fragment() {
         val seek = binding.seekBar
         val percent = binding.percent
 
+        //viewModel = ViewModelProvider(requireActivity())[EditorViewModel::class.java]
+        viewModel!!.message.observe(viewLifecycleOwner) { newMessage ->
+            Toast.makeText(requireContext(), "Stigla je poruka:" + newMessage, Toast.LENGTH_SHORT).show()
+        }
+
+        val txtCaption = viewModel.getCaption()
+        addCaption.text = txtCaption
+
+
         val currentProgress = seek.progress.toString() + "%"
         percent.text = currentProgress
-        seek.isVisible = false
-        percent.isVisible = false
+        setSeekPercentVisible(false)
 
         seek?.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seek: SeekBar,
-                                           progress: Int, fromUser: Boolean) {
+            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 percent.text = progress.toString() + "%"
             }
-
-            override fun onStartTrackingTouch(seek: SeekBar) {
-
-            }
-
+            override fun onStartTrackingTouch(seek: SeekBar) {}
             override fun onStopTrackingTouch(seek: SeekBar) {
+                val prog = seek.progress
+                viewModel.setBrightness(prog)
 
             }
         })
 
+
+
         addCaption.setOnClickListener {
-            seek.isVisible = false
-            percent.isVisible = false
+            setSeekPercentVisible(false)
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
             findNavController().navigate(actionCaption)
         }
         btnFinish.setOnClickListener {
             val actionFinish = EditFragmentDirections.actionEditFragmentToFinishFragment()
             findNavController().navigate(actionFinish)
+
         }
         btnCaption.setOnClickListener {
-            seek.isVisible = false
-            percent.isVisible = false
+            setSeekPercentVisible(false)
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
             findNavController().navigate(actionCaption)
         }
@@ -95,21 +104,33 @@ class EditFragment : Fragment() {
             requireActivity().finish()
         }
         btnFilter.setOnClickListener {
-            seek.isVisible = false
-            percent.isVisible = false
+            setSeekPercentVisible(false)
         }
         btnBrightness.setOnClickListener {
-            seek.isVisible = true
-            percent.isVisible = true
+            setSeekPercentVisible(true)
+
+
+
         }
         btnSaturation.setOnClickListener {
-            seek.isVisible = true
-            percent.isVisible = true
+            setSeekPercentVisible(true)
+
+
         }
         btnContrast.setOnClickListener {
-            seek.isVisible = true
-            percent.isVisible = true
+            setSeekPercentVisible(true)
+            //viewModel?.setAnotherValueToLiveData("Nova poruka")
+
         }
+
+
+    }
+
+    private fun setSeekPercentVisible(isVisible: Boolean){
+        val seek = binding.seekBar
+        val percent = binding.percent
+        seek.isVisible = isVisible
+        percent.isVisible = isVisible
     }
 
 

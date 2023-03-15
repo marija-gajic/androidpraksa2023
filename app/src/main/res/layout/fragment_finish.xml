@@ -108,13 +108,11 @@
         app:layout_constraintTop_toBottomOf="@id/header_finish"
         app:layout_constraintBottom_toTopOf="@id/caption_field_finish"/>
 
-    <EditText
+    <TextView
         android:id="@+id/caption_field_finish"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/caption_holder"
-        android:hint="Caption"
-        android:textColorHint="@color/icon_text_light"
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:textColor="@color/icon_text_light"
