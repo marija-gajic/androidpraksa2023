@@ -29,7 +29,7 @@ class EditFragment : Fragment() {
 
         val imgEditor = binding.imgEditor
 
-        if(UIApplication.imageUri != null)
+        if(UIApplication.photoOrigin == "gallery")
         {//gallery
             val selectedImageFromGalleryUri = UIApplication.imageUri
             Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)

@@ -18,6 +18,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.navigateUp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
@@ -70,14 +71,14 @@ class AddFeedFragment : DialogFragment() {
 
         when (requestCode) {
             REQUEST_CAMERA -> if (resultCode == RESULT_OK) {
-                val photoOrigin = "camera"
+                UIApplication.photoOrigin = "camera"
                 val extras: Bundle? = data?.extras
                 val imageBitmap = extras?.get("data") as Bitmap?
                 UIApplication.tempBitmap = imageBitmap!!
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
             }
             REQUEST_GALLERY -> if (resultCode == RESULT_OK) {
-                val photoOrigin = "gallery"
+                UIApplication.photoOrigin = "gallery"
                 val selectedImageUri: Uri? = data?.data
                 UIApplication.imageUri = selectedImageUri!!
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
@@ -86,7 +87,7 @@ class AddFeedFragment : DialogFragment() {
         }
 
         when(resultCode) {
-            RESULT_CANCELED -> dismiss()
+            RESULT_CANCELED -> findNavController().navigateUp()
         }
     }
 }

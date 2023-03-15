@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.example.feedcraft.BuildConfig
 import com.example.feedcraft.databinding.FragmentSettingsBinding
 
 
