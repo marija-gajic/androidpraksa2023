@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.feedcraft.UIApplication.Companion.tempBitmap
 import com.example.feedcraft.databinding.FragmentEditBinding
 import com.example.feedcraft.databinding.FragmentFinishBinding
 import java.io.ByteArrayOutputStream
@@ -19,7 +22,7 @@ import java.io.FileOutputStream
 class FinishFragment : Fragment() {
     private var _binding: FragmentFinishBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: EditorViewModel by viewModels()
+    private val viewModel: EditorViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,9 +45,20 @@ class FinishFragment : Fragment() {
         val imgPreview = binding.imgPreview
         val captionField = binding.captionFieldFinish
 
-        val captiontxt = viewModel.getCaption()
-        captionField.text = captiontxt
+        captionField.text = viewModel.getCaption()
+        
+        val tempBitmap = UIApplication.tempBitmap as Bitmap
+        imgPreview.setImageBitmap(UIApplication.tempBitmap)
 
+//        if(UIApplication.photoOrigin == "gallery")
+//        {//gallery
+//            val selectedImageFromGalleryUri = UIApplication.imageUri
+//            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
+//        }
+//        else
+//        {//camera
+//            imgPreview.setImageBitmap(UIApplication.tempBitmap)
+//        }
 
         btnSchedule.setOnClickListener {
             val actionSchedule = FinishFragmentDirections.actionFinishFragmentToScheduleFragment()
@@ -52,7 +66,7 @@ class FinishFragment : Fragment() {
         }
         btnSave.setOnClickListener {
 
-            val tempBitmap = UIApplication.tempBitmap as Bitmap
+
             saveBitmap(tempBitmap, context?.filesDir.toString()+ File.separator+"creationAlbum", "temp.png")
             //requireActivity().finish()
         }

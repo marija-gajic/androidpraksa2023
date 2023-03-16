@@ -71,12 +71,14 @@ class AddFeedFragment : DialogFragment() {
                 val extras: Bundle? = data?.extras
                 val imageBitmap = extras?.get("data") as Bitmap?
                 UIApplication.tempBitmap = imageBitmap!!
+                findNavController().navigateUp()
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
             }
             REQUEST_GALLERY -> if (resultCode == RESULT_OK) {
                 UIApplication.photoOrigin = "gallery"
                 val selectedImageUri: Uri? = data?.data
                 UIApplication.imageUri = selectedImageUri!!
+                findNavController().navigateUp()
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
             }
 

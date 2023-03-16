@@ -53,7 +53,7 @@
         android:id="@+id/header_settings"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/header_bg"
+        android:background="@color/header_footer"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -81,7 +81,7 @@
         android:text="@string/txt_dark_mode_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_dark_mode_settings"
         app:layout_constraintTop_toBottomOf="@id/header_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelineDarkModeBottom_settings"/>
@@ -141,7 +141,7 @@
         android:text="@string/txt_rate_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_rate_settings"
         app:layout_constraintTop_toBottomOf="@id/guidelineDarkModeBottom_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelineRateBottom_settings"/>
@@ -191,7 +191,7 @@
         android:text="@string/txt_recommend_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_recommend_settings"
         app:layout_constraintTop_toBottomOf="@id/guidelineRateBottom_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelineRecommendBottom_settings"/>
@@ -241,7 +241,7 @@
         android:text="@string/txt_feedback_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_feedback_settings"
         app:layout_constraintTop_toBottomOf="@id/guidelineRecommendBottom_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelineFeedbackBottom_settings"/>
@@ -291,7 +291,7 @@
         android:text="@string/txt_more_apps_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_more_apps_settings"
         app:layout_constraintTop_toBottomOf="@id/guidelineFeedbackBottom_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelineMoreAppsBottom_settings"/>
@@ -341,7 +341,7 @@
         android:text="@string/txt_privacy_settings"
         android:layout_marginStart="20dp"
         android:gravity="center"
-        android:textColor="@color/icon_text_light"
+        android:textColor="@color/icon_text"
         app:layout_constraintStart_toEndOf="@id/img_privacy_settings"
         app:layout_constraintTop_toBottomOf="@id/guidelineMoreAppsBottom_settings"
         app:layout_constraintBottom_toTopOf="@id/guidelinePrivacyBottom_settings"/>
