@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.example.feedcraft.UIApplication.Companion.tempBitmap
 import com.example.feedcraft.databinding.FragmentEditBinding
 import com.example.feedcraft.databinding.FragmentFinishBinding
 import java.io.ByteArrayOutputStream
@@ -44,7 +46,19 @@ class FinishFragment : Fragment() {
         val captionField = binding.captionFieldFinish
 
         captionField.text = viewModel.getCaption()
+        
+        val tempBitmap = UIApplication.tempBitmap as Bitmap
+        imgPreview.setImageBitmap(UIApplication.tempBitmap)
 
+//        if(UIApplication.photoOrigin == "gallery")
+//        {//gallery
+//            val selectedImageFromGalleryUri = UIApplication.imageUri
+//            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
+//        }
+//        else
+//        {//camera
+//            imgPreview.setImageBitmap(UIApplication.tempBitmap)
+//        }
 
         btnSchedule.setOnClickListener {
             val actionSchedule = FinishFragmentDirections.actionFinishFragmentToScheduleFragment()
@@ -52,7 +66,7 @@ class FinishFragment : Fragment() {
         }
         btnSave.setOnClickListener {
 
-            val tempBitmap = UIApplication.tempBitmap as Bitmap
+
             saveBitmap(tempBitmap, context?.filesDir.toString()+ File.separator+"creationAlbum", "temp.png")
             //requireActivity().finish()
         }
