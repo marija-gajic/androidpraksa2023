@@ -42,7 +42,7 @@ class EditorViewModel : ViewModel() {
     }
 
     fun getCaption(): String {
-        return edits.value?.caption.toString()
+        return edits.value!!.caption
     }
 
 
