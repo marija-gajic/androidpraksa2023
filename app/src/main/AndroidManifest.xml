@@ -16,6 +16,17 @@
         android:theme="@style/Theme.FeedCraft"
         tools:targetApi="31"
         android:name=".UIApplication">
+
+        <provider
+            android:name="com.example.feedcraft.MyFileProvider"
+            android:authorities="${applicationId}"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".EditorActivity"
             android:screenOrientation="portrait"/>

@@ -1,18 +1,20 @@
 package com.example.feedcraft
 
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.FileProvider
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.feedcraft.UIApplication.Companion.tempBitmap
-import com.example.feedcraft.databinding.FragmentEditBinding
 import com.example.feedcraft.databinding.FragmentFinishBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -46,19 +48,21 @@ class FinishFragment : Fragment() {
         val captionField = binding.captionFieldFinish
 
         captionField.text = viewModel.getCaption()
-        
-        val tempBitmap = UIApplication.tempBitmap as Bitmap
-        imgPreview.setImageBitmap(UIApplication.tempBitmap)
 
-//        if(UIApplication.photoOrigin == "gallery")
-//        {//gallery
-//            val selectedImageFromGalleryUri = UIApplication.imageUri
-//            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
-//        }
-//        else
-//        {//camera
-//            imgPreview.setImageBitmap(UIApplication.tempBitmap)
-//        }
+        viewModel!!.message.observe(viewLifecycleOwner) { newMessage ->
+            Toast.makeText(requireContext(), newMessage, Toast.LENGTH_SHORT).show()
+        }
+
+        if(UIApplication.photoOrigin == "gallery")
+        {//gallery
+            val selectedImageFromGalleryUri = UIApplication.imageUri
+            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
+        }
+        else
+        {//camera
+            val tempBitmap = UIApplication.tempBitmap as Bitmap
+            imgPreview.setImageBitmap(UIApplication.tempBitmap)
+        }
 
         btnSchedule.setOnClickListener {
             val actionSchedule = FinishFragmentDirections.actionFinishFragmentToScheduleFragment()
@@ -66,40 +70,42 @@ class FinishFragment : Fragment() {
         }
         btnSave.setOnClickListener {
 
+            if(UIApplication.photoOrigin == "gallery")
+            {//gallery
+                viewModel?.setAnotherValueToLiveData("Saving...")
+                val selectedImageFromGalleryUri = UIApplication.imageUri
+                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
+                viewModel.saveBitmap(requireContext(), bitmap)
+                viewModel?.setAnotherValueToLiveData("Photo saved!")
+            }
+            else
+            {//camera
+                viewModel?.setAnotherValueToLiveData("Saving...")
+                val tempBitmap = UIApplication.tempBitmap as Bitmap
+                viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
+                viewModel?.setAnotherValueToLiveData("Photo saved!")
+            }
+        }
 
-            saveBitmap(tempBitmap, context?.filesDir.toString()+ File.separator+"creationAlbum", "temp.png")
-            //requireActivity().finish()
-        }
         btnShare.setOnClickListener {
-            //TODO
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            val filePath = context?.filesDir.toString() + File.separator + "saved_creations" + File.separator
+            val file = File(filePath, "creation_1.png")
+            val uri: Uri? = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
+            intent.putExtra(Intent.EXTRA_STREAM, uri)
+            intent.type = "image/png"
+            val pm = requireActivity().packageManager
+            if (intent.resolveActivity(pm) != null) {
+                startActivity(intent)
+            }
         }
+
         btnDiscard.setOnClickListener {
             val actionDiscard = FinishFragmentDirections.actionFinishFragmentToEditFragment()
             findNavController().navigate(actionDiscard)
         }
 
-
-    }
-
-    private fun saveBitmap(bitmap: Bitmap, filePath: String, fileName: String): File {
-
-        val bytes = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
-
-        val dir = File(filePath)
-
-        if (!dir.exists()) {
-            dir.mkdir()
-        }
-
-        val f = File(dir, fileName)
-        f.createNewFile()
-
-        val fo = FileOutputStream(f)
-        fo.write(bytes.toByteArray())
-        fo.close()
-
-        return f
     }
 
 }

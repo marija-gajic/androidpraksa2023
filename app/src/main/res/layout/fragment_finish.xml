@@ -125,6 +125,4 @@
         app:layout_constraintTop_toBottomOf="@id/img_preview"
         app:layout_constraintBottom_toTopOf="@id/footer_finish"/>
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
