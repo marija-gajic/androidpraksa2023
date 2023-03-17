@@ -338,5 +338,16 @@
         app:layout_constraintStart_toEndOf="@id/seekBar"
         app:layout_constraintEnd_toEndOf="@id/footer_editor"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_filter"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/guidelineRecycleTop"
+        app:layout_constraintBottom_toTopOf="@id/footer_editor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

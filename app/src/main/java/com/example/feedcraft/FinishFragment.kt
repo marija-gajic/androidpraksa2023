@@ -76,6 +76,7 @@ class FinishFragment : Fragment() {
                 val selectedImageFromGalleryUri = UIApplication.imageUri
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
                 viewModel.saveBitmap(requireContext(), bitmap)
+                viewModel.savePreview(requireContext(), bitmap)
                 viewModel?.setAnotherValueToLiveData("Photo saved!")
             }
             else
@@ -83,6 +84,7 @@ class FinishFragment : Fragment() {
                 viewModel?.setAnotherValueToLiveData("Saving...")
                 val tempBitmap = UIApplication.tempBitmap as Bitmap
                 viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
+                viewModel.savePreview(requireContext(), tempBitmap)
                 viewModel?.setAnotherValueToLiveData("Photo saved!")
             }
         }

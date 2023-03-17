@@ -16,4 +16,5 @@
     <color name="white_color">#FFFFFF</color>
     <color name="overlay_color">#E8AACA</color>
     <color name="transparent_color">#00FFFFFF</color>
+    <color name="selected">#CCBFEA</color>
 </resources>

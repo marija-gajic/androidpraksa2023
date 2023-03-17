@@ -1,15 +1,14 @@
 package com.example.feedcraft
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentEditBinding
@@ -22,6 +21,8 @@ class EditFragment : Fragment() {
     private var brightnessClicked: Boolean = false
     private var saturationClicked: Boolean = false
     private var contrastClicked: Boolean = false
+    private var filterList : MutableList<FilterModel> = mutableListOf()
+    private lateinit var filterAdapter: FilterAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +50,7 @@ class EditFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val addCaption = binding.captionField
         val btnFinish = binding.btnFinishEditor
@@ -60,6 +62,9 @@ class EditFragment : Fragment() {
         val btnContrast = binding.contContrastEditor
         val seek = binding.seekBar
         val percent = binding.percent
+        val filters = binding.rvFilter
+
+        filters.isVisible = false
 
         viewModel.edits.observe(viewLifecycleOwner) { newEdit ->
             addCaption.setText(newEdit.caption)
@@ -104,6 +109,7 @@ class EditFragment : Fragment() {
         }
         btnCaption.setOnClickListener {
             setSeekPercentVisible(false)
+            filters.isVisible = false
             val actionCaption = EditFragmentDirections.actionEditFragmentToAddCaptionFragment()
             findNavController().navigate(actionCaption)
         }
@@ -112,12 +118,15 @@ class EditFragment : Fragment() {
         }
         btnFilter.setOnClickListener {
             setSeekPercentVisible(false)
+            filters.isVisible = true
+
         }
         btnBrightness.setOnClickListener {
             setSeekPercentVisible(true)
             brightnessClicked = true
             saturationClicked = false
             contrastClicked = false
+            filters.isVisible = false
             val brightnessAmount = viewModel.getBrightness()
             seek.progress = brightnessAmount
             percent.text = brightnessAmount.toString() + "%"
@@ -127,6 +136,7 @@ class EditFragment : Fragment() {
             brightnessClicked = false
             saturationClicked = true
             contrastClicked = false
+            filters.isVisible = false
             val saturationAmount = viewModel.getSaturation()
             seek.progress = saturationAmount
             percent.text = saturationAmount.toString() + "%"
@@ -136,10 +146,33 @@ class EditFragment : Fragment() {
             brightnessClicked = false
             saturationClicked = false
             contrastClicked = true
+            filters.isVisible = false
             val contrastAmount = viewModel.getContrast()
             seek.progress = contrastAmount
             percent.text = contrastAmount.toString() + "%"
         }
+
+        loadData()
+        filterAdapter = FilterAdapter(filterList)
+        binding.apply {
+            filters.apply {
+                adapter = filterAdapter
+            }
+        }
+    }
+
+
+    fun loadData() {
+        val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
+        filterList.add(FilterModel("Sample 1", previewBitmap))
+        filterList.add(FilterModel("Sample 2", previewBitmap))
+        filterList.add(FilterModel("Sample 3", previewBitmap))
+        filterList.add(FilterModel("Sample 4", previewBitmap))
+        filterList.add(FilterModel("Sample 5", previewBitmap))
+        filterList.add(FilterModel("Sample 6", previewBitmap))
+        filterList.add(FilterModel("Sample 7", previewBitmap))
+        filterList.add(FilterModel("Sample 8", previewBitmap))
+        filterList.add(FilterModel("Sample 9", previewBitmap))
     }
 
     private fun setSeekPercentVisible(isVisible: Boolean){
