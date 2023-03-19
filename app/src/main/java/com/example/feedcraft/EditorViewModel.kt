@@ -71,16 +71,11 @@ class EditorViewModel : ViewModel() {
         return edits.value!!.contrast
     }
 
-    fun getTimestamp(): String {
-        val currentTimestamp = System.currentTimeMillis().toString()
-        return currentTimestamp
-    }
-
-
+    private fun getTimestamp() = System.currentTimeMillis().toString()
 
     fun saveBitmap(context: Context, bitmap: Bitmap): File {
 
-        val filePath = context?.filesDir.toString() + File.separator + "saved_creations"
+        val filePath = context.filesDir.toString() + File.separator + "saved_creations"
         val fileName ="creation_1.png"
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 99, bytes)
@@ -103,10 +98,10 @@ class EditorViewModel : ViewModel() {
 
     fun savePreview(context: Context, bitmap: Bitmap): File {
 
-        val filePath = context?.filesDir.toString() + File.separator + "creations_preview"
+        val filePath = context.filesDir.toString() + File.separator + "creations_preview"
         val fileName = getTimestamp() + ".png"
         val bytes = ByteArrayOutputStream()
-        val bitmap = scaleCenterCrop(bitmap,200,200)
+        val scaledCroppedBitmap = scaleCenterCrop(bitmap,200,200)
 //        Glide.with(context)
 //            .asBitmap()
 //            .load(thisBitmap)
@@ -117,7 +112,7 @@ class EditorViewModel : ViewModel() {
 //                }
 //            })
         //val thisbitmap = Bitmap.createScaledBitmap(bitmap, 200,200, true)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+        scaledCroppedBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
 
 
         val dir = File(filePath)
@@ -135,8 +130,8 @@ class EditorViewModel : ViewModel() {
     }
 
     fun scaleCenterCrop(bitmap: Bitmap, newHeight: Int, newWidth: Int): Bitmap {
-        val sourceWidth: Int = bitmap.getWidth()
-        val sourceHeight: Int = bitmap.getHeight()
+        val sourceWidth: Int = bitmap.width
+        val sourceHeight: Int = bitmap.height
 
         val xScale = newWidth.toFloat() / sourceWidth
         val yScale = newHeight.toFloat() / sourceHeight
@@ -169,17 +164,18 @@ class EditorViewModel : ViewModel() {
         return previewBitmap
     }
 
-    fun getListOfPreviewsFromStorage(context: Context) {
-        val folderPath = context?.filesDir.toString() + File.separator + "creations_preview"
-//        val files: Array<String> = context.fileList()
-//        for (preview in files) {}
+    fun getListOfPreviewsFromStorage(context: Context): MutableList<Bitmap> {
+        val folderPath = context.filesDir.toString() + File.separator + "creations_preview"
+        //val files: Array<String> = context.fileList()
+        val previewList: MutableList<Bitmap> = mutableListOf()
 
-//        File(folderPath).walk().forEach {file
-//            if (!file.isDirectory) {
-//                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
-//                bitmapList.add(tmpBitmap)
-//            }
-//        }
+        File(folderPath).walk().forEach { file ->
+            if (!file.isDirectory) {
+                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                previewList.add(tmpBitmap)
+            }
+        }
+        return previewList
     }
 
 

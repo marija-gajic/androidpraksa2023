@@ -2,6 +2,7 @@ package com.example.feedcraft
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -153,7 +154,9 @@ class EditFragment : Fragment() {
         }
 
         loadData()
-        filterAdapter = FilterAdapter(filterList)
+        filterAdapter = FilterAdapter(filterList) {
+            Log.d("mylog", "$it")
+        }
         binding.apply {
             filters.apply {
                 adapter = filterAdapter

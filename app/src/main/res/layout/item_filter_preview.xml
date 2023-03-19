@@ -20,7 +20,6 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/filter_selected"
         android:padding="4dp"
-        android:src="@drawable/illustration_empty"
         android:scaleType="centerInside"
         app:layout_constraintStart_toStartOf="@id/filter_cont"
         app:layout_constraintEnd_toEndOf="@id/filter_cont"

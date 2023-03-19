@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/preview_cont"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:background="@color/transparent_color"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/preview_border"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/preview_photo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:background="@color/design_default_color_on_primary"
+        app:layout_constraintStart_toStartOf="@id/preview_border"
+        app:layout_constraintEnd_toEndOf="@id/preview_border"
+        app:layout_constraintTop_toTopOf="@id/preview_border"
+        app:layout_constraintBottom_toBottomOf="@id/preview_border"/>
+
+    <ImageView
+        android:id="@+id/preview_photo_checked"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ico_check_on"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="@id/preview_photo"
+        app:layout_constraintEnd_toEndOf="@id/preview_photo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
