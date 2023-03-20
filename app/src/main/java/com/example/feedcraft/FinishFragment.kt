@@ -72,20 +72,22 @@ class FinishFragment : Fragment() {
 
             if(UIApplication.photoOrigin == "gallery")
             {//gallery
-                viewModel?.setAnotherValueToLiveData("Saving...")
+                viewModel.setAnotherValueToLiveData("Saving...")
                 val selectedImageFromGalleryUri = UIApplication.imageUri
                 val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
                 viewModel.saveBitmap(requireContext(), bitmap)
                 viewModel.savePreview(requireContext(), bitmap)
-                viewModel?.setAnotherValueToLiveData("Photo saved!")
+                viewModel.setAnotherValueToLiveData("Photo saved!")
+                UIApplication.photoSaved = "saved"
             }
             else
             {//camera
-                viewModel?.setAnotherValueToLiveData("Saving...")
+                viewModel.setAnotherValueToLiveData("Saving...")
                 val tempBitmap = UIApplication.tempBitmap as Bitmap
                 viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
                 viewModel.savePreview(requireContext(), tempBitmap)
-                viewModel?.setAnotherValueToLiveData("Photo saved!")
+                viewModel.setAnotherValueToLiveData("Photo saved!")
+                UIApplication.photoSaved = "saved"
             }
         }
 
@@ -106,6 +108,8 @@ class FinishFragment : Fragment() {
         btnDiscard.setOnClickListener {
             val actionDiscard = FinishFragmentDirections.actionFinishFragmentToEditFragment()
             findNavController().navigate(actionDiscard)
+            requireActivity().setResult(1005)
+
         }
 
     }

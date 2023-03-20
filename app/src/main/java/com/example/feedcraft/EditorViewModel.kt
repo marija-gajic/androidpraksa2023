@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModel
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.text.FieldPosition
 
 
 //import kotlinx.coroutines.NonCancellable.message
@@ -76,7 +77,7 @@ class EditorViewModel : ViewModel() {
     fun saveBitmap(context: Context, bitmap: Bitmap): File {
 
         val filePath = context.filesDir.toString() + File.separator + "saved_creations"
-        val fileName ="creation_1.png"
+        val fileName = getTimestamp() + ".png"
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 99, bytes)
 
@@ -178,6 +179,19 @@ class EditorViewModel : ViewModel() {
         return previewList
     }
 
+
+    fun getBitmapFromInternalStorageByPosition(context: Context, position: Int): Bitmap {
+        val folderPath = context.filesDir.toString() + File.separator + "saved_creations"
+        val previewList: MutableList<Bitmap> = mutableListOf()
+
+        File(folderPath).walk().forEach { file ->
+            if (!file.isDirectory) {
+                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                previewList.add(tmpBitmap)
+            }
+        }
+        return previewList[position]
+    }
 
 
 

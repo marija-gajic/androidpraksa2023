@@ -4,16 +4,13 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.feedcraft.databinding.FragmentFeedBinding
 
@@ -59,15 +56,15 @@ class FeedFragment : Fragment() {
             emptyFeedImg.isVisible = false
             emptyFeedTxt.isVisible = false
             loadPreviewPhotos()
-            previewAdapter = PhotoPreviewAdapter(previewList) {
-                Log.d("mylog", "kliknut item na poziciji: $it")
+            previewAdapter = PhotoPreviewAdapter(previewList) { position, checked ->
+                //Log.d("mylog", "kliknut item na poziciji: $it")
+
+                handleOptionsOnItemClick(checked)
+
             }
-            binding.apply {
-                previews.apply {
-                    adapter = previewAdapter
-                }
+            binding.rvPreviews.adapter = previewAdapter
             }
-        }
+
 
         fabAdd.setOnClickListener {
             val actionAdd = FeedFragmentDirections.actionFeedFragmentToAddFeedFragment()
@@ -78,7 +75,7 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionDelete)
         }
         editPhoto.setOnClickListener {
-            startActivity(Intent(requireContext(), EditorActivity::class.java))
+            startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
         }
         colorCode.setOnClickListener {
             //TODO
@@ -90,17 +87,44 @@ class FeedFragment : Fragment() {
     }
 
     fun loadPreviewPhotos() {
+
+        if(previewList.isNotEmpty())
+            previewList.clear()
+
         val listing: MutableList<Bitmap> = viewModel.getListOfPreviewsFromStorage(requireContext())
-        val color = ContextCompat.getColor(requireContext(), R.color.buttons)
-
-
+        //val color = ContextCompat.getColor(requireContext(), R.color.buttons)
         for (preview in listing) {
-//            Palette.Builder(preview).generate { it?.let { palette ->
-//                val dominantColor = palette.getDominantColor(ContextCompat.getColor(requireContext(), R.color.main_color))
-//                previewList.add(PhotoPreviewModel(preview, dominantColor))
-//            } }
+            val dominantColor = preview.getPixel(0,0)
+            previewList.add(PhotoPreviewModel(preview, dominantColor))
+        }
+    }
 
-            previewList.add(PhotoPreviewModel(preview, color))
+    override fun onResume() {
+        super.onResume()
+        if (UIApplication.photoSaved == "saved") {
+            UIApplication.photoSaved = ""
+
+            loadPreviewPhotos()
+            previewAdapter.refreshFilterAdapterList(previewList)
+        }
+
+    }
+
+    fun handleOptionsOnItemClick(optionsEnabled: Boolean)
+    {
+
+        if(optionsEnabled) {
+            binding.fabFeed.visibility = View.GONE
+            binding.btnDeleteFeed.visibility = View.VISIBLE
+            binding.btnColorCodeFeed.visibility = View.VISIBLE
+            binding.btnEditFeed.visibility = View.VISIBLE
+        }
+        else
+        {
+            binding.fabFeed.visibility = View.VISIBLE
+            binding.btnDeleteFeed.visibility = View.GONE
+            binding.btnColorCodeFeed.visibility = View.GONE
+            binding.btnEditFeed.visibility = View.GONE
         }
     }
 

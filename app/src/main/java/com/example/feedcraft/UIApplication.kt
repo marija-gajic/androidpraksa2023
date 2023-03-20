@@ -10,6 +10,7 @@ class UIApplication : Application(){
         var imageUri: Uri? = null
         var tempBitmap: Bitmap? = null
         var photoOrigin: String = ""
+        var photoSaved: String = ""
     }
 
     override fun onCreate() {

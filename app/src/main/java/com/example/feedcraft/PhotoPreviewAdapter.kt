@@ -2,50 +2,75 @@ package com.example.feedcraft
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feedcraft.databinding.ItemPhotoPreviewBinding
+import com.bumptech.glide.Glide
 
-class PhotoPreviewAdapter (val items : MutableList<PhotoPreviewModel>, val onClick: (Int) -> Unit)
-    : RecyclerView.Adapter<PhotoPreviewAdapter.ViewHolder>(){
-    private lateinit var binding: ItemPhotoPreviewBinding
+class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onClick: (Int, Boolean) -> Unit)
+    : RecyclerView.Adapter<PhotoPreviewAdapter.CustomViewHolder>(){
+    //private lateinit var binding: ItemPhotoPreviewBinding
+    private var lastSelectedIndex = -1
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoPreviewAdapter.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoPreviewAdapter.CustomViewHolder {
         Log.d("mylog", "onCreateViewHolder called")
         val inflater = LayoutInflater.from(parent.context)
-        binding = ItemPhotoPreviewBinding.inflate(inflater,parent,false)
-        return ViewHolder(binding)
+        //binding = ItemPhotoPreviewBinding.inflate(inflater,parent,false)
+        //return CustomViewHolder(binding)
+        return CustomViewHolder(inflater.inflate(R.layout.item_photo_preview, parent, false))
     }
-    override fun onBindViewHolder(holder: PhotoPreviewAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PhotoPreviewAdapter.CustomViewHolder, position: Int) {
         Log.d("mylog", "onBindViewHolder called $position")
-        val checkedPhoto = binding.previewPhotoChecked
-        holder.itemView.setOnClickListener {
-            onClick(position)
-            checkedPhoto.isVisible = !checkedPhoto.isVisible
+
+        if(lastSelectedIndex == position)
+        {
+            holder.previewPhotoChecked.isVisible = true
+        }
+        else
+        {
+            holder.previewPhotoChecked.isVisible = false
         }
 
-//        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
-//            if(v.hasFocus()) {
-//                Log.d("mylog","item $position has focus")
-//            }
-//            else {}
-//        }
+        onClick(position, false)
 
-        holder.bind(items[position])
+        //val checkedPhoto = holder.previewPhotoChecked
+        holder.itemView.setOnClickListener {
+
+            if(lastSelectedIndex != position) {
+                lastSelectedIndex = position
+                //holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
+                onClick(position, true)
+                notifyDataSetChanged()
+                //checkedPhoto.isVisible = !checkedPhoto.isVisible
+            }
+            else
+            {
+                onClick(position, false)
+            }
+        }
+
+        holder.previewBorder.setBackgroundColor(items[position].borderColor)
+        //holder.previewPhoto.setImageBitmap(items[position].previewBitmap)
+
+        Glide.with(holder.itemView.context).load(items[position].previewBitmap).into(holder.previewPhoto)
+
     }
     override fun getItemCount() = items.size
 
-    inner class ViewHolder(itemView: ItemPhotoPreviewBinding) : RecyclerView.ViewHolder(itemView.root){
-        fun bind(item : PhotoPreviewModel){
 
-            binding.apply {
-                previewBorder.setBackgroundColor(item.borderColor)
-                previewPhoto.setImageBitmap(item.previewBitmap)
+    fun refreshFilterAdapterList(items: MutableList<PhotoPreviewModel>)
+    {
+        this.items = items
+        notifyDataSetChanged()
+    }
 
-            }
-        }
+
+    inner class CustomViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
+        var previewBorder = itemView.findViewById<ImageView>(R.id.preview_border)
+        var previewPhoto = itemView.findViewById<ImageView>(R.id.preview_photo)
+        var previewPhotoChecked = itemView.findViewById<ImageView>(R.id.preview_photo_checked)
+
     }
 }

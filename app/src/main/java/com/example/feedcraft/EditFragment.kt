@@ -157,11 +157,7 @@ class EditFragment : Fragment() {
         filterAdapter = FilterAdapter(filterList) {
             Log.d("mylog", "$it")
         }
-        binding.apply {
-            filters.apply {
-                adapter = filterAdapter
-            }
-        }
+        binding.rvFilter.adapter = filterAdapter
     }
 
 
