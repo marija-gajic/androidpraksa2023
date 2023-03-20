@@ -72,7 +72,7 @@ class EditorViewModel : ViewModel() {
         return edits.value!!.contrast
     }
 
-    private fun getTimestamp() = System.currentTimeMillis().toString()
+     fun getTimestamp() = System.currentTimeMillis().toString()
 
     fun saveBitmap(context: Context, bitmap: Bitmap): File {
 

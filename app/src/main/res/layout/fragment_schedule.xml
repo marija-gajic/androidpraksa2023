@@ -96,12 +96,12 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:textSize="17sp"
+        android:padding="15dp"
+        android:textSize="20sp"
         android:textColorHint="@color/icon_text"
+        android:textColor="@color/icon_text"
         android:hint="@string/type_something_schedule"
         android:gravity="start"
-        android:maxLines="4"
         android:background="@drawable/schedule_message_icon"
         app:layout_constraintHeight_percent="0.2"
         app:layout_constraintTop_toBottomOf="@id/txt_write"
@@ -138,17 +138,17 @@
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/txt_add_picture"/>
 
-    <DatePicker
+    <TextView
         android:id="@+id/date_picker"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:calendarTextColor="@color/icon_text"
+        android:background="@drawable/button_full"
         app:layout_constraintWidth_percent="0.4"
         app:layout_constraintHeight_percent="0.05"
         android:layout_marginTop="15dp"
-        android:gravity="start"
-        android:datePickerMode="calendar"
-        android:calendarViewShown="false"
+        android:textSize="17sp"
+        android:hint="XX/XX/XXXX"
+        android:gravity="center"
         android:textColor="@color/white_color"
         android:textColorHint="@color/white_color"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
@@ -165,11 +165,19 @@
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/date_picker"/>
 
-    <TimePicker
+    <TextView
         android:id="@+id/time_picker"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button_full"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.05"
         android:layout_marginTop="15dp"
+        android:textSize="17sp"
+        android:hint="XX:XX"
+        android:gravity="center"
+        android:textColor="@color/white_color"
+        android:textColorHint="@color/white_color"
         app:layout_constraintStart_toStartOf="@id/guidelineLeft_schedule"
         app:layout_constraintTop_toBottomOf="@id/txt_pick_time"/>
 
