@@ -3,6 +3,7 @@ package com.example.feedcraft
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feedcraft.databinding.ItemPhotoPreviewBinding
@@ -25,6 +26,14 @@ class PhotoPreviewAdapter (val items : MutableList<PhotoPreviewModel>, val onCli
             onClick(position)
             checkedPhoto.isVisible = !checkedPhoto.isVisible
         }
+
+//        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
+//            if(v.hasFocus()) {
+//                Log.d("mylog","item $position has focus")
+//            }
+//            else {}
+//        }
+
         holder.bind(items[position])
     }
     override fun getItemCount() = items.size

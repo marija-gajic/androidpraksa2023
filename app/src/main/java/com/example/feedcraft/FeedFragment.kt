@@ -90,7 +90,7 @@ class FeedFragment : Fragment() {
 
     fun loadPreviewPhotos() {
         val listing: MutableList<Bitmap> = viewModel.getListOfPreviewsFromStorage(requireContext())
-        val color = ContextCompat.getColor(requireContext(), R.color.black_color)
+        val color = ContextCompat.getColor(requireContext(), R.color.buttons)
         for (preview in listing) {
             previewList.add(PhotoPreviewModel(preview, color))
         }
