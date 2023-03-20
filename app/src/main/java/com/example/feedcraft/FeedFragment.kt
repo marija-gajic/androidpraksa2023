@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.feedcraft.databinding.FragmentFeedBinding
 
@@ -91,7 +92,14 @@ class FeedFragment : Fragment() {
     fun loadPreviewPhotos() {
         val listing: MutableList<Bitmap> = viewModel.getListOfPreviewsFromStorage(requireContext())
         val color = ContextCompat.getColor(requireContext(), R.color.buttons)
+
+
         for (preview in listing) {
+//            Palette.Builder(preview).generate { it?.let { palette ->
+//                val dominantColor = palette.getDominantColor(ContextCompat.getColor(requireContext(), R.color.main_color))
+//                previewList.add(PhotoPreviewModel(preview, dominantColor))
+//            } }
+
             previewList.add(PhotoPreviewModel(preview, color))
         }
     }
