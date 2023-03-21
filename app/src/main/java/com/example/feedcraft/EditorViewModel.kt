@@ -9,6 +9,8 @@ import android.provider.MediaStore
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import jp.co.cyberagent.android.gpuimage.GPUImage
+import jp.co.cyberagent.android.gpuimage.filter.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -191,6 +193,49 @@ class EditorViewModel : ViewModel() {
             }
         }
         return previewList[position]
+    }
+
+    fun returnBitmapListWithFiltersApplied(context: Context, bitmap: Bitmap): MutableList<FilterModel> {
+        val filteredList: MutableList<FilterModel> = mutableListOf()
+        val gpuImage = GPUImage(context)
+        gpuImage.setImage(bitmap)
+        gpuImage.setFilter(GPUImageSepiaToneFilter())
+        val filteredImageSepia: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageHueFilter())
+        val filteredImageHue: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageVignetteFilter())
+        val filteredImageVignette: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageMonochromeFilter())
+        val filteredImageMonochrome: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageHazeFilter())
+        val filteredImageHaze: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageColorBalanceFilter())
+        val filteredImageColorBalance: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageEmbossFilter())
+        val filteredImageEmboss: Bitmap = gpuImage.bitmapWithFilterApplied
+
+        gpuImage.setFilter(GPUImageGaussianBlurFilter())
+        val filteredImageBlur: Bitmap = gpuImage.bitmapWithFilterApplied
+
+
+
+        filteredList.add(FilterModel("Normal", bitmap))
+        filteredList.add(FilterModel("Sepia", filteredImageSepia))
+        filteredList.add(FilterModel("Hue", filteredImageHue))
+        filteredList.add(FilterModel("Vignette", filteredImageVignette))
+        filteredList.add(FilterModel("Monochrome", filteredImageMonochrome))
+        filteredList.add(FilterModel("Haze", filteredImageHaze))
+        filteredList.add(FilterModel("Color Balance", filteredImageColorBalance))
+        filteredList.add(FilterModel("Emboss", filteredImageEmboss))
+        filteredList.add(FilterModel("Blur", filteredImageBlur))
+
+        return filteredList
     }
 
 

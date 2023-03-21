@@ -19,17 +19,13 @@ class NotificationHelper (val context: Context) {
     val NOTIFICATION_ID = 1
 
     fun createNotification(title: String, message: String){
-        // 1
         createNotificationChannel()
-        // 2
         val intent = Intent(context, MainActivity:: class.java).apply{
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        // 3
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
-        // 4
         val icon = BitmapFactory.decodeResource(context.resources, R.drawable.logo)
-        // 5
+
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.logo)
             .setLargeIcon(icon)
@@ -41,7 +37,7 @@ class NotificationHelper (val context: Context) {
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .build()
-        // 6
+
         if (ActivityCompat.checkSelfPermission(
                 context,
                 Manifest.permission.POST_NOTIFICATIONS

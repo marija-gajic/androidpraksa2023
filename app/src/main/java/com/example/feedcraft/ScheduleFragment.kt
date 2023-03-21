@@ -50,9 +50,7 @@ class ScheduleFragment : Fragment() {
         var datePicker = binding.datePicker
         val timePicker = binding.timePicker
 
-
-
-
+        
         btnDone.setOnClickListener {
             val userSelectedDateTime = Calendar.getInstance()
             userSelectedDateTime.set(chosenYear, chosenMonth, chosenDay, chosenHour , chosenMin)
@@ -113,7 +111,6 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun createWorkRequest(message: String,timeDelayInSeconds: Long  ) {
-
 
         val myWorkRequest = OneTimeWorkRequestBuilder<ReminderWorker>()
             .setInitialDelay(timeDelayInSeconds, TimeUnit.SECONDS)

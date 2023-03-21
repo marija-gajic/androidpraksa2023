@@ -1,6 +1,7 @@
 package com.example.feedcraft
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentEditBinding
+import jp.co.cyberagent.android.gpuimage.GPUImage
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorInvertFilter
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter
 
 
 class EditFragment : Fragment() {
@@ -163,15 +167,7 @@ class EditFragment : Fragment() {
 
     fun loadData() {
         val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
-        filterList.add(FilterModel("Sample 1", previewBitmap))
-        filterList.add(FilterModel("Sample 2", previewBitmap))
-        filterList.add(FilterModel("Sample 3", previewBitmap))
-        filterList.add(FilterModel("Sample 4", previewBitmap))
-        filterList.add(FilterModel("Sample 5", previewBitmap))
-        filterList.add(FilterModel("Sample 6", previewBitmap))
-        filterList.add(FilterModel("Sample 7", previewBitmap))
-        filterList.add(FilterModel("Sample 8", previewBitmap))
-        filterList.add(FilterModel("Sample 9", previewBitmap))
+        filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
     }
 
     private fun setSeekPercentVisible(isVisible: Boolean){
