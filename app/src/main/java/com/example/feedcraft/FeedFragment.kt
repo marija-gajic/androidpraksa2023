@@ -1,5 +1,6 @@
 package com.example.feedcraft
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,6 +22,11 @@ class FeedFragment : Fragment() {
     private val viewModel: EditorViewModel by activityViewModels()
     private var previewList : MutableList<PhotoPreviewModel> = mutableListOf()
     private lateinit var previewAdapter: PhotoPreviewAdapter
+    var itemBitmap: Bitmap? = UIApplication.tempBitmap
+    var itemBorderColor: Int = 0
+    var itemDominantColor: Int = 0
+    var itemPosition: Int = -1
+    lateinit var itemSelected : PhotoPreviewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +43,7 @@ class FeedFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val fabAdd = binding.fabFeed
         val deleteFeed = binding.btnDeleteFeed
@@ -58,8 +66,18 @@ class FeedFragment : Fragment() {
             loadPreviewPhotos()
             previewAdapter = PhotoPreviewAdapter(previewList) { position, checked ->
                 //Log.d("mylog", "kliknut item na poziciji: $it")
-
+                itemPosition = position
                 handleOptionsOnItemClick(checked)
+                itemBitmap = previewList[position].previewBitmap
+                itemDominantColor = itemBitmap!!.getPixel(0,0)
+                itemBorderColor = previewList[position].borderColor
+                itemSelected = previewList[position]
+
+                viewModel.getBitmapFromInternalStorageByPosition(requireContext(), position)
+
+
+
+
 
             }
             binding.rvPreviews.adapter = previewAdapter
@@ -71,14 +89,24 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionAdd)
         }
         deleteFeed.setOnClickListener {
-            val actionDelete = FeedFragmentDirections.actionFeedFragmentToDeleteFeedFragment()
-            findNavController().navigate(actionDelete)
+            //viewModel.deleteBitmapFromInternalStorageByPosition(requireContext(), itemPosition)
+            //previews.adapter?.notifyItemRemoved(itemPosition)
+            Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
         }
         editPhoto.setOnClickListener {
-            startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
+//            val intent = Intent()
+//            startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
         }
         colorCode.setOnClickListener {
-            //TODO
+            if (itemBorderColor == R.color.transparent_color) {
+                itemSelected.borderColor = itemDominantColor
+                itemBorderColor = itemDominantColor
+            } else {
+                itemSelected.borderColor = R.color.transparent_color
+                itemBorderColor = R.color.transparent_color
+            }
+            previews.adapter?.notifyDataSetChanged()
+
         }
         btnBack.setOnClickListener {
             val actionBack = FeedFragmentDirections.actionFeedFragmentToHomeFragment()
@@ -92,7 +120,6 @@ class FeedFragment : Fragment() {
             previewList.clear()
 
         val listing: MutableList<Bitmap> = viewModel.getListOfPreviewsFromStorage(requireContext())
-        //val color = ContextCompat.getColor(requireContext(), R.color.buttons)
         for (preview in listing) {
             val dominantColor = preview.getPixel(0,0)
             previewList.add(PhotoPreviewModel(preview, dominantColor))
@@ -127,5 +154,7 @@ class FeedFragment : Fragment() {
             binding.btnEditFeed.visibility = View.GONE
         }
     }
+
+
 
 }

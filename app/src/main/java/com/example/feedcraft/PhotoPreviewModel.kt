@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 
-data class PhotoPreviewModel(val previewBitmap: Bitmap, @ColorInt val  borderColor: Int) {
+data class PhotoPreviewModel(val previewBitmap: Bitmap, @ColorInt var borderColor: Int) {
 
 
 }

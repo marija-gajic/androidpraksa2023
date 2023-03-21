@@ -3,11 +3,14 @@ package com.example.feedcraft
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -28,6 +31,8 @@ class EditFragment : Fragment() {
     private var contrastClicked: Boolean = false
     private var filterList : MutableList<FilterModel> = mutableListOf()
     private lateinit var filterAdapter: FilterAdapter
+    lateinit var filterSelected: FilterModel
+    lateinit var filterBitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +73,8 @@ class EditFragment : Fragment() {
         val seek = binding.seekBar
         val percent = binding.percent
         val filters = binding.rvFilter
+
+
 
         filters.isVisible = false
 
@@ -158,8 +165,25 @@ class EditFragment : Fragment() {
         }
 
         loadData()
-        filterAdapter = FilterAdapter(filterList) {
-            Log.d("mylog", "$it")
+        filterAdapter = FilterAdapter(filterList) {position ->
+            Log.d("mylog", "$position")
+            filterSelected = filterList[position]
+            //filterBitmap = filterSelected.filterBitmap
+            //filterBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
+            if (UIApplication.photoOrigin == "gallery") {
+                val selectedImageFromGalleryUri = UIApplication.imageUri
+                val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
+                filterBitmap = uritobitmap
+            } else {
+                filterBitmap = UIApplication.tempBitmap!!
+            }
+            if (UIApplication.photoSaved == "saved") {
+             filterBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
+            }
+            var filteredBitmap = viewModel.applyFilterOnBitmapFromPosition(requireContext(),filterBitmap,position)
+            binding.imgEditor.setImageBitmap(filteredBitmap)
+            UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
+
         }
         binding.rvFilter.adapter = filterAdapter
     }

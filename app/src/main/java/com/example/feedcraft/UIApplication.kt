@@ -11,6 +11,7 @@ class UIApplication : Application(){
         var tempBitmap: Bitmap? = null
         var photoOrigin: String = ""
         var photoSaved: String = ""
+        var tempEditedPhoto: Bitmap? = null
     }
 
     override fun onCreate() {

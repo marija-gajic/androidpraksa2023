@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -53,16 +54,18 @@ class FinishFragment : Fragment() {
             Toast.makeText(requireContext(), newMessage, Toast.LENGTH_SHORT).show()
         }
 
-        if(UIApplication.photoOrigin == "gallery")
-        {//gallery
-            val selectedImageFromGalleryUri = UIApplication.imageUri
-            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
-        }
-        else
-        {//camera
-            val tempBitmap = UIApplication.tempBitmap as Bitmap
-            imgPreview.setImageBitmap(UIApplication.tempBitmap)
-        }
+//        if(UIApplication.photoOrigin == "gallery")
+//        {//gallery
+//            val selectedImageFromGalleryUri = UIApplication.imageUri
+//            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
+//        }
+//        else
+//        {//camera
+//            val tempBitmap = UIApplication.tempBitmap as Bitmap
+//            imgPreview.setImageBitmap(UIApplication.tempBitmap)
+//        }
+
+        imgPreview.setImageBitmap(UIApplication.tempEditedPhoto)
 
         btnSchedule.setOnClickListener {
             val actionSchedule = FinishFragmentDirections.actionFinishFragmentToScheduleFragment()
@@ -70,25 +73,34 @@ class FinishFragment : Fragment() {
         }
         btnSave.setOnClickListener {
 
-            if(UIApplication.photoOrigin == "gallery")
-            {//gallery
-                viewModel.setAnotherValueToLiveData("Saving...")
-                val selectedImageFromGalleryUri = UIApplication.imageUri
-                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-                viewModel.saveBitmap(requireContext(), bitmap)
-                viewModel.savePreview(requireContext(), bitmap)
-                viewModel.setAnotherValueToLiveData("Photo saved!")
-                UIApplication.photoSaved = "saved"
-            }
-            else
-            {//camera
-                viewModel.setAnotherValueToLiveData("Saving...")
-                val tempBitmap = UIApplication.tempBitmap as Bitmap
-                viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
-                viewModel.savePreview(requireContext(), tempBitmap)
-                viewModel.setAnotherValueToLiveData("Photo saved!")
-                UIApplication.photoSaved = "saved"
-            }
+
+            var resultBitmap = imgPreview.drawToBitmap()
+            viewModel.setAnotherValueToLiveData("Saving...")
+            viewModel.saveBitmap(requireContext(), resultBitmap)
+            viewModel.savePreview(requireContext(), resultBitmap)
+            viewModel.setAnotherValueToLiveData("Photo saved!")
+            UIApplication.photoSaved = "saved"
+
+
+//            if(UIApplication.photoOrigin == "gallery")
+//            {//gallery
+//                viewModel.setAnotherValueToLiveData("Saving...")
+//                val selectedImageFromGalleryUri = UIApplication.imageUri
+//                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
+//                viewModel.saveBitmap(requireContext(), bitmap)
+//                viewModel.savePreview(requireContext(), bitmap)
+//                viewModel.setAnotherValueToLiveData("Photo saved!")
+//                UIApplication.photoSaved = "saved"
+//            }
+//            else
+//            {//camera
+//                viewModel.setAnotherValueToLiveData("Saving...")
+//                val tempBitmap = UIApplication.tempBitmap as Bitmap
+//                viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
+//                viewModel.savePreview(requireContext(), tempBitmap)
+//                viewModel.setAnotherValueToLiveData("Photo saved!")
+//                UIApplication.photoSaved = "saved"
+//            }
         }
 
         btnShare.setOnClickListener {

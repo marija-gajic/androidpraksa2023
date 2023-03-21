@@ -1,11 +1,12 @@
 package com.example.feedcraft
 
+import android.R.attr.bitmap
+import android.R.attr.orientation
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.RectF
+import android.graphics.*
+import android.media.ExifInterface
 import android.provider.MediaStore
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,6 @@ import jp.co.cyberagent.android.gpuimage.filter.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.text.FieldPosition
 
 
 //import kotlinx.coroutines.NonCancellable.message
@@ -174,8 +174,38 @@ class EditorViewModel : ViewModel() {
 
         File(folderPath).walk().forEach { file ->
             if (!file.isDirectory) {
-                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+
+                var tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
                 previewList.add(tmpBitmap)
+
+               /* val exif = ExifInterface(file.absolutePath)
+                val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1)
+                Log.e("orientation", "" + orientation)
+                val m = Matrix()
+                when (orientation) {
+                    3 -> {
+                        m.postRotate(180f)
+                        //               if(m.preRotate(90)){
+                        Log.e("in orientation", "" + orientation)
+                        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.width, tmpBitmap.height, m, true)
+                        previewList.add(tmpBitmap)
+                    }
+                    6 -> {
+                        m.postRotate(90f)
+                        Log.e("in orientation", "" + orientation)
+                        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.width, tmpBitmap.height, m, true)
+                        previewList.add(tmpBitmap)
+                    }
+                    8 -> {
+                        m.postRotate(270f)
+                        Log.e("in orientation", "" + orientation)
+                        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.width, tmpBitmap.height, m, true)
+                        previewList.add(tmpBitmap)
+                    }
+                    else -> previewList.add(tmpBitmap)
+                }*/
+
+
             }
         }
         return previewList
@@ -193,6 +223,46 @@ class EditorViewModel : ViewModel() {
             }
         }
         return previewList[position]
+    }
+
+    fun deleteBitmapFromInternalStorageByPosition(context: Context, position: Int): Unit {
+        val folderPathSaved = context.filesDir.toString() + File.separator + "saved_creations"
+        //val previewListSaved: MutableList<Bitmap> = mutableListOf()
+        var countSaved = 0
+
+        File(folderPathSaved).walk().forEach { file ->
+            if (!file.isDirectory) {
+                if(countSaved==position) {
+                    file.delete()
+                } else {
+                    countSaved++
+                }
+                //val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                //previewListSaved.add(tmpBitmap)
+
+            }
+        }
+        //previewListSaved.removeAt(position)
+
+        val folderPathPreviews = context.filesDir.toString() + File.separator + "creations_preview"
+        //val previewListPreviews: MutableList<Bitmap> = mutableListOf()
+        var countPreviews = 0
+
+        File(folderPathPreviews).walk().forEach { file ->
+            if (!file.isDirectory) {
+                if(countPreviews==position) {
+                    file.delete()
+                } else {
+                    countPreviews++
+                }
+//                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+//                previewListPreviews.add(tmpBitmap)
+            }
+        }
+        //previewListPreviews.removeAt(position)
+
+
+
     }
 
     fun returnBitmapListWithFiltersApplied(context: Context, bitmap: Bitmap): MutableList<FilterModel> {
@@ -236,6 +306,51 @@ class EditorViewModel : ViewModel() {
         filteredList.add(FilterModel("Blur", filteredImageBlur))
 
         return filteredList
+    }
+
+    fun applyFilterOnBitmapFromPosition(context: Context, bitmap: Bitmap, position: Int): Bitmap {
+        val gpuImage = GPUImage(context)
+        gpuImage.setImage(bitmap)
+        lateinit var filteredBitmap: Bitmap
+        when(position) {
+            0 -> {
+                filteredBitmap = bitmap
+            }
+            1 -> {
+                gpuImage.setFilter(GPUImageSepiaToneFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            2 -> {
+                gpuImage.setFilter(GPUImageHueFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            3 -> {
+                gpuImage.setFilter(GPUImageVignetteFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            4 -> {
+                gpuImage.setFilter(GPUImageMonochromeFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            5 -> {
+                gpuImage.setFilter(GPUImageHazeFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            6 -> {
+                gpuImage.setFilter(GPUImageColorBalanceFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            7 -> {
+                gpuImage.setFilter(GPUImageEmbossFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+            8 -> {
+                gpuImage.setFilter(GPUImageGaussianBlurFilter())
+                filteredBitmap = gpuImage.bitmapWithFilterApplied
+            }
+
+        }
+        return filteredBitmap
     }
 
 
