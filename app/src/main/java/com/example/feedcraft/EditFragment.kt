@@ -208,6 +208,7 @@ class EditFragment : Fragment() {
         loadData()
         filterAdapter = FilterAdapter(filterList) {position ->
             Log.d("mylog", "$position")
+            UIApplication.lastFilterSelected = position
             filterSelected = filterList[position]
             //filterBitmap = filterSelected.filterBitmap
             //filterBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)

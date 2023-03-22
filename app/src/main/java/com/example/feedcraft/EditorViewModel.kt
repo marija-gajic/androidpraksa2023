@@ -76,10 +76,10 @@ class EditorViewModel : ViewModel() {
 
      fun getTimestamp() = System.currentTimeMillis().toString()
 
-    fun saveBitmap(context: Context, bitmap: Bitmap): File {
+    fun saveBitmap(context: Context, bitmap: Bitmap, timestamp: String): File {
 
         val filePath = context.filesDir.toString() + File.separator + "saved_creations"
-        val fileName = getTimestamp() + ".png"
+        val fileName = timestamp.toString() + ".png"
         val bytes = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 99, bytes)
 
@@ -99,10 +99,10 @@ class EditorViewModel : ViewModel() {
         return f
     }
 
-    fun savePreview(context: Context, bitmap: Bitmap): File {
+    fun savePreview(context: Context, bitmap: Bitmap, timestamp: String): File {
 
         val filePath = context.filesDir.toString() + File.separator + "creations_preview"
-        val fileName = getTimestamp() + ".png"
+        val fileName = timestamp.toString() + ".png"
         val bytes = ByteArrayOutputStream()
         val scaledCroppedBitmap = scaleCenterCrop(bitmap,200,200)
 //        Glide.with(context)
@@ -351,6 +351,41 @@ class EditorViewModel : ViewModel() {
 
         }
         return filteredBitmap
+    }
+
+    fun returnFilterNameFromPosition (position: Int): String {
+        var filterName = ""
+        when(position) {
+            0 -> {
+                filterName = "Normal"
+            }
+            1 -> {
+                filterName = "GPUImageSepiaToneFilter"
+            }
+            2 -> {
+                filterName = "GPUImageHueFilter"
+            }
+            3 -> {
+                filterName = "GPUImageVignetteFilter"
+            }
+            4 -> {
+                filterName = "GPUImageMonochromeFilter"
+            }
+            5 -> {
+                filterName = "GPUImageHazeFilter"
+            }
+            6 -> {
+                filterName = "GPUImageColorBalanceFilter"
+            }
+            7 -> {
+                filterName = "GPUImageEmbossFilter"
+            }
+            8 -> {
+                filterName = "GPUImageGaussianBlurFilter"
+            }
+
+        }
+        return filterName
     }
 
     fun applyBrightness(bitmap: Bitmap, brightness: Int): Bitmap {

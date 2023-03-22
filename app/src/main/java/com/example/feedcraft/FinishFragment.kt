@@ -1,25 +1,23 @@
 package com.example.feedcraft
 
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.graphics.Bitmap
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.core.view.drawToBitmap
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentFinishBinding
-import java.io.ByteArrayOutputStream
+import com.google.gson.Gson
 import java.io.File
-import java.io.FileOutputStream
 
 
 class FinishFragment : Fragment() {
@@ -77,10 +75,38 @@ class FinishFragment : Fragment() {
             var resultBitmap = imgPreview.drawToBitmap()
             viewModel.setAnotherValueToLiveData("Saving...")
             val cropResult = viewModel.cropEdgesOfPhoto(requireContext(),resultBitmap)
-            viewModel.saveBitmap(requireContext(), cropResult)
-            viewModel.savePreview(requireContext(), cropResult)
+            val currentTimestamp = viewModel.getTimestamp()
+            viewModel.saveBitmap(requireContext(), cropResult, currentTimestamp)
+            viewModel.savePreview(requireContext(), cropResult, currentTimestamp)
             viewModel.setAnotherValueToLiveData("Photo saved!")
             UIApplication.photoSaved = "saved"
+            val selectedFilterName = viewModel.returnFilterNameFromPosition(UIApplication.lastFilterSelected)
+
+         val caption = viewModel.getCaption()
+         val brightness = viewModel.getBrightness()
+         val saturation = viewModel.getSaturation()
+         val contrast = viewModel.getContrast()
+         val imgName = currentTimestamp
+         val filterName = selectedFilterName
+
+            val obj = EditedPhotoInformation(caption,brightness,saturation,contrast,imgName,filterName)
+            val gson = Gson()
+            val json = gson.toJson(obj)
+
+
+            val sharePrefsConfig = requireActivity().getSharedPreferences("config", 0)
+            val prefsConfig = sharePrefsConfig.edit()
+            var counterOfCreations = sharePrefsConfig.getInt("counter", 0)
+
+
+            val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
+            val prefsEditor = sharePrefsCreations.edit()
+            prefsEditor.putString("creation_$counterOfCreations", json)
+
+            prefsConfig.putInt("counter", ++counterOfCreations)
+
+            prefsEditor.commit()
+            prefsConfig.commit()
 
 
 //            if(UIApplication.photoOrigin == "gallery")
@@ -126,5 +152,7 @@ class FinishFragment : Fragment() {
         }
 
     }
+
+
 
 }

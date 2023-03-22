@@ -1,6 +1,7 @@
 package com.example.feedcraft
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -16,6 +17,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.feedcraft.databinding.FragmentFeedBinding
+import com.google.gson.Gson
+import org.json.JSONObject
 
 class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
@@ -28,6 +31,7 @@ class FeedFragment : Fragment() {
     var itemDominantColor: Int = 0
     var itemPosition: Int = -1
     lateinit var itemSelected : PhotoPreviewModel
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +58,7 @@ class FeedFragment : Fragment() {
         val previews = binding.rvPreviews
         val emptyFeedImg = binding.imgEmptyFeed
         val emptyFeedTxt = binding.txtEmptyFeed
+
 
         previews.setLayoutManager(GridLayoutManager(requireContext(), 3))
         val list = viewModel.getListOfPreviewsFromStorage(requireContext())
@@ -129,7 +134,7 @@ class FeedFragment : Fragment() {
 
         val listing: MutableList<Bitmap> = viewModel.getListOfPreviewsFromStorage(requireContext())
         for (preview in listing) {
-            val dominantColor = preview.getPixel(0,0)
+            val dominantColor = preview.getPixel(20,20)
             previewList.add(PhotoPreviewModel(preview, dominantColor))
         }
     }
@@ -166,3 +171,4 @@ class FeedFragment : Fragment() {
 
 
 }
+
