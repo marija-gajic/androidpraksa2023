@@ -41,9 +41,7 @@ class EditFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        val args = arguments
-//        positionFromFeed = args?.getInt("position", 111)!!
-//        sentFromFeedCode = args?.getInt("sent from feed", 111)!!
+
 
     }
 
@@ -52,6 +50,12 @@ class EditFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEditBinding.inflate(inflater, container, false)
+
+//        val bundle = arguments
+//        if (bundle != null) {
+//            val positionFromFeed = bundle?.getInt("position", 111)!!
+//        }
+
 
 //        if(sentFromFeedCode == 1005) {
 //            val bitmapFromFeed = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),positionFromFeed)

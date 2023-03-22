@@ -25,4 +25,10 @@ class MainViewModel: ViewModel() {
         }
         return photoInformationFromJson
     }
+
+    fun getPhotoInformationFromPosition(context: Context, position: Int): EditedPhotoInformation {
+        val listOfPhotos = getPhotosFromJson(context)
+        val obj = listOfPhotos[position]
+        return obj
+    }
 }

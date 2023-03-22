@@ -1,12 +1,11 @@
 package com.example.feedcraft
 
+import android.R
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
+import android.app.FragmentManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.feedcraft.databinding.FragmentFeedBinding
-import com.google.gson.Gson
-import org.json.JSONObject
+
 
 class FeedFragment : Fragment() {
     private var _binding: FragmentFeedBinding? = null
@@ -96,15 +94,20 @@ class FeedFragment : Fragment() {
             Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
         }
         editPhoto.setOnClickListener {
-//            startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
-            val intent = Intent(context, EditorActivity::class.java)
-//            intent.putExtra("position", itemPosition)
-//            intent.putExtra("sent from feed",1005)
-            val bundle = Bundle()
-            bundle.putInt("position", itemPosition)
-            bundle.putInt("sent from feed", 1005)
-            intent.putExtras(bundle)
-            startActivity(intent)
+            //startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
+//            val fragment = EditFragment()
+//            val fragmentManager = supportFragmentManager
+//            val fragmentTransaction = fragmentManager.beginTransaction()
+//            fragmentTransaction.replace(R.id., fragment)
+//            fragmentTransaction.addToBackStack(null)
+//            fragmentTransaction.commit()
+
+
+//            val bundle = Bundle()
+//            bundle.putInt("position", itemPosition)
+//            val intent = Intent(requireActivity(), EditFragment::class.java)
+//            intent.putExtras(bundle)
+//            startActivity(intent)
 
         }
         colorCode.setOnClickListener {
@@ -144,8 +147,11 @@ class FeedFragment : Fragment() {
         if (UIApplication.photoSaved == "saved") {
             UIApplication.photoSaved = ""
 
+            if(previewList.isNotEmpty())
+                previewAdapter.refreshFilterAdapterList(previewList)
+
             loadPreviewPhotos()
-            previewAdapter.refreshFilterAdapterList(previewList)
+            //previewAdapter.refreshFilterAdapterList(previewList)
         }
 
     }

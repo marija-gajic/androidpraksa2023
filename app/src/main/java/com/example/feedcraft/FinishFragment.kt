@@ -89,6 +89,7 @@ class FinishFragment : Fragment() {
          val imgName = currentTimestamp
          val filterName = selectedFilterName
 
+
             val obj = EditedPhotoInformation(caption,brightness,saturation,contrast,imgName,filterName)
             val gson = Gson()
             val json = gson.toJson(obj)
@@ -97,6 +98,8 @@ class FinishFragment : Fragment() {
             val sharePrefsConfig = requireActivity().getSharedPreferences("config", 0)
             val prefsConfig = sharePrefsConfig.edit()
             var counterOfCreations = sharePrefsConfig.getInt("counter", 0)
+            val position = counterOfCreations
+
 
 
             val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
