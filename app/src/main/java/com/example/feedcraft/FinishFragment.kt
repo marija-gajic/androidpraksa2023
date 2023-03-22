@@ -76,8 +76,9 @@ class FinishFragment : Fragment() {
 
             var resultBitmap = imgPreview.drawToBitmap()
             viewModel.setAnotherValueToLiveData("Saving...")
-            viewModel.saveBitmap(requireContext(), resultBitmap)
-            viewModel.savePreview(requireContext(), resultBitmap)
+            val cropResult = viewModel.cropEdgesOfPhoto(requireContext(),resultBitmap)
+            viewModel.saveBitmap(requireContext(), cropResult)
+            viewModel.savePreview(requireContext(), cropResult)
             viewModel.setAnotherValueToLiveData("Photo saved!")
             UIApplication.photoSaved = "saved"
 

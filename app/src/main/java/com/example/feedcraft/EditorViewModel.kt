@@ -353,6 +353,64 @@ class EditorViewModel : ViewModel() {
         return filteredBitmap
     }
 
+    fun applyBrightness(bitmap: Bitmap, brightness: Int): Bitmap {
+        val brightnessLevel = brightness.toFloat() / 100f * 255f
+        val colorMatrix = ColorMatrix()
+        colorMatrix.set(
+            floatArrayOf(
+                1f, 0f, 0f, 0f, brightnessLevel,
+                0f, 1f, 0f, 0f, brightnessLevel,
+                0f, 0f, 1f, 0f, brightnessLevel,
+                0f, 0f, 0f, 1f, 0f
+            )
+        )
+        val paint = Paint()
+        paint.colorFilter = ColorMatrixColorFilter(colorMatrix)
+        val adjustedBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+        val canvas = Canvas(adjustedBitmap)
+        canvas.drawBitmap(bitmap, 0f, 0f, paint)
+        return adjustedBitmap
+    }
+
+    fun applyContrast(bitmap: Bitmap, contrast: Int): Bitmap {
+        val contrastLevel = (contrast.toFloat() / 100f + 1f) * 127f
+        val colorMatrix = ColorMatrix()
+        colorMatrix.set(
+            floatArrayOf(
+                contrastLevel / 127f, 0f, 0f, 0f, 0f,
+                0f, contrastLevel / 127f, 0f, 0f, 0f,
+                0f, 0f, contrastLevel / 127f, 0f, 0f,
+                0f, 0f, 0f, 1f, 0f
+            )
+        )
+        val paint = Paint()
+        paint.colorFilter = ColorMatrixColorFilter(colorMatrix)
+        val adjustedBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+        val canvas = Canvas(adjustedBitmap)
+        canvas.drawBitmap(bitmap, 0f, 0f, paint)
+        return adjustedBitmap
+    }
+
+    fun applySaturation(bitmap: Bitmap, saturation: Int): Bitmap {
+        val saturationLevel = saturation.toFloat() / 100f
+        val colorMatrix = ColorMatrix()
+        colorMatrix.setSaturation(saturationLevel)
+        val paint = Paint()
+        paint.colorFilter = ColorMatrixColorFilter(colorMatrix)
+        val adjustedBitmap = Bitmap.createBitmap(bitmap.width, bitmap.height, bitmap.config)
+        val canvas = Canvas(adjustedBitmap)
+        canvas.drawBitmap(bitmap, 0f, 0f, paint)
+        return adjustedBitmap
+    }
+
+    fun cropEdgesOfPhoto (context: Context, bitmap: Bitmap): Bitmap {
+        val croppedRect = Rect(10, 10, bitmap.width - 10, bitmap.height - 10)
+        return Bitmap.createBitmap(bitmap, croppedRect.left, croppedRect.top, croppedRect.width(), croppedRect.height())
+    }
+
+
+
+
 
 
 }

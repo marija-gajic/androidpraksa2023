@@ -66,18 +66,14 @@ class FeedFragment : Fragment() {
             loadPreviewPhotos()
             previewAdapter = PhotoPreviewAdapter(previewList) { position, checked ->
                 //Log.d("mylog", "kliknut item na poziciji: $it")
-                itemPosition = position
                 handleOptionsOnItemClick(checked)
+                itemPosition = position
                 itemBitmap = previewList[position].previewBitmap
                 itemDominantColor = itemBitmap!!.getPixel(0,0)
                 itemBorderColor = previewList[position].borderColor
                 itemSelected = previewList[position]
 
                 viewModel.getBitmapFromInternalStorageByPosition(requireContext(), position)
-
-
-
-
 
             }
             binding.rvPreviews.adapter = previewAdapter
@@ -94,8 +90,16 @@ class FeedFragment : Fragment() {
             Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
         }
         editPhoto.setOnClickListener {
-//            val intent = Intent()
 //            startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
+            val intent = Intent(context, EditorActivity::class.java)
+//            intent.putExtra("position", itemPosition)
+//            intent.putExtra("sent from feed",1005)
+            val bundle = Bundle()
+            bundle.putInt("position", itemPosition)
+            bundle.putInt("sent from feed", 1005)
+            intent.putExtras(bundle)
+            startActivity(intent)
+
         }
         colorCode.setOnClickListener {
             if (itemBorderColor == R.color.transparent_color) {

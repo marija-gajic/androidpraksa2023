@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -18,7 +19,9 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.feedcraft.databinding.FragmentEditBinding
 import jp.co.cyberagent.android.gpuimage.GPUImage
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageBrightnessFilter
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorInvertFilter
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter
 
 
@@ -33,9 +36,14 @@ class EditFragment : Fragment() {
     private lateinit var filterAdapter: FilterAdapter
     lateinit var filterSelected: FilterModel
     lateinit var filterBitmap: Bitmap
+//    var sentFromFeedCode = 0
+//    var positionFromFeed = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        val args = arguments
+//        positionFromFeed = args?.getInt("position", 111)!!
+//        sentFromFeedCode = args?.getInt("sent from feed", 111)!!
 
     }
 
@@ -45,17 +53,31 @@ class EditFragment : Fragment() {
     ): View? {
         _binding = FragmentEditBinding.inflate(inflater, container, false)
 
-        val imgEditor = binding.imgEditor
+//        if(sentFromFeedCode == 1005) {
+//            val bitmapFromFeed = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),positionFromFeed)
+//            val imgEditor = binding.imgEditor
+//            imgEditor.setImageBitmap(bitmapFromFeed)
+//        } else {
+            val imgEditor = binding.imgEditor
+            //imgEditor.setImageBitmap(UIApplication.tempEditedPhoto)
 
-        if(UIApplication.photoOrigin == "gallery")
-        {//gallery
-            val selectedImageFromGalleryUri = UIApplication.imageUri
-            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)
-        }
-        else
-        {//camera
-            imgEditor.setImageBitmap(UIApplication.tempBitmap)
-        }
+            if(UIApplication.photoOrigin == "gallery")
+            {//gallery
+                val selectedImageFromGalleryUri = UIApplication.imageUri
+                Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)
+                val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
+                UIApplication.tempEditedPhoto = uritobitmap
+            }
+            else
+            {//camera
+                val bitmapTemp = UIApplication.camBitmap
+                UIApplication.tempBitmap = bitmapTemp
+                UIApplication.tempEditedPhoto = bitmapTemp
+                imgEditor.setImageBitmap(bitmapTemp)
+            }
+//        }
+
+
 
         return binding.root
     }
@@ -89,8 +111,24 @@ class EditFragment : Fragment() {
         setSeekPercentVisible(false)
 
         seek.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+
+
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 percent.text = progress.toString() + "%"
+
+                if (brightnessClicked){
+                    var adjustedBitmap = viewModel.applyBrightness(UIApplication.tempEditedPhoto!!, progress)
+                    binding.imgEditor.setImageBitmap(adjustedBitmap)
+                }
+                if (saturationClicked){
+                    var adjustedBitmap = viewModel.applySaturation(UIApplication.tempEditedPhoto!!, progress)
+                    binding.imgEditor.setImageBitmap(adjustedBitmap)
+                }
+                if (contrastClicked){
+                    var adjustedBitmap = viewModel.applyContrast(UIApplication.tempEditedPhoto!!, progress)
+                    binding.imgEditor.setImageBitmap(adjustedBitmap)
+                }
+
             }
 
             override fun onStartTrackingTouch(seek: SeekBar) {}
@@ -107,6 +145,8 @@ class EditFragment : Fragment() {
                     viewModel.setContrast(seek.progress)
                 }
 
+                UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
+
             }
         })
 
@@ -116,6 +156,7 @@ class EditFragment : Fragment() {
             findNavController().navigate(actionCaption)
         }
         btnFinish.setOnClickListener {
+            UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
             val actionFinish = EditFragmentDirections.actionEditFragmentToFinishFragment()
             findNavController().navigate(actionFinish)
         }
@@ -182,7 +223,7 @@ class EditFragment : Fragment() {
             }
             var filteredBitmap = viewModel.applyFilterOnBitmapFromPosition(requireContext(),filterBitmap,position)
             binding.imgEditor.setImageBitmap(filteredBitmap)
-            UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
+            //UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
 
         }
         binding.rvFilter.adapter = filterAdapter

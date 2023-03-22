@@ -8,8 +8,11 @@ import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.widget.CheckBox
+import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -17,14 +20,24 @@ import androidx.core.app.NotificationManagerCompat
 class NotificationHelper (val context: Context) {
     var CHANNEL_ID = "channel_id"
     val NOTIFICATION_ID = 1
+    lateinit  var notificationPhoto: Bitmap
+
 
     fun createNotification(title: String, message: String){
+
+//        if (UIApplication.addPhotoFlag == "checked") {
+//            notificationPhoto = UIApplication.tempEditedPhoto!!
+//        } else {
+//            notificationPhoto = BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher)
+//        }
+
         createNotificationChannel()
         val intent = Intent(context, MainActivity:: class.java).apply{
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
         val icon = BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher)
+        //val icon = notificationPhoto
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher)

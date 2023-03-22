@@ -70,7 +70,7 @@ class AddFeedFragment : DialogFragment() {
                 UIApplication.photoOrigin = "camera"
                 val extras: Bundle? = data?.extras
                 val imageBitmap = extras?.get("data") as Bitmap?
-                UIApplication.tempBitmap = imageBitmap!!
+                UIApplication.camBitmap = imageBitmap!!
                 findNavController().navigateUp()
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
             }

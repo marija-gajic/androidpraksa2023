@@ -14,7 +14,6 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
     //private lateinit var binding: ItemPhotoPreviewBinding
     private var lastSelectedIndex = -1
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoPreviewAdapter.CustomViewHolder {
         Log.d("mylog", "onCreateViewHolder called")
         val inflater = LayoutInflater.from(parent.context)
@@ -29,10 +28,11 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
 
         if(lastSelectedIndex == position)
         {
-            if(!holder.previewPhotoChecked.isVisible)
+            if(holder.previewPhotoChecked.isVisible)
                 holder.previewPhotoChecked.isVisible = false
             else
                 holder.previewPhotoChecked.isVisible = true
+
         }
         else
         {
@@ -47,7 +47,7 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
             if(lastSelectedIndex != position) {
                 lastSelectedIndex = position
                 onClick(position, true)
-                holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
+                //holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
                 //holder.previewBorder.isVisible = !holder.previewBorder.isVisible
                 notifyDataSetChanged()
             }
