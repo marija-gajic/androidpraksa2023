@@ -3,6 +3,7 @@ package com.example.feedcraft
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -102,12 +103,15 @@ class FeedFragment : Fragment() {
 
         }
         colorCode.setOnClickListener {
-            if (itemBorderColor == R.color.transparent_color) {
+            if (itemBorderColor == Color.argb(0, 0, 0, 0)) {
                 itemSelected.borderColor = itemDominantColor
                 itemBorderColor = itemDominantColor
             } else {
-                itemSelected.borderColor = R.color.transparent_color
-                itemBorderColor = R.color.transparent_color
+                //itemSelected.borderColor = R.color.transparent_color
+                //itemBorderColor = R.color.transparent_color
+                itemSelected.borderColor = Color.argb(0, 0, 0, 0)
+                itemBorderColor = Color.argb(0, 0, 0, 0)
+
             }
             previews.adapter?.notifyDataSetChanged()
 
