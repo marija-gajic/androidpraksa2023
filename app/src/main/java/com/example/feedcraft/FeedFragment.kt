@@ -3,6 +3,7 @@ package com.example.feedcraft
 import android.R
 import android.annotation.SuppressLint
 import android.app.FragmentManager
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -101,11 +102,13 @@ class FeedFragment : Fragment() {
 //            fragmentTransaction.replace(R.id., fragment)
 //            fragmentTransaction.addToBackStack(null)
 //            fragmentTransaction.commit()
-
+            UIApplication.editExisting = 1
+            startActivity(Intent(requireContext(), EditorActivity::class.java))
 
 //            val bundle = Bundle()
 //            bundle.putInt("position", itemPosition)
 //            val intent = Intent(requireActivity(), EditFragment::class.java)
+//            val intent = Intent(requireActivity(), EditorActivity::class.java)
 //            intent.putExtras(bundle)
 //            startActivity(intent)
 

@@ -14,6 +14,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -25,11 +27,13 @@ import com.bumptech.glide.request.transition.Transition
 import com.example.feedcraft.Constants.Companion.REQUEST_CAMERA
 import com.example.feedcraft.Constants.Companion.REQUEST_GALLERY
 import com.example.feedcraft.databinding.FragmentAddFeedBinding
+import java.io.File
 
 
 class AddFeedFragment : DialogFragment() {
     private var _binding: FragmentAddFeedBinding? = null
     private val binding get() = _binding!!
+    private lateinit var capturedImageUri: Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +61,11 @@ class AddFeedFragment : DialogFragment() {
         }
         addCamera.setOnClickListener {
             val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            val file = File(context?.cacheDir.toString() + File.separator + "capturedImage.png")
+            capturedImageUri = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
+            takePicture.putExtra(Intent.EXTRA_STREAM, capturedImageUri)
+            takePicture.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)
             startActivityForResult(takePicture, Constants.REQUEST_CAMERA)
         }
     }
@@ -68,11 +77,26 @@ class AddFeedFragment : DialogFragment() {
         when (requestCode) {
             REQUEST_CAMERA -> if (resultCode == RESULT_OK) {
                 UIApplication.photoOrigin = "camera"
-                val extras: Bundle? = data?.extras
-                val imageBitmap = extras?.get("data") as Bitmap?
-                UIApplication.camBitmap = imageBitmap!!
-                findNavController().navigateUp()
-                startActivity(Intent(requireContext(), EditorActivity::class.java))
+
+
+                Glide.with(this)
+                    .asBitmap()
+                    .override((0.9f * resources.displayMetrics.widthPixels).toInt())
+                    .load(capturedImageUri)
+                    .into(object : CustomTarget<Bitmap>(){
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+
+
+                            UIApplication.camBitmap = resource
+                            findNavController().navigateUp()
+                            startActivity(Intent(requireContext(), EditorActivity::class.java))
+
+                        }
+                        override fun onLoadCleared(placeholder: Drawable?) {
+
+                        }
+                    })
+
             }
             REQUEST_GALLERY -> if (resultCode == RESULT_OK) {
                 UIApplication.photoOrigin = "gallery"

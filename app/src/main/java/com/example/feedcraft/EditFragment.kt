@@ -29,6 +29,7 @@ class EditFragment : Fragment() {
     private var _binding: FragmentEditBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EditorViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
     private var brightnessClicked: Boolean = false
     private var saturationClicked: Boolean = false
     private var contrastClicked: Boolean = false
@@ -72,13 +73,22 @@ class EditFragment : Fragment() {
                 val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
                 UIApplication.tempEditedPhoto = uritobitmap
             }
-            else
+        if(UIApplication.photoOrigin == "camera")
             {//camera
                 val bitmapTemp = UIApplication.camBitmap
                 UIApplication.tempBitmap = bitmapTemp
                 UIApplication.tempEditedPhoto = bitmapTemp
                 imgEditor.setImageBitmap(bitmapTemp)
+
             }
+
+        if(UIApplication.editExisting == 1) {
+            //UIApplication.editExisting = 0
+            val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(),1)
+            val imgName = obj.imgName
+            val imgBitmap = viewModel.getBitmapFromInternalStorageByName(requireContext(), imgName)
+            imgEditor.setImageBitmap(imgBitmap)
+        }
 //        }
 
 
@@ -236,8 +246,17 @@ class EditFragment : Fragment() {
 
 
     fun loadData() {
-        val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
-        filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
+
+        if(UIApplication.editExisting == 1) {
+            val previewBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),1)
+            filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
+            UIApplication.editExisting = 0
+        }
+        if(UIApplication.editExisting == 0) {
+            val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
+            filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
+        }
+
     }
 
     private fun setSeekPercentVisible(isVisible: Boolean){

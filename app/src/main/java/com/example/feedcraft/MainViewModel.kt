@@ -12,7 +12,7 @@ class MainViewModel: ViewModel() {
         var counterOfCreations = counterSharedPrefs?.getInt("counter", 0)
         val gson = Gson()
         val photoInformationFromJson: MutableList<EditedPhotoInformation> = mutableListOf()
-        for (i in 1..counterOfCreations!!) {
+        for (i in 0..counterOfCreations!!-1) {
             var json = creationsSharedPrefs?.getString("creation_$i", "")
             var obj: EditedPhotoInformation = gson.fromJson(json, EditedPhotoInformation::class.java)
             val caption = obj.caption

@@ -225,6 +225,22 @@ class EditorViewModel : ViewModel() {
         return previewList[position]
     }
 
+    fun getBitmapFromInternalStorageByName(context: Context, name: String): Bitmap? {
+        val folderPath = context.filesDir.toString() + File.separator + "saved_creations"
+        //val previewList: MutableList<Bitmap> = mutableListOf()
+        var requiredBitmap: Bitmap? = null
+
+        File(folderPath).walk().forEach { file ->
+            if (!file.isDirectory) {
+
+                if (file.name == "$name.png") {
+                    requiredBitmap = BitmapFactory.decodeFile(file.absolutePath)
+                }
+            }
+        }
+        return requiredBitmap
+    }
+
     fun deleteBitmapFromInternalStorageByPosition(context: Context, position: Int): Unit {
         val folderPathSaved = context.filesDir.toString() + File.separator + "saved_creations"
         //val previewListSaved: MutableList<Bitmap> = mutableListOf()
