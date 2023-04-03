@@ -136,9 +136,12 @@ class FinishFragment : Fragment() {
         btnShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            val filePath = context?.filesDir.toString() + File.separator + "saved_creations" + File.separator
-            val file = File(filePath, "creation_1.png")
-            val uri: Uri? = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
+//            val filePath = context?.filesDir.toString() + File.separator + "saved_creations" + File.separator
+//            val file = File(filePath, "creation_1.png")
+//            val uri: Uri? = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
+//            intent.putExtra(Intent.EXTRA_STREAM, uri)
+            val bitmap = UIApplication.tempEditedPhoto
+            val uri = bitmap?.let { it1 -> viewModel.bitmapToUri(requireContext(), it1) }
             intent.putExtra(Intent.EXTRA_STREAM, uri)
             intent.type = "image/png"
             val pm = requireActivity().packageManager

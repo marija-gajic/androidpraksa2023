@@ -5,4 +5,5 @@
     <color name="header_footer">#262330</color>
     <color name="icon_text">#C0B7CC</color>
     <color name="buttons">#B197F5</color>
+    <color name="overlay_color">#E8AACA</color>
 </resources>

@@ -90,9 +90,8 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionAdd)
         }
         deleteFeed.setOnClickListener {
-            //viewModel.deleteBitmapFromInternalStorageByPosition(requireContext(), itemPosition)
-            //previews.adapter?.notifyItemRemoved(itemPosition)
-            Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
+            val actionDelete = FeedFragmentDirections.actionFeedFragmentToDeleteFeedFragment()
+            findNavController().navigate(actionDelete)
         }
         editPhoto.setOnClickListener {
             //startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)

@@ -16,4 +16,19 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.BottomNavigationView</item>
+        <item name="itemActiveIndicatorStyle"> @style/ActiveStateIndicator</item>
+    </style>
+    <style name="ThemeOverlay.App.BottomNavigationView" parent="">
+        <item name="colorPrimary">@color/main_color</item>
+        <item name="colorOnPrimary">@color/icon_text</item>
+    </style>
+    <style name="ActiveStateIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator" >
+        <item name="android:color">@color/overlay_color</item>
+        <item name="android:width">60dp</item>
+        <item name="android:height">28dp</item>
+                <item name="android:background">@drawable/footer_active_indicator</item>
+    </style>
 </resources>

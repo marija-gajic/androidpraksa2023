@@ -54,9 +54,9 @@ class ScheduleFragment : Fragment() {
 
         
         btnDone.setOnClickListener {
-//            if (addPicture.isChecked) {
-//                UIApplication.addPhotoFlag = "checked"
-//            }
+            if (addPicture.isChecked) {
+                UIApplication.addPhotoFlag = "checked"
+            }
             val userSelectedDateTime = Calendar.getInstance()
             userSelectedDateTime.set(chosenYear, chosenMonth, chosenDay, chosenHour , chosenMin)
             val todayDateTime = Calendar.getInstance()
@@ -64,7 +64,6 @@ class ScheduleFragment : Fragment() {
             createWorkRequest(notifTxt.text.toString(), delayInSeconds)
             Toast.makeText(requireContext(), "Reminder set", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
-            UIApplication.addPhotoFlag = ""
         }
 
         btnBack.setOnClickListener {

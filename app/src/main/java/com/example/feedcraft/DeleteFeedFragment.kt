@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
@@ -39,11 +40,15 @@ class DeleteFeedFragment : DialogFragment() {
 //            ResourcesCompat.getFont(requireContext(), R.font.poppins_regular)
 
         btnOk.setOnClickListener {
-            //TODO
+            //viewModel.deleteBitmapFromInternalStorageByPosition(requireContext(), itemPosition)
+            //previews.adapter?.notifyItemRemoved(itemPosition)
+            Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
+            findNavController().navigateUp()
         }
         btnCancel.setOnClickListener {
-            val actionCancel = DeleteFeedFragmentDirections.actionDeleteFeedFragmentToFeedFragment()
-            findNavController().navigate(actionCancel)
+//            val actionCancel = DeleteFeedFragmentDirections.actionDeleteFeedFragmentToFeedFragment()
+//            findNavController().navigate(actionCancel)
+            findNavController().navigateUp()
         }
     }
 

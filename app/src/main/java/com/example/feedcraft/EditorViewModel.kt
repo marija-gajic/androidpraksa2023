@@ -5,6 +5,7 @@ import android.R.attr.orientation
 import android.content.Context
 import android.graphics.*
 import android.media.ExifInterface
+import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -458,6 +459,15 @@ class EditorViewModel : ViewModel() {
         val croppedRect = Rect(10, 10, bitmap.width - 10, bitmap.height - 10)
         return Bitmap.createBitmap(bitmap, croppedRect.left, croppedRect.top, croppedRect.width(), croppedRect.height())
     }
+
+    fun bitmapToUri(context: Context, bitmap: Bitmap): Uri? {
+        val resolver = context.contentResolver
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(resolver, bitmap, "Title", null)
+        return Uri.parse(path)
+    }
+
 
 
 

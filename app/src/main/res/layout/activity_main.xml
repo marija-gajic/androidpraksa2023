@@ -28,9 +28,7 @@
         android:background="@color/header_footer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:itemIconTint="@color/icon_text"
-        app:itemTextColor="@color/icon_text" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 
 
