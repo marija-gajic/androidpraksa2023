@@ -29,12 +29,12 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val startButton = binding.btnStartMain
-
-        startButton.setOnClickListener {
-            val actionStartFeed = HomeFragmentDirections.actionHomeFragmentToFeedFragment()
-            findNavController().navigate(actionStartFeed)
-        }
+//        val startButton = binding.btnStartMain
+//
+//        startButton.setOnClickListener {
+//            val actionStartFeed = HomeFragmentDirections.actionHomeFragmentToFeedFragment()
+//            findNavController().navigate(actionStartFeed)
+//        }
 
     }
 

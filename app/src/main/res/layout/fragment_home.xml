@@ -47,6 +47,7 @@
 
         <TextView
             android:id="@+id/btn_start_main"
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/btn_start"
