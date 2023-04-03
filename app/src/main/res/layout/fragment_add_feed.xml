@@ -18,7 +18,7 @@
         android:maxLines="1"
         android:fontFamily="@font/poppins_regular"
         android:textColor="@color/icon_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txt_add_a_picture_from"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/add_feed_title"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintWidth_percent="0.3" />
 
     <TextView
         android:id="@+id/btn_camera"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_gallery"
         app:layout_constraintTop_toBottomOf="@id/add_feed_title"
-        app:layout_constraintWidth_percent="0.4" />
+        app:layout_constraintWidth_percent="0.3" />
 
      <ImageView
           android:id="@+id/ic_gallery"
