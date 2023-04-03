@@ -19,6 +19,7 @@ class UIApplication : Application(){
         var editExisting: Int = 0
         var currentPosition: Int = -1
         var nameOfEditingSavedPhoto = ""
+        var camImgUri: Uri? = null
     }
 
     override fun onCreate() {

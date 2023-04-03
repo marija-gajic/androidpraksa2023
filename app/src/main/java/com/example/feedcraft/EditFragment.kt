@@ -75,11 +75,11 @@ class EditFragment : Fragment() {
             }
         if(UIApplication.photoOrigin == "camera")
             {//camera
-                val bitmapTemp = UIApplication.camBitmap
+                //val bitmapTemp = UIApplication.camBitmap
+                val bitmapTemp = viewModel.rotatePhotoIfNeeded(requireContext(),UIApplication.camBitmap!!)
                 UIApplication.tempBitmap = bitmapTemp
                 UIApplication.tempEditedPhoto = bitmapTemp
                 imgEditor.setImageBitmap(bitmapTemp)
-
             }
 
         if(UIApplication.editExisting == 1) {
@@ -88,7 +88,8 @@ class EditFragment : Fragment() {
             val imgName = obj.imgName
             val imgBitmap = viewModel.getBitmapFromInternalStorageByName(requireContext(), imgName)
             imgEditor.setImageBitmap(imgBitmap)
-            UIApplication.tempEditedPhoto =imgBitmap
+            UIApplication.tempEditedPhoto = imgBitmap
+            UIApplication.tempBitmap = imgBitmap
             UIApplication.nameOfEditingSavedPhoto = imgName //
         }
 //        }

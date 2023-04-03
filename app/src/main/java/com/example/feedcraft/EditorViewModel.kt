@@ -468,6 +468,19 @@ class EditorViewModel : ViewModel() {
         return Uri.parse(path)
     }
 
+    fun uriToBitmap(context: Context, uri: Uri): Bitmap? {
+        try {
+            val inputStream = context.contentResolver.openInputStream(uri)
+            val options = BitmapFactory.Options()
+            options.inPreferredConfig = Bitmap.Config.RGB_565
+            return BitmapFactory.decodeStream(inputStream, null, options)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+
     fun overwriteSavedBitmap (context: Context, imgName: String, bitmap: Bitmap): File {
         val filePath = context.filesDir.toString() + File.separator + "saved_creations"
         val fileName = imgName + ".png"
@@ -510,6 +523,50 @@ class EditorViewModel : ViewModel() {
         fo.write(bytes.toByteArray())
         fo.close()
         return f
+    }
+
+    fun getFilePathFromUri(context: Context, uri: Uri): String? {
+        val projection = arrayOf(MediaStore.Images.Media.DATA)
+        val cursor = context.contentResolver.query(uri, projection, null, null, null)
+        cursor?.use {
+            val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+            it.moveToFirst()
+            return it.getString(columnIndex)
+        }
+        return null
+    }
+
+
+    fun rotatePhotoIfNeeded (context: Context, bitmap: Bitmap): Bitmap {
+        var adjustedBitmap = bitmap
+        var filePath = context?.cacheDir.toString() + File.separator + "capturedImage.png"
+         val exif = ExifInterface(filePath!!)
+                val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1)
+                Log.e("orientation", "" + orientation)
+                val m = Matrix()
+                when (orientation) {
+                    3 -> {
+                        m.postRotate(180f)
+                        //               if(m.preRotate(90)){
+                        Log.e("in orientation", "" + orientation)
+                        adjustedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+
+                    }
+                    6 -> {
+                        m.postRotate(90f)
+                        Log.e("in orientation", "" + orientation)
+                        adjustedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+
+                    }
+                    8 -> {
+                        m.postRotate(270f)
+                        Log.e("in orientation", "" + orientation)
+                        adjustedBitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, m, true)
+
+                    }
+                    else -> adjustedBitmap = bitmap
+                }
+        return adjustedBitmap
     }
 
 
