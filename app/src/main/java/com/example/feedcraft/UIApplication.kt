@@ -16,8 +16,9 @@ class UIApplication : Application(){
         var tempEditedPhoto: Bitmap? = null
         var addPhotoFlag: String = ""
         var lastFilterSelected: Int = 0
-        var saveCounter: Int = 0
         var editExisting: Int = 0
+        var currentPosition: Int = -1
+        var nameOfEditingSavedPhoto = ""
     }
 
     override fun onCreate() {

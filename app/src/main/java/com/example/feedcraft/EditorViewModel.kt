@@ -468,6 +468,49 @@ class EditorViewModel : ViewModel() {
         return Uri.parse(path)
     }
 
+    fun overwriteSavedBitmap (context: Context, imgName: String, bitmap: Bitmap): File {
+        val filePath = context.filesDir.toString() + File.separator + "saved_creations"
+        val fileName = imgName + ".png"
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 99, bytes)
+
+        val dir = File(filePath)
+
+        if (!dir.exists()) {
+            dir.mkdir()
+        }
+
+        val f = File(dir, fileName)
+        f.createNewFile()
+
+        val fo = FileOutputStream(f)
+        fo.write(bytes.toByteArray())
+        fo.close()
+
+        return f
+    }
+
+    fun overwritePreviewBitmap (context: Context, imgName: String, bitmap: Bitmap): File {
+        val filePath = context.filesDir.toString() + File.separator + "creations_preview"
+        val fileName = imgName + ".png"
+        val bytes = ByteArrayOutputStream()
+        val scaledCroppedBitmap = scaleCenterCrop(bitmap,200,200)
+
+        scaledCroppedBitmap.compress(Bitmap.CompressFormat.PNG, 90, bytes)
+
+        val dir = File(filePath)
+        if (!dir.exists()) {
+            dir.mkdir()
+        }
+
+        val f = File(dir, fileName)
+        f.createNewFile()
+
+        val fo = FileOutputStream(f)
+        fo.write(bytes.toByteArray())
+        fo.close()
+        return f
+    }
 
 
 

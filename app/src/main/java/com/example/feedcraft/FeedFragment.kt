@@ -101,8 +101,14 @@ class FeedFragment : Fragment() {
 //            fragmentTransaction.replace(R.id., fragment)
 //            fragmentTransaction.addToBackStack(null)
 //            fragmentTransaction.commit()
+
             UIApplication.editExisting = 1
+            UIApplication.currentPosition = itemPosition
             startActivity(Intent(requireContext(), EditorActivity::class.java))
+
+
+
+
 
 //            val bundle = Bundle()
 //            bundle.putInt("position", itemPosition)

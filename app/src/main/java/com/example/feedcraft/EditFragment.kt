@@ -83,11 +83,13 @@ class EditFragment : Fragment() {
             }
 
         if(UIApplication.editExisting == 1) {
-            //UIApplication.editExisting = 0
-            val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(),1)
+            var position = UIApplication.currentPosition
+            val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(),position)
             val imgName = obj.imgName
             val imgBitmap = viewModel.getBitmapFromInternalStorageByName(requireContext(), imgName)
             imgEditor.setImageBitmap(imgBitmap)
+            UIApplication.tempEditedPhoto =imgBitmap
+            UIApplication.nameOfEditingSavedPhoto = imgName //
         }
 //        }
 
@@ -248,11 +250,11 @@ class EditFragment : Fragment() {
     fun loadData() {
 
         if(UIApplication.editExisting == 1) {
-            val previewBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),1)
+            var position = UIApplication.currentPosition
+            val previewBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
             UIApplication.editExisting = 0
-        }
-        if(UIApplication.editExisting == 0) {
+        } else {
             val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
         }

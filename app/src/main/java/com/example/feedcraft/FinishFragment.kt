@@ -74,23 +74,50 @@ class FinishFragment : Fragment() {
 
             var resultBitmap = imgPreview.drawToBitmap()
             viewModel.setAnotherValueToLiveData("Saving...")
-            val cropResult = viewModel.cropEdgesOfPhoto(requireContext(),resultBitmap)
+
+            if (UIApplication.nameOfEditingSavedPhoto != "") {
+                val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
+                viewModel.overwritePreviewBitmap(
+                    requireContext(),
+                    UIApplication.nameOfEditingSavedPhoto,
+                    cropResult
+                )
+                viewModel.overwriteSavedBitmap(
+                    requireContext(),
+                    UIApplication.nameOfEditingSavedPhoto,
+                    cropResult
+                )
+                UIApplication.nameOfEditingSavedPhoto = ""
+                viewModel.setAnotherValueToLiveData("Photo saved!")
+                UIApplication.photoSaved = "saved"
+            } else
+            {
+
+            val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
             val currentTimestamp = viewModel.getTimestamp()
             viewModel.saveBitmap(requireContext(), cropResult, currentTimestamp)
             viewModel.savePreview(requireContext(), cropResult, currentTimestamp)
             viewModel.setAnotherValueToLiveData("Photo saved!")
             UIApplication.photoSaved = "saved"
-            val selectedFilterName = viewModel.returnFilterNameFromPosition(UIApplication.lastFilterSelected)
+            val selectedFilterName =
+                viewModel.returnFilterNameFromPosition(UIApplication.lastFilterSelected)
 
-         val caption = viewModel.getCaption()
-         val brightness = viewModel.getBrightness()
-         val saturation = viewModel.getSaturation()
-         val contrast = viewModel.getContrast()
-         val imgName = currentTimestamp
-         val filterName = selectedFilterName
+            val caption = viewModel.getCaption()
+            val brightness = viewModel.getBrightness()
+            val saturation = viewModel.getSaturation()
+            val contrast = viewModel.getContrast()
+            val imgName = currentTimestamp
+            val filterName = selectedFilterName
 
 
-            val obj = EditedPhotoInformation(caption,brightness,saturation,contrast,imgName,filterName)
+            val obj = EditedPhotoInformation(
+                caption,
+                brightness,
+                saturation,
+                contrast,
+                imgName,
+                filterName
+            )
             val gson = Gson()
             val json = gson.toJson(obj)
 
@@ -101,7 +128,6 @@ class FinishFragment : Fragment() {
             val position = counterOfCreations
 
 
-
             val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
             val prefsEditor = sharePrefsCreations.edit()
             prefsEditor.putString("creation_$counterOfCreations", json)
@@ -110,7 +136,7 @@ class FinishFragment : Fragment() {
 
             prefsEditor.commit()
             prefsConfig.commit()
-
+        }
 
 //            if(UIApplication.photoOrigin == "gallery")
 //            {//gallery
