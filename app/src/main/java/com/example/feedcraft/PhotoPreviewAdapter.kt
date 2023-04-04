@@ -46,6 +46,7 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
 
             if(lastSelectedIndex != position) {
                 lastSelectedIndex = position
+
                 onClick(position, true)
                 //holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
                 //holder.previewBorder.isVisible = !holder.previewBorder.isVisible

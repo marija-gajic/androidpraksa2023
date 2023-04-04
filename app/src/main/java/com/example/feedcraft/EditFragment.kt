@@ -135,6 +135,7 @@ class EditFragment : Fragment() {
 
                 if (brightnessClicked){
                     var adjustedBitmap = viewModel.applyBrightness(UIApplication.tempEditedPhoto!!, progress)
+                    //var rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), adjustedBitmap)
                     binding.imgEditor.setImageBitmap(adjustedBitmap)
                 }
                 if (saturationClicked){
@@ -145,6 +146,7 @@ class EditFragment : Fragment() {
                     var adjustedBitmap = viewModel.applyContrast(UIApplication.tempEditedPhoto!!, progress)
                     binding.imgEditor.setImageBitmap(adjustedBitmap)
                 }
+
 
             }
 
@@ -163,6 +165,7 @@ class EditFragment : Fragment() {
                 }
 
                 UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
+
 
             }
         })
@@ -232,7 +235,8 @@ class EditFragment : Fragment() {
             if (UIApplication.photoOrigin == "gallery") {
                 val selectedImageFromGalleryUri = UIApplication.imageUri
                 val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-                filterBitmap = uritobitmap
+                val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),uritobitmap)
+                filterBitmap = rotatedBitmap
             } else {
                 filterBitmap = UIApplication.tempBitmap!!
             }
@@ -252,11 +256,13 @@ class EditFragment : Fragment() {
 
         if(UIApplication.editExisting == 1) {
             var position = UIApplication.currentPosition
-            val previewBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
+            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position))
+            val previewBitmap = rotatedBitmap
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
             UIApplication.editExisting = 0
         } else {
-            val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
+            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), viewModel.preparePreviewBitmap(requireContext()) )
+            val previewBitmap = rotatedBitmap
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
         }
 
