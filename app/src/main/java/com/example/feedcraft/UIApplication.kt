@@ -20,6 +20,8 @@ class UIApplication : Application(){
         var currentPosition: Int = -1
         var nameOfEditingSavedPhoto = ""
         var camImgUri: Uri? = null
+        var itemSelectedPosition: Int = -1
+        var photoDeleted: String = ""
     }
 
     override fun onCreate() {

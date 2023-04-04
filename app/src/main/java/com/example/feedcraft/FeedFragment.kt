@@ -73,6 +73,7 @@ class FeedFragment : Fragment() {
                 //Log.d("mylog", "kliknut item na poziciji: $it")
                 handleOptionsOnItemClick(checked)
                 itemPosition = position
+                UIApplication.itemSelectedPosition = position
                 itemBitmap = previewList[position].previewBitmap
                 itemDominantColor = itemBitmap!!.getPixel(0,0)
                 itemBorderColor = previewList[position].borderColor
@@ -160,7 +161,15 @@ class FeedFragment : Fragment() {
 
             loadPreviewPhotos()
             //previewAdapter.refreshFilterAdapterList(previewList)
+
         }
+//        if (UIApplication.photoDeleted == "deleted") {
+//            UIApplication.photoDeleted = ""
+//            binding.rvPreviews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
+//            //previewAdapter.refreshFilterAdapterList(previewList)
+//
+//            loadPreviewPhotos()
+//        }
 
     }
 

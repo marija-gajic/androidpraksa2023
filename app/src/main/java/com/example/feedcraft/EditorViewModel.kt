@@ -242,44 +242,75 @@ class EditorViewModel : ViewModel() {
         return requiredBitmap
     }
 
-    fun deleteBitmapFromInternalStorageByPosition(context: Context, position: Int): Unit {
+//    fun deleteBitmapFromInternalStorageByPosition(context: Context, position: Int): Unit {
+//        val folderPathSaved = context.filesDir.toString() + File.separator + "saved_creations"
+//        //val previewListSaved: MutableList<Bitmap> = mutableListOf()
+//        var countSaved = 0
+//
+//        File(folderPathSaved).walk().forEach { file ->
+//            if (!file.isDirectory) {
+//                if(countSaved==position) {
+//                    file.delete()
+//                } else {
+//                    countSaved++
+//                }
+//                //val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+//                //previewListSaved.add(tmpBitmap)
+//
+//            }
+//        }
+//        //previewListSaved.removeAt(position)
+//
+//        val folderPathPreviews = context.filesDir.toString() + File.separator + "creations_preview"
+//        //val previewListPreviews: MutableList<Bitmap> = mutableListOf()
+//        var countPreviews = 0
+//
+//        File(folderPathPreviews).walk().forEach { file ->
+//            if (!file.isDirectory) {
+//                if(countPreviews==position) {
+//                    file.delete()
+//                } else {
+//                    countPreviews++
+//                }
+////                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
+////                previewListPreviews.add(tmpBitmap)
+//            }
+//        }
+//        //previewListPreviews.removeAt(position)
+//    }
+
+    fun deleteBitmapFromInternalStorageByName(context: Context, name: String): Unit {
+
+        //SAVED
         val folderPathSaved = context.filesDir.toString() + File.separator + "saved_creations"
-        //val previewListSaved: MutableList<Bitmap> = mutableListOf()
-        var countSaved = 0
 
         File(folderPathSaved).walk().forEach { file ->
             if (!file.isDirectory) {
-                if(countSaved==position) {
-                    file.delete()
-                } else {
-                    countSaved++
-                }
-                //val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
-                //previewListSaved.add(tmpBitmap)
 
+                if (file.name == "$name.png") {
+                    file.delete()
+
+                }
             }
         }
-        //previewListSaved.removeAt(position)
 
-        val folderPathPreviews = context.filesDir.toString() + File.separator + "creations_preview"
-        //val previewListPreviews: MutableList<Bitmap> = mutableListOf()
-        var countPreviews = 0
+        //PREVIEW
+        val folderPathPreview = context.filesDir.toString() + File.separator + "creations_preview"
 
-        File(folderPathPreviews).walk().forEach { file ->
+        File(folderPathPreview).walk().forEach { file ->
             if (!file.isDirectory) {
-                if(countPreviews==position) {
+
+                if (file.name == "$name.png") {
                     file.delete()
-                } else {
-                    countPreviews++
                 }
-//                val tmpBitmap = BitmapFactory.decodeFile(file.absolutePath)
-//                previewListPreviews.add(tmpBitmap)
             }
         }
-        //previewListPreviews.removeAt(position)
 
-
-
+//        //SHARED PREFS
+//        val sharePrefsCreations = context.getSharedPreferences("creations", 0)
+//        val prefsEditor = sharePrefsCreations.edit()
+//        prefsEditor.remove(name)
+//        prefsEditor.apply()
     }
 
     fun returnBitmapListWithFiltersApplied(context: Context, bitmap: Bitmap): MutableList<FilterModel> {

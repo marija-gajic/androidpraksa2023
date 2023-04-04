@@ -131,6 +131,7 @@ class FinishFragment : Fragment() {
             val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
             val prefsEditor = sharePrefsCreations.edit()
             prefsEditor.putString("creation_$counterOfCreations", json)
+                //prefsEditor.putString(imgName, json)
 
             prefsConfig.putInt("counter", ++counterOfCreations)
 
