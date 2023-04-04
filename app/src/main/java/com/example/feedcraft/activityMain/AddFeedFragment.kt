@@ -1,33 +1,27 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityMain
 
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.core.content.FileProvider
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI.navigateUp
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.transition.Transition
-import com.example.feedcraft.Constants.Companion.REQUEST_CAMERA
-import com.example.feedcraft.Constants.Companion.REQUEST_GALLERY
+import com.example.feedcraft.BuildConfig
+import com.example.feedcraft.activityEditor.EditorActivity
+import com.example.feedcraft.data.Constants
+import com.example.feedcraft.data.Constants.Companion.REQUEST_CAMERA
+import com.example.feedcraft.data.Constants.Companion.REQUEST_GALLERY
+import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentAddFeedBinding
+import com.example.feedcraft.viewModels.EditorViewModel
 import java.io.File
 
 
@@ -65,7 +59,8 @@ class AddFeedFragment : DialogFragment() {
             val takePicture = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
             val file = File(context?.cacheDir.toString() + File.separator + "capturedImage.png")
-            capturedImageUri = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
+            capturedImageUri = FileProvider.getUriForFile(requireContext(),
+                BuildConfig.APPLICATION_ID, file)
             //UIApplication.camImgUri = capturedImageUri
             takePicture.putExtra(Intent.EXTRA_STREAM, capturedImageUri)
             takePicture.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)

@@ -1,23 +1,21 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityEditor
 
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.content.SharedPreferences
-import android.net.Uri
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.FileProvider
 import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.feedcraft.FinishFragmentDirections
+import com.example.feedcraft.data.EditedPhotoInformation
+import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentFinishBinding
+import com.example.feedcraft.viewModels.EditorViewModel
 import com.google.gson.Gson
-import java.io.File
 
 
 class FinishFragment : Fragment() {

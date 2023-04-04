@@ -1,22 +1,17 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityMain
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
-import com.example.feedcraft.databinding.FragmentAddCaptionBinding
+import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentDeleteFeedBinding
+import com.example.feedcraft.viewModels.EditorViewModel
+import com.example.feedcraft.viewModels.MainViewModel
 
 class DeleteFeedFragment : DialogFragment() {
     private var _binding: FragmentDeleteFeedBinding? = null

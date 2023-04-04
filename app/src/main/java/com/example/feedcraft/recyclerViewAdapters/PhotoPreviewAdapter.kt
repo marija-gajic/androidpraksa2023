@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.recyclerViewAdapters
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,13 +8,15 @@ import android.widget.ImageView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.feedcraft.recyclerViewModels.PhotoPreviewModel
+import com.example.feedcraft.R
 
 class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onClick: (Int, Boolean) -> Unit)
     : RecyclerView.Adapter<PhotoPreviewAdapter.CustomViewHolder>(){
     //private lateinit var binding: ItemPhotoPreviewBinding
     private var lastSelectedIndex = -1
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoPreviewAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         Log.d("mylog", "onCreateViewHolder called")
         val inflater = LayoutInflater.from(parent.context)
 
@@ -22,7 +24,7 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
         //return CustomViewHolder(binding)
         return CustomViewHolder(inflater.inflate(R.layout.item_photo_preview, parent, false))
     }
-    override fun onBindViewHolder(holder: PhotoPreviewAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         Log.d("mylog", "onBindViewHolder called $position")
 
 

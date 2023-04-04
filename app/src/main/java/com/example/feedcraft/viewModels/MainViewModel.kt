@@ -1,7 +1,8 @@
-package com.example.feedcraft
+package com.example.feedcraft.viewModels
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
+import com.example.feedcraft.data.EditedPhotoInformation
 import com.google.gson.Gson
 
 class MainViewModel: ViewModel() {

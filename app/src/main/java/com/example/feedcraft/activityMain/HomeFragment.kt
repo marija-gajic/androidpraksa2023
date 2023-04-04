@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityMain
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

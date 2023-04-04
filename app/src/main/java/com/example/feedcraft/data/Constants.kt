@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.data
 
 class Constants {
 

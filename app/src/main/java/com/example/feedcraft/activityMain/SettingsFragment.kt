@@ -1,11 +1,10 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityMain
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
-import android.content.pm.ApplicationInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -19,6 +18,7 @@ import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.feedcraft.BuildConfig
+import com.example.feedcraft.R
 import com.example.feedcraft.databinding.FragmentSettingsBinding
 
 

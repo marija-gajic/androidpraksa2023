@@ -1,7 +1,5 @@
-package com.example.feedcraft
+package com.example.feedcraft.viewModels
 
-import android.R.attr.bitmap
-import android.R.attr.orientation
 import android.content.Context
 import android.graphics.*
 import android.media.ExifInterface
@@ -11,6 +9,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.feedcraft.data.Edits
+import com.example.feedcraft.recyclerViewAdapters.FilterAdapter
+import com.example.feedcraft.recyclerViewModels.FilterModel
+import com.example.feedcraft.data.UIApplication
 import jp.co.cyberagent.android.gpuimage.GPUImage
 import jp.co.cyberagent.android.gpuimage.filter.*
 import java.io.ByteArrayOutputStream

@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:src="@drawable/popup_holder"
-    tools:context=".AddFeedFragment">
+    tools:context=".activityMain.AddFeedFragment">
 
     <TextView
         android:id="@+id/add_feed_title"

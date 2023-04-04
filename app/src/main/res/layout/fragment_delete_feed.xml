@@ -5,7 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:src="@drawable/popup_holder"
-    tools:context=".DeleteFeedFragment">
+    tools:context=".activityMain.DeleteFeedFragment">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/txt_delete"

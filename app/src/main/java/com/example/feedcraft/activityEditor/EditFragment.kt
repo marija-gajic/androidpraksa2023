@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityEditor
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
@@ -9,20 +9,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.drawToBitmap
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.feedcraft.EditFragmentDirections
+import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentEditBinding
-import jp.co.cyberagent.android.gpuimage.GPUImage
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageBrightnessFilter
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorInvertFilter
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageGaussianBlurFilter
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageSepiaToneFilter
+import com.example.feedcraft.recyclerViewAdapters.FilterAdapter
+import com.example.feedcraft.recyclerViewModels.FilterModel
+import com.example.feedcraft.viewModels.EditorViewModel
+import com.example.feedcraft.viewModels.MainViewModel
 
 
 class EditFragment : Fragment() {
@@ -76,7 +75,7 @@ class EditFragment : Fragment() {
         if(UIApplication.photoOrigin == "camera")
             {//camera
                 //val bitmapTemp = UIApplication.camBitmap
-                val bitmapTemp = viewModel.rotatePhotoIfNeeded(requireContext(),UIApplication.camBitmap!!)
+                val bitmapTemp = viewModel.rotatePhotoIfNeeded(requireContext(), UIApplication.camBitmap!!)
                 UIApplication.tempBitmap = bitmapTemp
                 UIApplication.tempEditedPhoto = bitmapTemp
                 imgEditor.setImageBitmap(bitmapTemp)

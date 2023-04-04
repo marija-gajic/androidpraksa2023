@@ -16,10 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FeedCraft"
         tools:targetApi="31"
-        android:name=".UIApplication">
+        android:name=".data.UIApplication">
 
         <provider
-            android:name="com.example.feedcraft.MyFileProvider"
+            android:name="com.example.feedcraft.data.MyFileProvider"
             android:authorities="${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">
@@ -29,10 +29,10 @@
         </provider>
 
         <activity
-            android:name=".EditorActivity"
+            android:name=".activityEditor.EditorActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".SplashActivity"
+            android:name=".activitySplash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.FeedCraft">
@@ -44,7 +44,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activityMain.MainActivity"
             android:screenOrientation="portrait">
 
         </activity>

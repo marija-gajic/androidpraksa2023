@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.notifications
 
 import android.Manifest
 import android.app.NotificationChannel
@@ -11,11 +11,12 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
-import android.widget.CheckBox
-import android.widget.ImageView
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.feedcraft.activityMain.MainActivity
+import com.example.feedcraft.R
+import com.example.feedcraft.data.UIApplication
 
 class NotificationHelper (val context: Context) {
     var CHANNEL_ID = "channel_id"
@@ -29,7 +30,9 @@ class NotificationHelper (val context: Context) {
             notificationPhoto = UIApplication.tempEditedPhoto!!
             UIApplication.addPhotoFlag = ""
         } else {
-            notificationPhoto = BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher)
+            notificationPhoto = BitmapFactory.decodeResource(context.resources,
+                R.drawable.ic_launcher
+            )
         }
 
         createNotificationChannel()

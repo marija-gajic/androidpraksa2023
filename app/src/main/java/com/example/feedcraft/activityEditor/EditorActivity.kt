@@ -1,11 +1,8 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityEditor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
-import com.example.feedcraft.databinding.ActivityEditorBinding
-import com.example.feedcraft.databinding.ActivityMainBinding
+import com.example.feedcraft.R
 
 class EditorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

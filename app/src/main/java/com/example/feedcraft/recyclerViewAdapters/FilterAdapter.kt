@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.recyclerViewAdapters
 
 import android.annotation.SuppressLint
 import android.graphics.Typeface
@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.feedcraft.recyclerViewModels.FilterModel
+import com.example.feedcraft.R
 
 class FilterAdapter (var items : MutableList<FilterModel>, val onClick: (Int) -> Unit)
     : RecyclerView.Adapter<FilterAdapter.CustomViewHolder>(){
@@ -15,12 +17,12 @@ class FilterAdapter (var items : MutableList<FilterModel>, val onClick: (Int) ->
 
     private var lastSelectedIndex = 0
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         //binding = ItemFilterPreviewBinding.inflate(inflater,parent,false)
         return CustomViewHolder(inflater.inflate(R.layout.item_filter_preview, parent, false))
     }
-    override fun onBindViewHolder(holder: FilterAdapter.CustomViewHolder, @SuppressLint("RecyclerView") position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         holder.filterName.text = items[position].name
         holder.filterPreview.setImageBitmap(items[position].filterBitmap)

@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.recyclerViewModels
 
 import android.graphics.Bitmap
 

@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.activityEditor
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.feedcraft.databinding.FragmentAddCaptionBinding
+import com.example.feedcraft.viewModels.EditorViewModel
 
 class AddCaptionFragment : DialogFragment() {
     private var _binding: FragmentAddCaptionBinding? = null

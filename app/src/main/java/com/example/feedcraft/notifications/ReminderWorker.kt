@@ -1,4 +1,4 @@
-package com.example.feedcraft
+package com.example.feedcraft.notifications
 
 import android.content.Context
 import androidx.work.Worker
