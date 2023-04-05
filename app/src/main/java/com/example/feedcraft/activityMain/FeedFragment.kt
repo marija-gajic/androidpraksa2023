@@ -14,7 +14,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.feedcraft.activityEditor.EditorActivity
-import com.example.feedcraft.FeedFragmentDirections
+import com.example.feedcraft.activityMain.FeedFragmentDirections
 import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentFeedBinding
 import com.example.feedcraft.recyclerViewAdapters.PhotoPreviewAdapter

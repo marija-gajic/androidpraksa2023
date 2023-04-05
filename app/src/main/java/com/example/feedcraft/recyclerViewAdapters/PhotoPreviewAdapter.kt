@@ -28,16 +28,9 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
         Log.d("mylog", "onBindViewHolder called $position")
 
 
-        if(lastSelectedIndex == position)
-        {
-            if(holder.previewPhotoChecked.isVisible)
-                holder.previewPhotoChecked.isVisible = false
-            else
-                holder.previewPhotoChecked.isVisible = true
-
-        }
-        else
-        {
+        if (lastSelectedIndex == position) {
+            holder.previewPhotoChecked.isVisible = true
+        } else {
             holder.previewPhotoChecked.isVisible = false
         }
 
@@ -47,15 +40,23 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
         holder.itemView.setOnClickListener {
 
             if(lastSelectedIndex != position) {
+
+                if (lastSelectedIndex >= 0) {
+                    notifyItemChanged(lastSelectedIndex)
+                }
+
                 lastSelectedIndex = position
 
                 onClick(position, true)
+                holder.previewPhotoChecked.isVisible = true
                 //holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
                 //holder.previewBorder.isVisible = !holder.previewBorder.isVisible
                 notifyDataSetChanged()
             }
             else
             {
+                lastSelectedIndex = -1
+                holder.previewPhotoChecked.isVisible = false
                 onClick(position, false)
                 notifyDataSetChanged()
             }
@@ -81,5 +82,14 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
         var previewPhoto = itemView.findViewById<ImageView>(R.id.preview_photo)
         var previewPhotoChecked = itemView.findViewById<ImageView>(R.id.preview_photo_checked)
 
+        init {
+            previewPhotoChecked.setOnClickListener {
+                if (lastSelectedIndex == adapterPosition) {
+                    lastSelectedIndex = -1
+                    onClick(adapterPosition, false)
+                    previewPhotoChecked.isVisible = false
+                }
+            }
+        }
     }
 }

@@ -15,7 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.feedcraft.EditFragmentDirections
+//import com.example.feedcraft.EditFragmentDirections
 import com.example.feedcraft.data.UIApplication
 import com.example.feedcraft.databinding.FragmentEditBinding
 import com.example.feedcraft.recyclerViewAdapters.FilterAdapter
