@@ -3,6 +3,7 @@ package com.example.feedcraft.data
 import android.app.Application
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 
 class UIApplication : Application(){
 
@@ -21,7 +22,8 @@ class UIApplication : Application(){
         var nameOfEditingSavedPhoto = ""
         var camImgUri: Uri? = null
         var itemSelectedPosition: Int = -1
-        var photoDeleted: String = ""
+        var photoDeleted = MutableLiveData("")
+
     }
 
     override fun onCreate() {

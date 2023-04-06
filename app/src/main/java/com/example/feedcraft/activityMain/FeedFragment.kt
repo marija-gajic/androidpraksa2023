@@ -36,18 +36,14 @@ class FeedFragment : Fragment() {
     lateinit var itemSelected : PhotoPreviewModel
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFeedBinding.inflate(inflater, container, false)
+        UIApplication.photoDeleted.observe(viewLifecycleOwner) {
+            onPhotoDelete(it)
+        }
         return binding.root
     }
 
@@ -95,6 +91,7 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionAdd)
         }
         deleteFeed.setOnClickListener {
+            val capturePcetaTeIzela = previewAdapter.items
             val actionDelete = FeedFragmentDirections.actionFeedFragmentToDeleteFeedFragment()
             findNavController().navigate(actionDelete)
         }
@@ -177,6 +174,15 @@ class FeedFragment : Fragment() {
 
     }
 
+    private fun onPhotoDelete(photoDeleted: String) {
+        if (photoDeleted == "deleted") {
+            UIApplication.photoDeleted.postValue("")
+            //binding.rvPreviews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
+
+            loadPreviewPhotos()
+            previewAdapter.refreshFilterAdapterList(previewList)
+        }
+    }
     fun handleOptionsOnItemClick(optionsEnabled: Boolean)
     {
 
