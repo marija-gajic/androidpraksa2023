@@ -75,7 +75,7 @@ class FeedFragment : Fragment() {
                 itemPosition = position
                 UIApplication.itemSelectedPosition = position
                 itemBitmap = previewList[position].previewBitmap
-                itemDominantColor = itemBitmap!!.getPixel(0,0)
+                itemDominantColor = itemBitmap!!.getPixel(20,20)
                 itemBorderColor = previewList[position].borderColor
                 itemSelected = previewList[position]
 

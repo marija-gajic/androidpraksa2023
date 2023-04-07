@@ -74,16 +74,16 @@ class FinishFragment : Fragment() {
             viewModel.setAnotherValueToLiveData("Saving...")
 
             if (UIApplication.nameOfEditingSavedPhoto != "") {
-                val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
+                //val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
                 viewModel.overwritePreviewBitmap(
                     requireContext(),
                     UIApplication.nameOfEditingSavedPhoto,
-                    cropResult
+                    resultBitmap
                 )
                 viewModel.overwriteSavedBitmap(
                     requireContext(),
                     UIApplication.nameOfEditingSavedPhoto,
-                    cropResult
+                    resultBitmap
                 )
                 UIApplication.nameOfEditingSavedPhoto = ""
                 viewModel.setAnotherValueToLiveData("Photo saved!")
@@ -91,10 +91,10 @@ class FinishFragment : Fragment() {
             } else
             {
 
-            val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
+            //val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
             val currentTimestamp = viewModel.getTimestamp()
-            viewModel.saveBitmap(requireContext(), cropResult, currentTimestamp)
-            viewModel.savePreview(requireContext(), cropResult, currentTimestamp)
+            viewModel.saveBitmap(requireContext(), resultBitmap, currentTimestamp)
+            viewModel.savePreview(requireContext(), resultBitmap, currentTimestamp)
             viewModel.setAnotherValueToLiveData("Photo saved!")
             UIApplication.photoSaved = "saved"
             val selectedFilterName =

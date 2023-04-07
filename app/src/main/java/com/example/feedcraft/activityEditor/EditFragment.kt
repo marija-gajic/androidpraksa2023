@@ -234,8 +234,8 @@ class EditFragment : Fragment() {
             if (UIApplication.photoOrigin == "gallery") {
                 val selectedImageFromGalleryUri = UIApplication.imageUri
                 val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-                val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),uritobitmap)
-                filterBitmap = rotatedBitmap
+                //val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),uritobitmap)
+                filterBitmap = uritobitmap
             } else {
                 filterBitmap = UIApplication.tempBitmap!!
             }
@@ -255,13 +255,16 @@ class EditFragment : Fragment() {
 
         if(UIApplication.editExisting == 1) {
             var position = UIApplication.currentPosition
-            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position))
+            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),
+                                viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position))
             val previewBitmap = rotatedBitmap
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
             UIApplication.editExisting = 0
         } else {
-            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), viewModel.preparePreviewBitmap(requireContext()) )
-            val previewBitmap = rotatedBitmap
+//            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),
+//                                viewModel.preparePreviewBitmap(requireContext()) )
+//            val previewBitmap = rotatedBitmap
+            val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
             filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
         }
 
