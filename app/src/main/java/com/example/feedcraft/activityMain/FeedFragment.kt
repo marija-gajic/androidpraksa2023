@@ -91,7 +91,7 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionAdd)
         }
         deleteFeed.setOnClickListener {
-            val capturePcetaTeIzela = previewAdapter.items
+            //val capturePcetaTeIzela = previewAdapter.items
             val actionDelete = FeedFragmentDirections.actionFeedFragmentToDeleteFeedFragment()
             findNavController().navigate(actionDelete)
         }

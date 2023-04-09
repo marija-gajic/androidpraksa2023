@@ -43,6 +43,7 @@ class DeleteFeedFragment : DialogFragment() {
             val photo = mainViewModel.getPhotoInformationFromPosition(requireContext(), UIApplication.itemSelectedPosition)
             val photoName = photo.imgName
             viewModel.deleteBitmapFromInternalStorageByName(requireContext(), photoName)
+            mainViewModel.deletePhotoFromJsonByName(requireContext(), photoName)
             //previews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
             UIApplication.photoDeleted.postValue("deleted")
             Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()

@@ -6,6 +6,7 @@ import android.media.ExifInterface
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

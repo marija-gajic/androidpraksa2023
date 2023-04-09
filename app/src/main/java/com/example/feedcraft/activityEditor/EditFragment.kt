@@ -86,10 +86,10 @@ class EditFragment : Fragment() {
             val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(),position)
             val imgName = obj.imgName
             val imgBitmap = viewModel.getBitmapFromInternalStorageByName(requireContext(), imgName)
-            imgEditor.setImageBitmap(imgBitmap)
             UIApplication.tempEditedPhoto = imgBitmap
             UIApplication.tempBitmap = imgBitmap
-            UIApplication.nameOfEditingSavedPhoto = imgName //
+            UIApplication.nameOfEditingSavedPhoto = imgName
+            imgEditor.setImageBitmap(imgBitmap)//
         }
 //        }
 

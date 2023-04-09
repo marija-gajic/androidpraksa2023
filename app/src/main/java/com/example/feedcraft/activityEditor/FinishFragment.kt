@@ -97,8 +97,7 @@ class FinishFragment : Fragment() {
             viewModel.savePreview(requireContext(), resultBitmap, currentTimestamp)
             viewModel.setAnotherValueToLiveData("Photo saved!")
             UIApplication.photoSaved = "saved"
-            val selectedFilterName =
-                viewModel.returnFilterNameFromPosition(UIApplication.lastFilterSelected)
+            val selectedFilterName = viewModel.returnFilterNameFromPosition(UIApplication.lastFilterSelected)
 
             val caption = viewModel.getCaption()
             val brightness = viewModel.getBrightness()
@@ -108,22 +107,26 @@ class FinishFragment : Fragment() {
             val filterName = selectedFilterName
 
 
-            val obj = EditedPhotoInformation(
-                caption,
-                brightness,
-                saturation,
-                contrast,
-                imgName,
-                filterName
-            )
-            val gson = Gson()
-            val json = gson.toJson(obj)
+            //
 
 
             val sharePrefsConfig = requireActivity().getSharedPreferences("config", 0)
             val prefsConfig = sharePrefsConfig.edit()
             var counterOfCreations = sharePrefsConfig.getInt("counter", 0)
-            val position = counterOfCreations
+
+                val key = "creation_$counterOfCreations"
+
+                val obj = EditedPhotoInformation(
+                    key,
+                    caption,
+                    brightness,
+                    saturation,
+                    contrast,
+                    imgName,
+                    filterName
+                )
+                val gson = Gson()
+                val json = gson.toJson(obj)
 
 
             val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
