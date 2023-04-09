@@ -13,30 +13,20 @@ import com.example.feedcraft.R
 
 class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onClick: (Int, Boolean) -> Unit)
     : RecyclerView.Adapter<PhotoPreviewAdapter.CustomViewHolder>(){
-    //private lateinit var binding: ItemPhotoPreviewBinding
     private var lastSelectedIndex = -1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         Log.d("mylog", "onCreateViewHolder called")
         val inflater = LayoutInflater.from(parent.context)
 
-                //binding = ItemPhotoPreviewBinding.inflate(inflater,parent,false)
-        //return CustomViewHolder(binding)
         return CustomViewHolder(inflater.inflate(R.layout.item_photo_preview, parent, false))
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         Log.d("mylog", "onBindViewHolder called $position")
 
 
-        if (lastSelectedIndex == position) {
-            holder.previewPhotoChecked.isVisible = true
-        } else {
-            holder.previewPhotoChecked.isVisible = false
-        }
+        holder.previewPhotoChecked.isVisible = lastSelectedIndex == position
 
-        //onClick(position, false)
-
-        //val checkedPhoto = holder.previewPhotoChecked
         holder.itemView.setOnClickListener {
 
             if(lastSelectedIndex != position) {
@@ -49,8 +39,6 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
 
                 onClick(position, true)
                 holder.previewPhotoChecked.isVisible = true
-                //holder.previewPhotoChecked.isVisible = !holder.previewPhotoChecked.isVisible
-                //holder.previewBorder.isVisible = !holder.previewBorder.isVisible
                 notifyDataSetChanged()
             }
             else
@@ -63,7 +51,6 @@ class PhotoPreviewAdapter (var items : MutableList<PhotoPreviewModel>, val onCli
         }
 
         holder.previewBorder.setBackgroundColor(items[position].borderColor)
-        //holder.previewPhoto.setImageBitmap(items[position].previewBitmap)
         Glide.with(holder.itemView.context).load(items[position].previewBitmap).into(holder.previewPhoto)
 
     }

@@ -53,9 +53,6 @@ class ScheduleFragment : Fragment() {
         var datePicker = binding.datePicker
         val timePicker = binding.timePicker
 
-
-
-        
         btnDone.setOnClickListener {
             if (addPicture.isChecked) {
                 UIApplication.addPhotoFlag = "checked"

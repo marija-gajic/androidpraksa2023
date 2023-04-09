@@ -50,17 +50,6 @@ class FinishFragment : Fragment() {
             Toast.makeText(requireContext(), newMessage, Toast.LENGTH_SHORT).show()
         }
 
-//        if(UIApplication.photoOrigin == "gallery")
-//        {//gallery
-//            val selectedImageFromGalleryUri = UIApplication.imageUri
-//            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgPreview)
-//        }
-//        else
-//        {//camera
-//            val tempBitmap = UIApplication.tempBitmap as Bitmap
-//            imgPreview.setImageBitmap(UIApplication.tempBitmap)
-//        }
-
         imgPreview.setImageBitmap(UIApplication.tempEditedPhoto)
 
         btnSchedule.setOnClickListener {
@@ -74,7 +63,6 @@ class FinishFragment : Fragment() {
             viewModel.setAnotherValueToLiveData("Saving...")
 
             if (UIApplication.nameOfEditingSavedPhoto != "") {
-                //val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
                 viewModel.overwritePreviewBitmap(
                     requireContext(),
                     UIApplication.nameOfEditingSavedPhoto,
@@ -90,8 +78,6 @@ class FinishFragment : Fragment() {
                 UIApplication.photoSaved = "saved"
             } else
             {
-
-            //val cropResult = viewModel.cropEdgesOfPhoto(requireContext(), resultBitmap)
             val currentTimestamp = viewModel.getTimestamp()
             viewModel.saveBitmap(requireContext(), resultBitmap, currentTimestamp)
             viewModel.savePreview(requireContext(), resultBitmap, currentTimestamp)
@@ -105,10 +91,6 @@ class FinishFragment : Fragment() {
             val contrast = viewModel.getContrast()
             val imgName = currentTimestamp
             val filterName = selectedFilterName
-
-
-            //
-
 
             val sharePrefsConfig = requireActivity().getSharedPreferences("config", 0)
             val prefsConfig = sharePrefsConfig.edit()
@@ -132,42 +114,17 @@ class FinishFragment : Fragment() {
             val sharePrefsCreations = requireActivity().getSharedPreferences("creations", 0)
             val prefsEditor = sharePrefsCreations.edit()
             prefsEditor.putString("creation_$counterOfCreations", json)
-                //prefsEditor.putString(imgName, json)
 
             prefsConfig.putInt("counter", ++counterOfCreations)
 
             prefsEditor.commit()
             prefsConfig.commit()
         }
-
-//            if(UIApplication.photoOrigin == "gallery")
-//            {//gallery
-//                viewModel.setAnotherValueToLiveData("Saving...")
-//                val selectedImageFromGalleryUri = UIApplication.imageUri
-//                val bitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-//                viewModel.saveBitmap(requireContext(), bitmap)
-//                viewModel.savePreview(requireContext(), bitmap)
-//                viewModel.setAnotherValueToLiveData("Photo saved!")
-//                UIApplication.photoSaved = "saved"
-//            }
-//            else
-//            {//camera
-//                viewModel.setAnotherValueToLiveData("Saving...")
-//                val tempBitmap = UIApplication.tempBitmap as Bitmap
-//                viewModel.saveBitmap(requireContext(), tempBitmap) //(tempBitmap, context?.filesDir.toString() + File.separator + "saved_creations", "creation_1.png")
-//                viewModel.savePreview(requireContext(), tempBitmap)
-//                viewModel.setAnotherValueToLiveData("Photo saved!")
-//                UIApplication.photoSaved = "saved"
-//            }
         }
 
         btnShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-//            val filePath = context?.filesDir.toString() + File.separator + "saved_creations" + File.separator
-//            val file = File(filePath, "creation_1.png")
-//            val uri: Uri? = FileProvider.getUriForFile(requireContext(), BuildConfig.APPLICATION_ID, file)
-//            intent.putExtra(Intent.EXTRA_STREAM, uri)
             val bitmap = UIApplication.tempEditedPhoto
             val uri = bitmap?.let { it1 -> viewModel.bitmapToUri(requireContext(), it1) }
             intent.putExtra(Intent.EXTRA_STREAM, uri)

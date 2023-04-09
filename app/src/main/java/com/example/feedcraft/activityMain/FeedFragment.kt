@@ -70,7 +70,6 @@ class FeedFragment : Fragment() {
             emptyFeedTxt.isVisible = false
             loadPreviewPhotos()
             previewAdapter = PhotoPreviewAdapter(previewList) { position, checked ->
-                //Log.d("mylog", "kliknut item na poziciji: $it")
                 handleOptionsOnItemClick(checked)
                 itemPosition = position
                 UIApplication.itemSelectedPosition = position
@@ -91,42 +90,19 @@ class FeedFragment : Fragment() {
             findNavController().navigate(actionAdd)
         }
         deleteFeed.setOnClickListener {
-            //val capturePcetaTeIzela = previewAdapter.items
             val actionDelete = FeedFragmentDirections.actionFeedFragmentToDeleteFeedFragment()
             findNavController().navigate(actionDelete)
         }
         editPhoto.setOnClickListener {
-            //startActivityForResult(Intent(requireContext(), EditorActivity::class.java), 1005)
-//            val fragment = EditFragment()
-//            val fragmentManager = supportFragmentManager
-//            val fragmentTransaction = fragmentManager.beginTransaction()
-//            fragmentTransaction.replace(R.id., fragment)
-//            fragmentTransaction.addToBackStack(null)
-//            fragmentTransaction.commit()
-
             UIApplication.editExisting = 1
             UIApplication.currentPosition = itemPosition
             startActivity(Intent(requireContext(), EditorActivity::class.java))
-
-
-
-
-
-//            val bundle = Bundle()
-//            bundle.putInt("position", itemPosition)
-//            val intent = Intent(requireActivity(), EditFragment::class.java)
-//            val intent = Intent(requireActivity(), EditorActivity::class.java)
-//            intent.putExtras(bundle)
-//            startActivity(intent)
-
         }
         colorCode.setOnClickListener {
             if (itemBorderColor == Color.argb(0, 0, 0, 0)) {
                 itemSelected.borderColor = itemDominantColor
                 itemBorderColor = itemDominantColor
             } else {
-                //itemSelected.borderColor = R.color.transparent_color
-                //itemBorderColor = R.color.transparent_color
                 itemSelected.borderColor = Color.argb(0, 0, 0, 0)
                 itemBorderColor = Color.argb(0, 0, 0, 0)
 
@@ -161,24 +137,13 @@ class FeedFragment : Fragment() {
                 previewAdapter.refreshFilterAdapterList(previewList)
 
             loadPreviewPhotos()
-            //previewAdapter.refreshFilterAdapterList(previewList)
-
         }
-//        if (UIApplication.photoDeleted == "deleted") {
-//            UIApplication.photoDeleted = ""
-//            binding.rvPreviews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
-//            //previewAdapter.refreshFilterAdapterList(previewList)
-//
-//            loadPreviewPhotos()
-//        }
 
     }
 
     private fun onPhotoDelete(photoDeleted: String) {
         if (photoDeleted == "deleted") {
             UIApplication.photoDeleted.postValue("")
-            //binding.rvPreviews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
-
             loadPreviewPhotos()
             previewAdapter.refreshFilterAdapterList(previewList)
         }

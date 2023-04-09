@@ -13,13 +13,11 @@ import com.example.feedcraft.R
 
 class FilterAdapter (var items : MutableList<FilterModel>, val onClick: (Int) -> Unit)
     : RecyclerView.Adapter<FilterAdapter.CustomViewHolder>(){
-    //private lateinit var binding: ItemFilterPreviewBinding
 
     private var lastSelectedIndex = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        //binding = ItemFilterPreviewBinding.inflate(inflater,parent,false)
         return CustomViewHolder(inflater.inflate(R.layout.item_filter_preview, parent, false))
     }
     override fun onBindViewHolder(holder: CustomViewHolder, @SuppressLint("RecyclerView") position: Int) {
@@ -33,7 +31,6 @@ class FilterAdapter (var items : MutableList<FilterModel>, val onClick: (Int) ->
         {//trenutno selektovani
             holder.filterName.typeface = Typeface.DEFAULT_BOLD
             holder.filterName.setTextColor(holder.itemView.context.resources.getColor(R.color.buttons))
-
         }
         else
         {//nije selektovan
@@ -45,8 +42,6 @@ class FilterAdapter (var items : MutableList<FilterModel>, val onClick: (Int) ->
         holder.itemView.setOnClickListener {
             lastSelectedIndex = position
             onClick(position)
-            //items[position].selected.apply { not() }
-            //notifyItemChanged(position)
             notifyDataSetChanged()
         }
 

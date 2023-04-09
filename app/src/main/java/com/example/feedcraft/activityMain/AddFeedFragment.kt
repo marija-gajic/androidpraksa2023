@@ -61,7 +61,6 @@ class AddFeedFragment : DialogFragment() {
             val file = File(context?.cacheDir.toString() + File.separator + "capturedImage.png")
             capturedImageUri = FileProvider.getUriForFile(requireContext(),
                 BuildConfig.APPLICATION_ID, file)
-            //UIApplication.camImgUri = capturedImageUri
             takePicture.putExtra(Intent.EXTRA_STREAM, capturedImageUri)
             takePicture.putExtra(MediaStore.EXTRA_OUTPUT, capturedImageUri)
             startActivityForResult(takePicture, Constants.REQUEST_CAMERA)
@@ -75,32 +74,9 @@ class AddFeedFragment : DialogFragment() {
         when (requestCode) {
             REQUEST_CAMERA -> if (resultCode == RESULT_OK) {
                 UIApplication.photoOrigin = "camera"
-
-//                val extras: Bundle? = data?.extras
-//                val imageBitmap = extras?.get("data") as Bitmap?
-//                UIApplication.camBitmap = imageBitmap!!
-
                 UIApplication.camBitmap = viewModel.uriToBitmap(requireContext(), capturedImageUri)
                 findNavController().navigateUp()
                 startActivity(Intent(requireContext(), EditorActivity::class.java))
-//                Glide.with(this)
-//                    .asBitmap()
-//                    .override((0.9f * resources.displayMetrics.widthPixels).toInt())
-//                    .load(capturedImageUri)
-//                    .into(object : CustomTarget<Bitmap>(){
-//                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-//
-//
-//                            UIApplication.camBitmap = resource
-//                            findNavController().navigateUp()
-//                            startActivity(Intent(requireContext(), EditorActivity::class.java))
-//
-//                        }
-//                        override fun onLoadCleared(placeholder: Drawable?) {
-//
-//                        }
-//                    })
-
             }
             REQUEST_GALLERY -> if (resultCode == RESULT_OK) {
                 UIApplication.photoOrigin = "gallery"

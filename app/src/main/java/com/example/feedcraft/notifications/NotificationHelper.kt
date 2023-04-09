@@ -40,8 +40,6 @@ class NotificationHelper (val context: Context) {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
-        //val icon = BitmapFactory.decodeResource(context.resources, R.drawable.ic_launcher)
-        //notificationPhoto = UIApplication.tempEditedPhoto!!
         val icon = notificationPhoto
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)

@@ -32,18 +32,10 @@ class EditFragment : Fragment() {
     private var brightnessClicked: Boolean = false
     private var saturationClicked: Boolean = false
     private var contrastClicked: Boolean = false
-    private var filterList : MutableList<FilterModel> = mutableListOf()
+    private var filterList: MutableList<FilterModel> = mutableListOf()
     private lateinit var filterAdapter: FilterAdapter
     lateinit var filterSelected: FilterModel
     lateinit var filterBitmap: Bitmap
-//    var sentFromFeedCode = 0
-//    var positionFromFeed = 0
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,39 +43,28 @@ class EditFragment : Fragment() {
     ): View? {
         _binding = FragmentEditBinding.inflate(inflater, container, false)
 
-//        val bundle = arguments
-//        if (bundle != null) {
-//            val positionFromFeed = bundle?.getInt("position", 111)!!
-//        }
+        val imgEditor = binding.imgEditor
 
+        if (UIApplication.photoOrigin == "gallery") {
+            val selectedImageFromGalleryUri = UIApplication.imageUri
+            Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)
+            val uritobitmap = MediaStore.Images.Media.getBitmap(
+                requireContext().contentResolver,
+                selectedImageFromGalleryUri
+            )
+            UIApplication.tempEditedPhoto = uritobitmap
+        }
+        if (UIApplication.photoOrigin == "camera") {
+            val bitmapTemp =
+                viewModel.rotatePhotoIfNeeded(requireContext(), UIApplication.camBitmap!!)
+            UIApplication.tempBitmap = bitmapTemp
+            UIApplication.tempEditedPhoto = bitmapTemp
+            imgEditor.setImageBitmap(bitmapTemp)
+        }
 
-//        if(sentFromFeedCode == 1005) {
-//            val bitmapFromFeed = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),positionFromFeed)
-//            val imgEditor = binding.imgEditor
-//            imgEditor.setImageBitmap(bitmapFromFeed)
-//        } else {
-            val imgEditor = binding.imgEditor
-            //imgEditor.setImageBitmap(UIApplication.tempEditedPhoto)
-
-            if(UIApplication.photoOrigin == "gallery")
-            {//gallery
-                val selectedImageFromGalleryUri = UIApplication.imageUri
-                Glide.with(requireActivity()).load(selectedImageFromGalleryUri).into(imgEditor)
-                val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-                UIApplication.tempEditedPhoto = uritobitmap
-            }
-        if(UIApplication.photoOrigin == "camera")
-            {//camera
-                //val bitmapTemp = UIApplication.camBitmap
-                val bitmapTemp = viewModel.rotatePhotoIfNeeded(requireContext(), UIApplication.camBitmap!!)
-                UIApplication.tempBitmap = bitmapTemp
-                UIApplication.tempEditedPhoto = bitmapTemp
-                imgEditor.setImageBitmap(bitmapTemp)
-            }
-
-        if(UIApplication.editExisting == 1) {
+        if (UIApplication.editExisting == 1) {
             var position = UIApplication.currentPosition
-            val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(),position)
+            val obj = mainViewModel.getPhotoInformationFromPosition(requireContext(), position)
             val imgName = obj.imgName
             val imgBitmap = viewModel.getBitmapFromInternalStorageByName(requireContext(), imgName)
             UIApplication.tempEditedPhoto = imgBitmap
@@ -91,9 +72,6 @@ class EditFragment : Fragment() {
             UIApplication.nameOfEditingSavedPhoto = imgName
             imgEditor.setImageBitmap(imgBitmap)//
         }
-//        }
-
-
 
         return binding.root
     }
@@ -112,15 +90,13 @@ class EditFragment : Fragment() {
         val percent = binding.percent
         val filters = binding.rvFilter
 
-
-
         filters.isVisible = false
 
         viewModel.edits.observe(viewLifecycleOwner) { newEdit ->
-            addCaption.setText(newEdit.caption)
+            addCaption.text = newEdit.caption
         }
 
-        addCaption.setText(viewModel.edits.value?.caption)
+        addCaption.text = viewModel.edits.value?.caption
 
         val currentProgress = seek.progress.toString() + "%"
         percent.text = currentProgress
@@ -132,20 +108,22 @@ class EditFragment : Fragment() {
             override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
                 percent.text = progress.toString() + "%"
 
-                if (brightnessClicked){
-                    var adjustedBitmap = viewModel.applyBrightness(UIApplication.tempEditedPhoto!!, progress)
+                if (brightnessClicked) {
+                    var adjustedBitmap =
+                        viewModel.applyBrightness(UIApplication.tempEditedPhoto!!, progress)
                     //var rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(), adjustedBitmap)
                     binding.imgEditor.setImageBitmap(adjustedBitmap)
                 }
-                if (saturationClicked){
-                    var adjustedBitmap = viewModel.applySaturation(UIApplication.tempEditedPhoto!!, progress)
+                if (saturationClicked) {
+                    var adjustedBitmap =
+                        viewModel.applySaturation(UIApplication.tempEditedPhoto!!, progress)
                     binding.imgEditor.setImageBitmap(adjustedBitmap)
                 }
-                if (contrastClicked){
-                    var adjustedBitmap = viewModel.applyContrast(UIApplication.tempEditedPhoto!!, progress)
+                if (contrastClicked) {
+                    var adjustedBitmap =
+                        viewModel.applyContrast(UIApplication.tempEditedPhoto!!, progress)
                     binding.imgEditor.setImageBitmap(adjustedBitmap)
                 }
-
 
             }
 
@@ -153,13 +131,13 @@ class EditFragment : Fragment() {
 
             override fun onStopTrackingTouch(seek: SeekBar) {
 
-                if (brightnessClicked){
+                if (brightnessClicked) {
                     viewModel.setBrightness(seek.progress)
                 }
-                if (saturationClicked){
+                if (saturationClicked) {
                     viewModel.setSaturation(seek.progress)
                 }
-                if (contrastClicked){
+                if (contrastClicked) {
                     viewModel.setContrast(seek.progress)
                 }
 
@@ -225,26 +203,27 @@ class EditFragment : Fragment() {
         }
 
         loadData()
-        filterAdapter = FilterAdapter(filterList) {position ->
+        filterAdapter = FilterAdapter(filterList) { position ->
             Log.d("mylog", "$position")
             UIApplication.lastFilterSelected = position
             filterSelected = filterList[position]
-            //filterBitmap = filterSelected.filterBitmap
-            //filterBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
             if (UIApplication.photoOrigin == "gallery") {
                 val selectedImageFromGalleryUri = UIApplication.imageUri
-                val uritobitmap = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedImageFromGalleryUri)
-                //val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),uritobitmap)
+                val uritobitmap = MediaStore.Images.Media.getBitmap(
+                    requireContext().contentResolver,
+                    selectedImageFromGalleryUri
+                )
                 filterBitmap = uritobitmap
             } else {
                 filterBitmap = UIApplication.tempBitmap!!
             }
             if (UIApplication.photoSaved == "saved") {
-             filterBitmap = viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position)
+                filterBitmap =
+                    viewModel.getBitmapFromInternalStorageByPosition(requireContext(), position)
             }
-            var filteredBitmap = viewModel.applyFilterOnBitmapFromPosition(requireContext(),filterBitmap,position)
+            var filteredBitmap =
+                viewModel.applyFilterOnBitmapFromPosition(requireContext(), filterBitmap, position)
             binding.imgEditor.setImageBitmap(filteredBitmap)
-            //UIApplication.tempEditedPhoto = binding.imgEditor.drawToBitmap()
 
         }
         binding.rvFilter.adapter = filterAdapter
@@ -253,31 +232,30 @@ class EditFragment : Fragment() {
 
     fun loadData() {
 
-        if(UIApplication.editExisting == 1) {
+        if (UIApplication.editExisting == 1) {
             var position = UIApplication.currentPosition
-            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),
-                                viewModel.getBitmapFromInternalStorageByPosition(requireContext(),position))
+            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(
+                requireContext(),
+                viewModel.getBitmapFromInternalStorageByPosition(requireContext(), position)
+            )
             val previewBitmap = rotatedBitmap
-            filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
+            filterList =
+                viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
             UIApplication.editExisting = 0
         } else {
-//            val rotatedBitmap = viewModel.rotatePhotoIfNeeded(requireContext(),
-//                                viewModel.preparePreviewBitmap(requireContext()) )
-//            val previewBitmap = rotatedBitmap
             val previewBitmap = viewModel.preparePreviewBitmap(requireContext())
-            filterList = viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
+            filterList =
+                viewModel.returnBitmapListWithFiltersApplied(requireContext(), previewBitmap)
         }
 
     }
 
-    private fun setSeekPercentVisible(isVisible: Boolean){
+    private fun setSeekPercentVisible(isVisible: Boolean) {
         val seek = binding.seekBar
         val percent = binding.percent
         seek.isVisible = isVisible
         percent.isVisible = isVisible
     }
-
-
 
 
 }

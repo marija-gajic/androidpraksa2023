@@ -36,22 +36,16 @@ class DeleteFeedFragment : DialogFragment() {
         val btnOk = binding.btnDeleteOk
         val btnCancel = binding.btnDeleteCancel
 
-//        binding.txtDelete.typeface =
-//            ResourcesCompat.getFont(requireContext(), R.font.poppins_regular)
-
         btnOk.setOnClickListener {
             val photo = mainViewModel.getPhotoInformationFromPosition(requireContext(), UIApplication.itemSelectedPosition)
             val photoName = photo.imgName
             viewModel.deleteBitmapFromInternalStorageByName(requireContext(), photoName)
             mainViewModel.deletePhotoFromJsonByName(requireContext(), photoName)
-            //previews.adapter?.notifyItemRemoved(UIApplication.itemSelectedPosition)
             UIApplication.photoDeleted.postValue("deleted")
             Toast.makeText(requireContext(), "Photo deleted!", Toast.LENGTH_SHORT).show()
             findNavController().navigateUp()
         }
         btnCancel.setOnClickListener {
-//            val actionCancel = DeleteFeedFragmentDirections.actionDeleteFeedFragmentToFeedFragment()
-//            findNavController().navigate(actionCancel)
             findNavController().navigateUp()
         }
     }

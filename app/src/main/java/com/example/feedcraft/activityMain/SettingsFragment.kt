@@ -111,20 +111,11 @@ class SettingsFragment : Fragment() {
             val androidVersion = Build.VERSION.SDK_INT
             val subject = "App name: $appName, App version: $appVersion, Device: $phoneDevice, Phone model: $phoneModel, Android version: $androidVersion"
 
-          /*  lateinit var imageUri: Uri
-            val appInfo: ApplicationInfo = context?.applicationContext?.packageManager?.getApplicationInfo(requireContext().packageName!!, 0)!!
-            if (appInfo.icon != 0) {
-                imageUri = Uri.parse("android.resource://" + requireContext().packageName + "/" + appInfo.icon)
-            }*/
-
-            //val imageUri = getUriFromDrawableResId(requireContext(), R.drawable.logo)
-
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
                 putExtra(Intent.EXTRA_SUBJECT, subject)
                 putExtra(Intent.EXTRA_TEXT, extraText)
-                //putExtra(Intent.EXTRA_STREAM, imageUri)
             }
             try {
                 startActivity(intent)
